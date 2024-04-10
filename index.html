@@ -69,6 +69,243 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-测试开发" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/04/10/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/" class="article-date">
+  <time class="dt-published" datetime="2024-04-10T08:02:09.236Z" itemprop="datePublished">2024-04-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="测试的基本理论"><a href="#测试的基本理论" class="headerlink" title="测试的基本理论"></a>测试的基本理论</h2><h3 id="黑盒测试"><a href="#黑盒测试" class="headerlink" title="黑盒测试"></a>黑盒测试</h3><details>
+<summary>展开查看</summary>
+
+<p>又叫功能测试，功能测试在测试工作中占有比例最大。</p>
+<p>测试人员不需要了解软件的内部结构，只关心输入和输出之间的关系是否符合预期。</p>
+<p>无法保证软件代码内各主要路径都被覆盖到，导致测试不完全。</p>
+</details>
+
+<h3 id="白盒测试"><a href="#白盒测试" class="headerlink" title="白盒测试"></a>白盒测试</h3><details>
+<summary>展开查看</summary>
+
+<p>又叫结构测试</p>
+<p>测试人员对软件的内部结构和工作原理有深入的了解，针对软件代码和路径进行测试。</p>
+<p>软件代码改变，测试用例也需要改变。</p>
+</details>
+
+<h3 id="测试用例"><a href="#测试用例" class="headerlink" title="测试用例"></a>测试用例</h3><details>
+<summary>展开查看</summary>
+描述输入实际值和预期输出行为或者结果的文档，同时也标识了测试过程结果与约束
+</details>
+
+<h2 id="如何理解测试开发中的开发"><a href="#如何理解测试开发中的开发" class="headerlink" title="如何理解测试开发中的开发"></a>如何理解测试开发中的开发</h2><details>
+<summary>展开查看</summary>
+
+<ol>
+<li><strong>编写测试用例：</strong> 测试开发人员编写测试用例来验证软件系统的不同功能。这些测试用例可以是单元测试、集成测试、端到端测试等，覆盖不同层次和方面的功能和行为。</li>
+<li><strong>编写自动化测试脚本：</strong> 测试开发人员使用编程语言（如Java、Python、JavaScript等）编写自动化测试脚本，用于执行测试用例并检查系统的响应和行为。这些脚本通常使用测试框架（如JUnit、TestNG、Selenium等）来组织和运行测试。</li>
+<li><strong>开发测试工具和框架：</strong> 测试开发人员开发测试工具和框架，用于简化测试过程、提高测试效率和覆盖率。这些工具和框架可以包括测试数据生成工具、模拟器、Mock对象、测试管理系统等。</li>
+<li><strong>维护测试代码：</strong> 随着软件系统的演变和变化，测试代码也需要不断更新和维护。测试开发人员负责确保测试代码的可靠性、稳定性和可维护性，以及及时更新测试代码以反映系统的变化。</li>
+<li><strong>参与持续集成和持续部署：</strong> 测试开发人员参与持续集成和持续部署流程，确保每次代码提交或部署后都运行自动化测试，并及时发现和解决问题。</li>
+</ol>
+</details>
+
+<h2 id="如何测试一个Java项目？"><a href="#如何测试一个Java项目？" class="headerlink" title="如何测试一个Java项目？"></a>如何测试一个Java项目？</h2><details>
+<summary>展开查看</summary>
+
+<ol>
+<li><strong>单元测试：</strong> 编写单元测试来测试项目中的各个模块、类和方法。使用 JUnit 或 TestNG 等单元测试框架来编写测试用例，并确保覆盖尽可能多的代码路径和边界情况。</li>
+<li><strong>集成测试：</strong> 编写集成测试来测试项目中不同模块之间的交互。这可以包括测试数据库访问、外部 API 调用、消息队列等。使用 JUnit、Mockito 等工具来模拟外部依赖，并编写集成测试用例。</li>
+<li><strong>性能测试：</strong> 对项目进行性能测试，评估其在不同负载下的性能表现。使用 JMeter、Gatling 等性能测试工具来模拟大量用户请求，并监控系统的响应时间、吞吐量等指标。</li>
+<li><strong>持续集成和持续部署：</strong> 将测试集成到持续集成和持续部署流程中，确保每次代码提交或部署后都运行测试，并及时发现和修复问题。</li>
+</ol>
+</details>
+
+<h2 id="如果判断所写接口功能正常？"><a href="#如果判断所写接口功能正常？" class="headerlink" title="如果判断所写接口功能正常？"></a>如果判断所写接口功能正常？</h2><details>
+<summary>展开查看</summary>
+
+<ol>
+<li><strong>功能测试：</strong> 确保接口按照预期工作。这包括发送各种有效和无效的输入数据，并验证接口的响应是否符合预期。例如，如果接口是一个登录接口，你可以测试使用正确的用户名和密码进行登录是否成功，以及使用错误的凭据时是否会得到适当的错误消息。</li>
+<li><strong>性能测试：</strong> 检查接口的性能，包括响应时间、吞吐量等指标。确保接口在负载增加时仍然能够正常工作，并且性能不会严重下降。</li>
+<li><strong>安全测试：</strong> 确保接口受到适当的安全保护，例如输入验证、防止SQL注入、XSS攻击等。</li>
+<li><strong>兼容性测试：</strong> 确保接口在不同的浏览器、操作系统和设备上都能正常工作。</li>
+</ol>
+</details>
+
+<h2 id="怎么构造无用测试用例？"><a href="#怎么构造无用测试用例？" class="headerlink" title="怎么构造无用测试用例？"></a>怎么构造无用测试用例？</h2><details>
+<summary>展开查看</summary>
+
+<ol>
+<li><strong>随机数据：</strong> 使用随机生成的数据作为输入。这些数据可能不符合业务逻辑或实际情况，从而导致测试用例的无用性。</li>
+<li><strong>非法输入：</strong> 提供完全不合法的输入数据。例如，如果一个字段要求输入数字，你可以提供字母字符或特殊字符。</li>
+<li><strong>重复数据：</strong> 重复使用相同的数据进行测试，而不关注不同数据情况下的行为。这样做可能会错过一些潜在的问题。</li>
+</ol>
+</details>
+
+<h2 id="如何感知线上项目出现问题"><a href="#如何感知线上项目出现问题" class="headerlink" title="如何感知线上项目出现问题"></a>如何感知线上项目出现问题</h2><details>
+<summary>展开查看</summary>
+
+<ol>
+<li><strong>日志监控：</strong> 实时监控系统的日志以捕获异常情况和错误信息。通过设置适当的日志级别和使用日志聚合工具，可以帮助发现潜在的问题。</li>
+<li><strong>性能监控：</strong> 监控系统的性能指标，如响应时间、吞吐量、CPU 使用率、内存使用率等。突然的性能下降可能是系统出现问题的迹象。</li>
+<li><strong>自动化测试：</strong> 编写自动化测试用例，定期运行以确保系统的功能和性能符合预期。自动化测试可以在每次部署后运行，帮助发现新的问题。</li>
+</ol>
+</details>
+
+<h2 id="小红书购物搜索框设计测试用例"><a href="#小红书购物搜索框设计测试用例" class="headerlink" title="小红书购物搜索框设计测试用例"></a>小红书购物搜索框设计测试用例</h2><details>
+<summary>展开查看</summary>
+
+<p><strong>测试用例名称：搜索框输入有效关键词</strong></p>
+<ul>
+<li>输入：在搜索框中输入有效的商品关键词，例如“连衣裙”。</li>
+<li>操作：点击搜索按钮或按下回车键。</li>
+<li>预期结果：搜索结果页面显示与输入关键词相关的商品列表。</li>
+</ul>
+<p><strong>测试用例名称：搜索框输入无效关键词</strong></p>
+<ul>
+<li>输入：在搜索框中输入无效的商品关键词，例如“@@@”。</li>
+<li>操作：点击搜索按钮或按下回车键。</li>
+<li>预期结果：搜索结果页面提示“未找到相关商品”。</li>
+</ul>
+<p><strong>测试用例名称：搜索框输入空关键词</strong></p>
+<ul>
+<li>输入：在搜索框中不输入任何内容。</li>
+<li>操作：点击搜索按钮或按下回车键。</li>
+<li>预期结果：搜索结果页面显示全部商品列表。</li>
+</ul>
+<p><strong>测试用例名称：搜索框联想功能</strong></p>
+<ul>
+<li>输入：在搜索框中输入部分关键词，例如“连衣”。</li>
+<li>操作：等待几秒钟，观察搜索框下方是否出现联想词。</li>
+<li>预期结果：搜索框下方显示与输入关键词相关的联想词列表。</li>
+</ul>
+<p><strong>测试用例名称：搜索框输入并选择联想词</strong></p>
+<ul>
+<li>输入：在搜索框中输入部分关键词，例如“连衣”。</li>
+<li>操作：从联想词列表中选择一个词，例如“连衣裙”。</li>
+<li>预期结果：搜索框中显示选择的联想词，并跳转到与该词相关的搜索结果页面。</li>
+</ul>
+<p><strong>测试用例名称：搜索框清空功能</strong></p>
+<ul>
+<li>输入：在搜索框中输入关键词，例如“连衣裙”。</li>
+<li>操作：点击搜索框右侧的清空按钮。</li>
+<li>预期结果：搜索框中的文本被清空，搜索框恢复为空状态。</li>
+</ul>
+</details>
+
+<h2 id="登录设计测试样例"><a href="#登录设计测试样例" class="headerlink" title="登录设计测试样例"></a>登录设计测试样例</h2><details>
+<summary>展开查看</summary>
+
+<ol>
+<li><strong>测试用例名称：输入有效的用户名和密码登录</strong><ul>
+<li>输入：有效的用户名和密码。</li>
+<li>操作：在登录页面输入用户名和密码，点击登录按钮。</li>
+<li>预期结果：成功登录，跳转到用户的个人资料页面或首页。</li>
+</ul>
+</li>
+<li><strong>测试用例名称：输入无效的用户名和密码登录</strong><ul>
+<li>输入：无效的用户名和密码。</li>
+<li>操作：在登录页面输入错误的用户名和密码，点击登录按钮。</li>
+<li>预期结果：登录失败，提示用户名或密码错误的错误信息。</li>
+</ul>
+</li>
+<li><strong>测试用例名称：输入不存在的用户名登录</strong><ul>
+<li>输入：不存在的用户名和有效密码。</li>
+<li>操作：在登录页面输入不存在的用户名和有效密码，点击登录按钮。</li>
+<li>预期结果：登录失败，提示用户名不存在的错误信息。</li>
+</ul>
+</li>
+<li><strong>测试用例名称：输入正确的用户名和空密码登录</strong><ul>
+<li>输入：有效的用户名和空密码。</li>
+<li>操作：在登录页面输入正确的用户名和空密码，点击登录按钮。</li>
+<li>预期结果：登录失败，提示密码不能为空的错误信息。</li>
+</ul>
+</li>
+<li><strong>测试用例名称：输入空用户名和正确密码登录</strong><ul>
+<li>输入：空用户名和有效的密码。</li>
+<li>操作：在登录页面输入空用户名和正确的密码，点击登录按钮。</li>
+<li>预期结果：登录失败，提示用户名不能为空的错误信息。</li>
+</ul>
+</li>
+<li><strong>测试用例名称：输入特殊字符的用户名和密码登录</strong><ul>
+<li>输入：包含特殊字符的用户名和密码。</li>
+<li>操作：在登录页面输入包含特殊字符的用户名和密码，点击登录按钮。</li>
+<li>预期结果：登录失败，提示用户名或密码格式不正确的错误信息。</li>
+</ul>
+</li>
+<li><strong>测试用例名称：记住登录状态</strong><ul>
+<li>输入：有效的用户名和密码。</li>
+<li>操作：在登录页面勾选“记住我”选项后登录。</li>
+<li>预期结果：成功登录后，关闭浏览器再次打开时，应自动保持登录状态，无需重新输入用户名和密码。</li>
+</ul>
+</li>
+<li><strong>测试用例名称：登录页链接验证</strong><ul>
+<li>输入：无。</li>
+<li>操作：检查登录页面上的链接。</li>
+<li>预期结果：登录页面应包含“忘记密码”、“注册账号”等相关链接，确保用户可以方便地进行其他操作。</li>
+</ul>
+</li>
+<li><strong>测试用例名称：跳转到登录页面</strong><ul>
+<li>输入：未登录状态。</li>
+<li>操作：尝试访问需要登录权限的页面。</li>
+<li>预期结果：跳转到登录页面，并在登录成功后自动跳回原页面。</li>
+</ul>
+</li>
+<li><strong>测试用例名称：登录界面的响应速度</strong><ul>
+<li>输入：无。</li>
+<li>操作：在不同网络环境下打开登录页面。</li>
+<li>预期结果：登录页面应该在合理的时间内加载完成，不应该出现过长的加载时间。</li>
+</ul>
+</li>
+</ol>
+</details>
+
+<h2 id="自动化测试"><a href="#自动化测试" class="headerlink" title="自动化测试"></a>自动化测试</h2><details>
+<summary>展开查看</summary>
+
+<p>以人为驱动的测试行为转化为机器执行的一种过程</p>
+<p>自动化测试包括UI测试、接口测试和单元测试</p>
+<p><strong>Selenium</strong>——UI自动化测试工具，工作原理：</p>
+<ol>
+<li>开发人员编写自动化脚本代码（测试代码）</li>
+<li>测试代码通过Web驱动程序（如ChromeDriver、GeckoDriver等）与所选浏览器建立通信</li>
+<li>Web驱动程序将命令发送给浏览器，并接收来自浏览器的响应。</li>
+<li>浏览器执行接收到的命令，例如导航至指定URL、查找和操作页面上的元素等。</li>
+<li>浏览器将执行结果返回给Web驱动程序。</li>
+<li>Web驱动程序将结果传递给测试代码，以便进行进一步的处理和验证。</li>
+</ol>
+<p><img src="https://developer.qcloudimg.com/http-save/yehe-10496291/a66e29500026a19ea096b11bf8bae1f8.png" alt="img"></p>
+</details>
+
+<h2 id="测试工具"><a href="#测试工具" class="headerlink" title="测试工具"></a>测试工具</h2><details>
+<summary>展开查看</summary>
+
+<ol>
+<li><strong>JUnit</strong>：JUnit是Java中最流行的单元测试框架之一，用于编写和运行单元测试。它提供了一组注解和断言方法，使得编写测试用例变得简单易懂。</li>
+<li><strong>TestNG</strong>：TestNG是另一个流行的Java测试框架，提供了比JUnit更丰富的功能，例如参数化测试、测试组、依赖测试等。它也可以用于编写单元测试和集成测试。</li>
+<li><strong>Selenium</strong>：Selenium是用于自动化Web应用程序测试的工具，它支持多种浏览器，并提供了Java API，使得测试脚本的编写和执行变得简单。Selenium可以用于执行功能测试、回归测试等。</li>
+<li><strong>JMeter</strong>：JMeter是一个用于性能测试的工具，它可以模拟大量用户并测量应用程序的性能和稳定性。JMeter也可以用于功能测试和接口测试。</li>
+</ol>
+</details>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jiangduwang.github.io/2024/04/10/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/" data-id="clutj1iws0001l8ul99efduqk" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-简历八股内容" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/04/02/%E7%AE%80%E5%8E%86%E5%85%AB%E8%82%A1%E5%86%85%E5%AE%B9/" class="article-date">
@@ -880,7 +1117,7 @@ RDB
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://jiangduwang.github.io/2024/04/02/%E7%AE%80%E5%8E%86%E5%85%AB%E8%82%A1%E5%86%85%E5%AE%B9/" data-id="cluiaa8x10001vkulh383fm3c" data-title="面试八股内容" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://jiangduwang.github.io/2024/04/02/%E7%AE%80%E5%8E%86%E5%85%AB%E8%82%A1%E5%86%85%E5%AE%B9/" data-id="clutj1iwu0002l8ul74j49fic" data-title="面试八股内容" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -931,7 +1168,7 @@ RDB
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://jiangduwang.github.io/2024/04/02/hello-world/" data-id="cluiaa8wt0000vkulbvs69ghk" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://jiangduwang.github.io/2024/04/02/hello-world/" data-id="clutj1iwo0000l8ul9bbu7xxh" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -972,6 +1209,10 @@ RDB
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2024/04/10/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/">(no title)</a>
+          </li>
         
           <li>
             <a href="/2024/04/02/%E7%AE%80%E5%8E%86%E5%85%AB%E8%82%A1%E5%86%85%E5%AE%B9/">面试八股内容</a>
