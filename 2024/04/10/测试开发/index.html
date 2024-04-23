@@ -15,7 +15,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://developer.qcloudimg.com/http-save/yehe-10496291/a66e29500026a19ea096b11bf8bae1f8.png">
 <meta property="article:published_time" content="2024-04-10T08:02:09.236Z">
-<meta property="article:modified_time" content="2024-04-10T08:12:35.870Z">
+<meta property="article:modified_time" content="2024-04-23T11:32:58.468Z">
 <meta property="article:author" content="jiangduwang">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://developer.qcloudimg.com/http-save/yehe-10496291/a66e29500026a19ea096b11bf8bae1f8.png">
@@ -305,6 +305,9 @@
 <li><strong>JMeter</strong>：JMeter是一个用于性能测试的工具，它可以模拟大量用户并测量应用程序的性能和稳定性。JMeter也可以用于功能测试和接口测试。</li>
 </ol>
 </details>
+
+<h2 id="项目中的实际测试经验"><a href="#项目中的实际测试经验" class="headerlink" title="项目中的实际测试经验"></a>项目中的实际测试经验</h2><p>周期性心跳包阻塞<br>从100ms阻塞到700ms<br>排查网络：网络延时，无线转有线<br>软件层数据问题，接收数据排查，校验和错误或长度错误导致未执行<br>发送端的问题，模块间冲突，删除模块依次测试，看问题是否解决<br>只剩下udp后还存在问题，底层问题，写日志，看日志是否阻塞<br>top查看cpu，是否异常占用，cpu调度<br>system-journaled每次阻塞时cpu占用高，这个是管理Linux日志的线程，查内核日志<br>有频繁写入写出，硬件接口连接问题，日志几十微妙的速度写，导致阻塞。<br>最终禁用该服务</p>
+
       
     </div>
     <footer class="article-footer">

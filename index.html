@@ -301,6 +301,9 @@
 <li><strong>JMeter</strong>：JMeter是一个用于性能测试的工具，它可以模拟大量用户并测量应用程序的性能和稳定性。JMeter也可以用于功能测试和接口测试。</li>
 </ol>
 </details>
+
+<h2 id="项目中的实际测试经验"><a href="#项目中的实际测试经验" class="headerlink" title="项目中的实际测试经验"></a>项目中的实际测试经验</h2><p>周期性心跳包阻塞<br>从100ms阻塞到700ms<br>排查网络：网络延时，无线转有线<br>软件层数据问题，接收数据排查，校验和错误或长度错误导致未执行<br>发送端的问题，模块间冲突，删除模块依次测试，看问题是否解决<br>只剩下udp后还存在问题，底层问题，写日志，看日志是否阻塞<br>top查看cpu，是否异常占用，cpu调度<br>system-journaled每次阻塞时cpu占用高，这个是管理Linux日志的线程，查内核日志<br>有频繁写入写出，硬件接口连接问题，日志几十微妙的速度写，导致阻塞。<br>最终禁用该服务</p>
+
       
     </div>
     <footer class="article-footer">
@@ -1009,6 +1012,20 @@ RDB
 <p>前两次挥手是客户端表明要断开连接，后两次挥手是服务端确定要断开连接。</p>
 </details>
 
+<h4 id="TCP拥塞控制"><a href="#TCP拥塞控制" class="headerlink" title="TCP拥塞控制"></a>TCP拥塞控制</h4><details>
+<summary>展开查看</summary>
+
+<p>避免发送方的数据填满整个网络，为了调节发送数据的量，定义了一个拥塞窗口的概念。</p>
+<p>网络中没有出现拥塞，cwnd就会增大；网络中出现了拥塞，cwnd就减少。</p>
+<p>算法：</p>
+<ul>
+<li>慢启动：发送方每收到一个ACK，拥塞窗口cwnd大小加1    cwnd &lt; ssthresh（慢启动门限）</li>
+<li>拥塞避免：发送方每收到一个ACK，cwnd增加1&#x2F;cwnd        cwnd &gt;&#x3D; ssthresh</li>
+<li>拥塞发生  ssthresh设为 cwnd &#x2F; 2   cwnd初始化值</li>
+<li>快速恢复</li>
+</ul>
+</details>
+
 <h3 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h3><h4 id="线程间的同步方式"><a href="#线程间的同步方式" class="headerlink" title="线程间的同步方式"></a>线程间的同步方式</h4><details>
 <summary>展开查看</summary>
 
@@ -1095,7 +1112,12 @@ RDB
 <p>当一个进程申请使用资源的时候，<strong>银行家算法</strong> 通过先 <strong>试探</strong> 分配给该进程资源，然后通过 <strong>安全性算法</strong> 判断分配后系统是否处于安全状态，若不安全则试探分配作废，让该进程继续等待，若能够进入到安全的状态，则就 <strong>真的分配资源给该进程</strong>。</p>
 </details>
 
-<h2 id="项目经历"><a href="#项目经历" class="headerlink" title="项目经历"></a>项目经历</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>MTR课表小程序是和组里同学和师兄一起开发的java项目，初衷是帮南理工的同学们查询课表、成绩等教务信息。主要的技术栈是springboot、mybatis-plus、redis、mysql、elasticsearch和kafka。</p>
+<h2 id="横向项目"><a href="#横向项目" class="headerlink" title="横向项目"></a>横向项目</h2><h3 id="yolo模型部署在华为开发板上"><a href="#yolo模型部署在华为开发板上" class="headerlink" title="yolo模型部署在华为开发板上"></a>yolo模型部署在华为开发板上</h3><ol>
+<li>首先是根据yolov5源码，通过网络上抓取到的人或者军事建筑目标的图片（手动打标签），训练出yolov5模型，这时候是pt模型文件；</li>
+<li>通过yolov5源码中的export.py将pt模型导出ONNX模型；</li>
+<li>通过ATC工具将ONNX模型转为OM模型</li>
+</ol>
+<h3 id="交叉编译"><a href="#交叉编译" class="headerlink" title="交叉编译"></a>交叉编译</h3><h2 id="项目经历"><a href="#项目经历" class="headerlink" title="项目经历"></a>项目经历</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>MTR课表小程序是和组里同学和师兄一起开发的java项目，初衷是帮南理工的同学们查询课表、成绩等教务信息。主要的技术栈是springboot、mybatis-plus、redis、mysql、elasticsearch和kafka。</p>
 <p>原来查询课表或者成绩都需要登录学校的教务网站，在手机上操作不太方便而且比较耗时，为了快捷且便利的查看课表，查询成绩、空教室以及校内交流，开发了这个微信小程序。</p>
 <h3 id="我的工作"><a href="#我的工作" class="headerlink" title="我的工作"></a>我的工作</h3><p>我主要实现了登录模块和校内论坛模块</p>
 <h4 id="登录模块"><a href="#登录模块" class="headerlink" title="登录模块"></a>登录模块</h4><p>第一个版本使用的是最常规的Session的登录方式（session-localStorage方案），后来改了多服务器以后，Session这种方式就出现了问题，首先就是Session不共享的问题。</p>
