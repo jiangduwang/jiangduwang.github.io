@@ -16,7 +16,7 @@
 <meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20240325145435343.png">
 <meta property="og:image" content="https://oss.javaguide.cn/github/javaguide/cs-basics/network/osi-7-model.png">
 <meta property="article:published_time" content="2024-04-02T10:28:05.019Z">
-<meta property="article:modified_time" content="2024-05-14T07:05:34.333Z">
+<meta property="article:modified_time" content="2024-05-14T07:32:58.164Z">
 <meta property="article:author" content="jiangduwang">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="c:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20240325145435343.png">
@@ -241,6 +241,13 @@
 <li>加载——链接（验证——准备——解析）——初始化</li>
 <li>类加载器实例在亲自查找类和资源之前，会将这个任务委托给父类加载器。</li>
 </ul>
+<p>类加载器：</p>
+<ul>
+<li>启动类加载器：所有类加载器的父加载器，加载java的核心标准库</li>
+<li>扩展类加载器：加载java的扩展类库</li>
+<li>系统类加载器：加载classpath下的类和jar包</li>
+<li>自定义加载器</li>
+</ul>
 </details>
 
 <h4 id="简述-CMS-与-G1-机制的区别"><a href="#简述-CMS-与-G1-机制的区别" class="headerlink" title="简述 CMS 与 G1 机制的区别"></a>简述 CMS 与 G1 机制的区别</h4><details>
@@ -423,6 +430,15 @@
 </ol>
 </details>
 
+<h4 id="bean初始化之前运行一段方法的做法"><a href="#bean初始化之前运行一段方法的做法" class="headerlink" title="bean初始化之前运行一段方法的做法"></a>bean初始化之前运行一段方法的做法</h4><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>在 bean 类中实现 InitializingBean 接口,并覆写 afterPropertiesSet() 方法</li>
+<li>在 bean 类的方法上添加 @PostConstruct 注解</li>
+</ul>
+</details>
+
 <h3 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h3><h4 id="MySQL-为什么使用-B-树来作索引，对比-B-树它的优点和缺点是什么？"><a href="#MySQL-为什么使用-B-树来作索引，对比-B-树它的优点和缺点是什么？" class="headerlink" title="MySQL 为什么使用 B+ 树来作索引，对比 B 树它的优点和缺点是什么？"></a>MySQL 为什么使用 B+ 树来作索引，对比 B 树它的优点和缺点是什么？</h4><details>
 <summary>展开查看</summary>
 
@@ -516,6 +532,13 @@
 <li>避免使用外键或者级联操作      对分库分表不友好</li>
 <li>选择合适的字段类型       存储字节越少，，占用空间越小，性能也越好</li>
 </ul>
+</details>
+
+<h4 id="mysql的查询过程"><a href="#mysql的查询过程" class="headerlink" title="mysql的查询过程"></a>mysql的查询过程</h4><details>
+<summary>展开查看</summary>
+
+<p>连接器-查询缓存（已移除）-分析器-优化器-执行器</p>
+<p>分析器分析sql语句的语法；优化器根据索引、表的大小、数据分布等选择合适的执行方式；执行器打开表，建立读写锁，调用存储引擎的接口执行查询；存储引擎根据查询条件定位到B+树叶子节点，从叶子节点中读取到对应的数据行。</p>
 </details>
 
 <h3 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h3><h4 id="Redis-如何实现分布式锁？"><a href="#Redis-如何实现分布式锁？" class="headerlink" title="Redis 如何实现分布式锁？"></a>Redis 如何实现分布式锁？</h4><details>
