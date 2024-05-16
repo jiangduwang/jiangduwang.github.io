@@ -1205,24 +1205,27 @@ RDB
 <h4 id="登录模块"><a href="#登录模块" class="headerlink" title="登录模块"></a>登录模块</h4><p>第一个版本使用的是最常规的Session的登录方式（session-localStorage方案），后来改了多服务器以后，Session这种方式就出现了问题，首先就是Session不共享的问题。</p>
 <p>我们最后选择了JWT（json web token），解决了Session共享的问题，用户登陆时，服务器端生成一个token令牌响应给前端。后续的请求中需要携带令牌到服务器端，服务器端可以解析token，得到用户信息做校验。jwt令牌会存在localstorage（本地浏览器）中，不需要总是重新登录</p>
 <p><a target="_blank" rel="noopener" href="https://fangjun120.github.io/2023/11/12/11-00-37/">jwt</a>是目前最流行的跨域认证的解决方案，是基于token的认证授权机制。本质是一组字符串，由3个部分组成。jwt会将用户id和一些其他信息包装起来一起编码。</p>
-<h5 id="CSRF攻击"><a href="#CSRF攻击" class="headerlink" title="CSRF攻击"></a>CSRF攻击</h5><p>跨站请求伪造，用你的身份去发送一些对你不友好的请求，通过点击非法链接，如果是cookie的话会带到链接中去，伪造者可以利用这个cookie进行非法操作，但是我们将jwt放入localstorage，就不会跟着cookie带到链接里面去。</p>
 <h5 id="如何获得教务信息"><a href="#如何获得教务信息" class="headerlink" title="如何获得教务信息"></a>如何获得教务信息</h5><p>学校教务有一个统一的入口，通过登录教务系统拿到一个cookie，再通过cookie访问课表、成绩等信息。</p>
+<p>查课表：课表一学期都不会变，所以直接将课表缓存到前台，用户查询的时候直接从前台拿，微信小程序的localstorage有10MB的大小</p>
 <h5 id="获取用户信息"><a href="#获取用户信息" class="headerlink" title="获取用户信息"></a>获取用户信息</h5><p>ThreadLocal 并不是一个Thread，而是Thread的局部变量。<br>ThreadLocal为每个线程提供单独一份存储空间，具有线程隔离的效果，只有在线程内才能获取到对应的值，线程外则不能访问。</p>
 <p>可以用threalocal的set方法去存用户的信息，然后用get方法获取当前线程下的信息，不需要加锁。</p>
-<h5 id="nginx反向代理"><a href="#nginx反向代理" class="headerlink" title="nginx反向代理"></a>nginx反向代理</h5><p>用了三台2核4g的服务器，做nginx反向代理，采用轮询的方式做负载均衡。</p>
+<h5 id="nginx反向代理、限流"><a href="#nginx反向代理、限流" class="headerlink" title="nginx反向代理、限流"></a>nginx反向代理、限流</h5><p>用了三台2核4g的服务器，做nginx反向代理，采用轮询的方式做负载均衡。</p>
+<p>令牌桶算法：令牌以固定速率产生，缓存到令牌桶里面。令牌桶放满时，多余的令牌被丢弃。每次请求要消耗等比例的令牌才能被处理。令牌不够的时候，请求被缓存。</p>
 <h4 id="论坛模块"><a href="#论坛模块" class="headerlink" title="论坛模块"></a>论坛模块</h4><h5 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h5><p>帖子表：帖子id、发布者id、标题、内容、发布时间、评论数量</p>
 <p>评论表：评论id、帖子id、评论用户id、评论时间、内容、回复用户id</p>
 <p>评论图片表：帖子id、图片链接</p>
 <h5 id="评论实现方式"><a href="#评论实现方式" class="headerlink" title="评论实现方式"></a>评论实现方式</h5><p>把评论和回复都当做评论，按时间排序。因为我们回复评论的情况较少，实现起来也比较简单。</p>
-<h5 id="多线程评论数量不同步"><a href="#多线程评论数量不同步" class="headerlink" title="多线程评论数量不同步"></a>多线程评论数量不同步</h5><p>我一开始使用的是sycronized锁，来实现单机的锁，这样可以不用管锁的获取和释放，挺方便的。后来因为使用了多个服务器，单机锁不适用了，后来想起来sycronized的轻量级锁，想想直接使用乐观锁的方式来实现也可以，利用mysql自己的行锁写锁，在更新操作的时候在where上多加一个条件，如果更新失败，就睡一下，然后重试。这种实现方式在高并发的时候效率并不高，因为如果出现同步问题的时候，锁是在数据库的，相当于在磁盘上，效率并不高。</p>
+<h5 id="多线程评论数量不同步"><a href="#多线程评论数量不同步" class="headerlink" title="多线程评论数量不同步"></a>多线程评论数量不同步</h5><p>并发回复评论时，可能导致评论数显示不对，因此要加分布式锁。</p>
+<p>我一开始使用的是sycronized锁，来实现单机的锁，这样可以不用管锁的获取和释放，挺方便的。后来因为使用了多个服务器，单机锁不适用了，后来想起来sycronized的轻量级锁，想想直接使用乐观锁的方式来实现也可以，利用mysql自己的行锁写锁，在更新操作的时候在where上多加一个条件，如果更新失败，就睡一下，然后重试。这种实现方式在高并发的时候效率并不高，因为如果出现同步问题的时候，锁是在数据库的，相当于在磁盘上，效率并不高。</p>
 <p>使用了redis的<strong>分布式锁</strong>，原本打算用<strong>setnx</strong>做一个简单的分布式锁。考虑到可能出现客户端宕机，没有释放锁，导致死锁。于是加了<strong>过期时间</strong>。</p>
 <p>通过记录当前的机器+线程id，避免把别人的锁给释放了。</p>
 <p>锁过期了怎么解决？通过redission的watch dog机制，获取锁之后会将锁的线程放入到redission维护的一个map中，每隔10s检查一下，若还持有则会延长时间。</p>
 <p>锁的释放可以手动释放也可以定期释放。</p>
+<p>分布式锁可以确保在同一时刻只有一个用户对评论数进行更新，从而避免了数据竞争和不一致性。</p>
 <h5 id="ElasticSearch全文搜索并高亮"><a href="#ElasticSearch全文搜索并高亮" class="headerlink" title="ElasticSearch全文搜索并高亮"></a>ElasticSearch全文搜索并高亮</h5><p>es类似于数据库，es中的索引表示数据库中的一个表，当新增数据时（比如帖子表），es会将其中的标题和内容写入到索引中，以便于搜索，对数据进行更新或者删除时，也会对索引中的数据进行处理。</p>
 <p>当新建帖子时，会将帖子对象中的标题和内容字段异步写入到es中，这里首先是更新数据库，然后将内容写入消息字段，等待消费者将其写入es;如果es写入失败了，会再次加入到消息队列中。</p>
 <p>当删除帖子时，会先删数据库，然后异步删除es中的内容，如果删除失败也是再加入消息队列。</p>
-<p><strong>高亮的实现</strong>  重写elasticsearchtemplate类中的mapresults方法。</p>
+<p><strong>高亮的实现</strong>  重写elasticsearchtemplate类中的mapresults方法。 <strong>原理</strong>  在每一个关键字前后增加css样式</p>
 <p><strong>es和redis底层都用的netty，这两者启动时会冲突，主要是es会检查netty是否初始化，解决方案通过系统设置es底层检查netty是否初始化的参数，设置为false</strong></p>
 <h5 id="kafka实现系统通知"><a href="#kafka实现系统通知" class="headerlink" title="kafka实现系统通知"></a>kafka实现系统通知</h5><p>对于评论、点赞和关注三种通知，分别设置不同的topic，生产者线程只负责将这些行为写入到消息队列中，消费者线程会从消息队列中取出消息进行处理。</p>
 <p>从业务层面来说，上面的行为封装成一个事件的实体类，让这个实体类内中封装消费者可能需要的数据，然后让实体类的对象作为消息（这里是将对象转为json字符串）写入到消息队列中去。消费者线程从消息队列中取出消息写入到数据库中，让系统通知到用户，进入通知界面，会对message表进行查询。</p>
