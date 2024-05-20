@@ -450,7 +450,7 @@
 </ul>
 </details>
 
-<h3 id="接口和抽象类的区别"><a href="#接口和抽象类的区别" class="headerlink" title="接口和抽象类的区别"></a>接口和抽象类的区别</h3><details>
+<h4 id="接口和抽象类的区别"><a href="#接口和抽象类的区别" class="headerlink" title="接口和抽象类的区别"></a>接口和抽象类的区别</h4><details>
 <summary>展开查看</summary>
 
 <ul>
@@ -458,6 +458,14 @@
 <li>接口类中不能包含具体的方法实现，抽象类中可以包含具体的方法实现；</li>
 <li>只能继承一个抽象类，可以实现多个接口</li>
 </ul>
+</details>
+
+<h4 id="java对象的组成部分"><a href="#java对象的组成部分" class="headerlink" title="java对象的组成部分"></a>java对象的组成部分</h4><details>
+<summary>展开查看</summary>
+
+<p>对象都由对象头、对象的实例数据区和对齐填充字节这三部分组成。</p>
+<p>对象头包含对象和锁的信息、指向类的指针和数组长度；</p>
+<p>对齐填充字节：java对象所占空间应该是8bit倍数，将对象大小补充为8bit的倍数。</p>
 </details>
 
 <h3 id="java的内存区域与垃圾回收机制"><a href="#java的内存区域与垃圾回收机制" class="headerlink" title="java的内存区域与垃圾回收机制"></a>java的内存区域与垃圾回收机制</h3><h4 id="Java-中垃圾回收机制中如何判断对象需要回收？常见的-GC-回收算法有哪些？"><a href="#Java-中垃圾回收机制中如何判断对象需要回收？常见的-GC-回收算法有哪些？" class="headerlink" title="Java 中垃圾回收机制中如何判断对象需要回收？常见的 GC 回收算法有哪些？"></a>Java 中垃圾回收机制中如何判断对象需要回收？常见的 GC 回收算法有哪些？</h4><details>
@@ -486,6 +494,7 @@
 <li>加载——链接（验证——准备——解析）——初始化</li>
 <li>类加载器实例在亲自查找类和资源之前，会将这个任务委托给父类加载器。</li>
 </ul>
+<p><strong>避免类重复加载：</strong> 双亲委派模式可以避免同一个类被重复加载到 JVM 中。当父加载器已经加载了一个类时，子加载器不会再次加载该类，而是直接使用父加载器加载的类。这样可以节省内存空间，并提高类加载的效率。</p>
 <p>类加载器：</p>
 <ul>
 <li>启动类加载器：所有类加载器的父加载器，加载java的核心标准库</li>
@@ -565,6 +574,7 @@
 <h4 id="线程池是如何实现的？简述线程池的任务策略"><a href="#线程池是如何实现的？简述线程池的任务策略" class="headerlink" title="线程池是如何实现的？简述线程池的任务策略"></a>线程池是如何实现的？简述线程池的任务策略</h4><details>
 <summary>展开查看</summary>
 
+<p>核心参数：核心线程数、最大线程数、线程任务队列，临时线程存活时间</p>
 <ul>
 <li>通过ThreadPoolExecutor构造函数可以创建多种类型的线程池，包括固定线程线程池、单线程线程池、cache线程池等</li>
 <li>任务策略即饱和策略，默认策略是抛出异常拒绝新来的任务；或者把任务退回给调用者线程，让调用者线程来执行这个任务；或者丢弃掉最早未处理的任务</li>
@@ -574,7 +584,7 @@
 <h4 id="ThreadLocal-实现原理是什么？"><a href="#ThreadLocal-实现原理是什么？" class="headerlink" title="ThreadLocal 实现原理是什么？"></a>ThreadLocal 实现原理是什么？</h4><details>
 <summary>展开查看</summary>
 
-<p>threadlocal会保存变量的本地副本，使其独属于这个线程。本质上是一个threadlocalmap，键为threadlocal对象，值为副本的值，调用threadlocal的put和get方法本质上就是调用threadlocalmap的put和get方法</p>
+<p>threadlocal会保存变量的本地副本，使其独属于这个线程。本质上是一个threadlocalmap，键为threadlocal对象（弱引用），值为副本的值（强引用），调用threadlocal的put和get方法本质上就是调用threadlocalmap的put和get方法</p>
 </details>
 
 <h4 id="Java锁升级机制"><a href="#Java锁升级机制" class="headerlink" title="Java锁升级机制"></a>Java锁升级机制</h4><details>
@@ -600,12 +610,19 @@
 <p>如ReentrantLock，在内部维护了一个锁状态变量和一个等待队列，等待队列会阻塞等待获取锁的线程。在获取锁的时候，会判断当前锁状态变量是否为0，如果为0，则获取到锁，且锁状态变量+1，这时其他锁线程无法获取到锁，当获取锁的同一个线程再次获取锁时，则锁状态变量会再加一。当锁状态变量变为0才会真正释放锁。</p>
 </details>
 
+<h4 id="父子线程的threadlocal能共享吗？"><a href="#父子线程的threadlocal能共享吗？" class="headerlink" title="父子线程的threadlocal能共享吗？"></a>父子线程的threadlocal能共享吗？</h4><details>
+<summary>展开查看</summary>
+
+<p>异步场景下无法给子线程共享父线程中创建的线程副本数据；</p>
+<p>JDK提供了<code>InheritableThreadLocal</code>类，可以让子线程共享父线程的数据。</p>
+</details>
+
 <h3 id="spring"><a href="#spring" class="headerlink" title="spring"></a>spring</h3><h4 id="常见的面向对象设计的设计模式"><a href="#常见的面向对象设计的设计模式" class="headerlink" title="常见的面向对象设计的设计模式"></a>常见的面向对象设计的设计模式</h4><details>
 <summary>展开查看</summary>
 
 <p>工厂模式和单例模式，工厂模式通过封装对象的创建过程降低耦合度。单例模式适合只需要创建一次的对象，比如线程池，日志对象。</p>
 <p><strong>单例模式的实现</strong>   私有构造函数，通过volatile关键字定义单例，避免指令重排序，采用双重校验锁保证单例。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton uniqueInstance;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span>  <span class="keyword">static</span> Singleton <span class="title function_">getUniqueInstance</span><span class="params">()</span> &#123;</span><br><span class="line">       <span class="comment">//先判断对象是否已经实例过，没有实例化过才进入加锁代码</span></span><br><span class="line">        <span class="keyword">if</span> (uniqueInstance == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="comment">//注意这里是对类对象加锁，不是对单例对象加锁</span></span><br><span class="line">            <span class="keyword">synchronized</span> (Singleton.class) &#123;</span><br><span class="line">                <span class="keyword">if</span> (uniqueInstance == <span class="literal">null</span>) &#123;</span><br><span class="line">                    uniqueInstance = <span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> uniqueInstance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 懒汉式</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">singleton</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> singleton a;</span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">singleton</span><span class="params">()</span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> singleton <span class="title function_">getInstance</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(a==<span class="literal">null</span>)&#123;</span><br><span class="line">            a = <span class="keyword">new</span> <span class="title class_">singleton</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 饿汉式</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">singleton2</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> singleton2 a;</span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">singleton2</span><span class="params">()</span>&#123;&#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> singleton2 <span class="title function_">getInstance</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//双重锁</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton uniqueInstance;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span>  <span class="keyword">static</span> Singleton <span class="title function_">getUniqueInstance</span><span class="params">()</span> &#123;</span><br><span class="line">       <span class="comment">//先判断对象是否已经实例过，没有实例化过才进入加锁代码</span></span><br><span class="line">        <span class="keyword">if</span> (uniqueInstance == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="comment">//注意这里是对类对象加锁，不是对单例对象加锁</span></span><br><span class="line">            <span class="keyword">synchronized</span> (Singleton.class) &#123;</span><br><span class="line">                <span class="keyword">if</span> (uniqueInstance == <span class="literal">null</span>) &#123;</span><br><span class="line">                    uniqueInstance = <span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> uniqueInstance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 </details>
 
@@ -684,6 +701,25 @@
 </ul>
 </details>
 
+<h4 id="spring事务失效的场景"><a href="#spring事务失效的场景" class="headerlink" title="spring事务失效的场景"></a>spring事务失效的场景</h4><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>自己实现了异常捕获处理</li>
+<li>抛出检查异常（编译时异常）</li>
+<li>事务注解在非public方法上</li>
+</ul>
+</details>
+
+<h4 id="mybatis中-和-的区别"><a href="#mybatis中-和-的区别" class="headerlink" title="mybatis中$和#的区别"></a>mybatis中$和#的区别</h4><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>“#” 预编译的方式，会将参数值设置为预编译语句中的占位符。</li>
+<li>“$” 直接替换的方法，会直接将参数值按照字符串的形式替换到SQL语句中，会有潜在的sql注入风险   适用于动态拼接</li>
+</ul>
+</details>
+
 <h3 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h3><h4 id="MySQL-为什么使用-B-树来作索引，对比-B-树它的优点和缺点是什么？"><a href="#MySQL-为什么使用-B-树来作索引，对比-B-树它的优点和缺点是什么？" class="headerlink" title="MySQL 为什么使用 B+ 树来作索引，对比 B 树它的优点和缺点是什么？"></a>MySQL 为什么使用 B+ 树来作索引，对比 B 树它的优点和缺点是什么？</h4><details>
 <summary>展开查看</summary>
 
@@ -750,8 +786,10 @@
 
 <h4 id="简述-MySQL-MVCC-的实现原理"><a href="#简述-MySQL-MVCC-的实现原理" class="headerlink" title="简述 MySQL MVCC 的实现原理"></a>简述 MySQL MVCC 的实现原理</h4><details>
 <summary>展开查看</summary>
+MVCC会对一份数据存储多个版本，通过undo log（这个日志会记录某行数据多个版本的数据）实现
 
-<p>MVCC会对一份数据存储多个版本，通过undo log（这个日志会记录某行数据多个版本的数据）实现</p>
+<p>读操作：当一个事务执行读操作，会先创建快照，使用快照读取，这样其他事务的修改不会影响到当前事务的读取。</p>
+<p>写操作：事务执行写操作时，会生成一个新的数据版本，并将修改后的数据写入数据库。</p>
 </details>
 
 <h4 id="数据库如何设计索引，如何优化查询？"><a href="#数据库如何设计索引，如何优化查询？" class="headerlink" title="数据库如何设计索引，如何优化查询？"></a>数据库如何设计索引，如何优化查询？</h4><details>
@@ -765,8 +803,9 @@
 
 <h4 id="MySQL的主从同步机制"><a href="#MySQL的主从同步机制" class="headerlink" title="MySQL的主从同步机制"></a>MySQL的主从同步机制</h4><details>
 <summary>展开查看</summary>
+基于**binlog**日志的机制，实现主服务器到从服务器数据的同步。（有点像读写分离那一块的）
 
-<p>基于<strong>binlog</strong>日志的机制，实现主服务器到从服务器数据的同步。（有点像读写分离那一块的）</p>
+<p><code>binlog</code>文件记录了MySQL数据库中数据的所有变化，主库将数据的变化写入到<code>binlog</code>，从库将<code>binlog</code>写入到<code>relay log</code>，再从relay log同步数据到本地。</p>
 </details>
 
 <h4 id="sql优化手段"><a href="#sql优化手段" class="headerlink" title="sql优化手段"></a>sql优化手段</h4><details>
@@ -784,6 +823,43 @@
 
 <p>连接器-查询缓存（已移除）-分析器-优化器-执行器</p>
 <p>分析器分析sql语句的语法；优化器根据索引、表的大小、数据分布等选择合适的执行方式；执行器打开表，建立读写锁，调用存储引擎的接口执行查询；存储引擎根据查询条件定位到B+树叶子节点，从叶子节点中读取到对应的数据行。</p>
+</details>
+
+<h4 id="InnoDB存储引擎有哪两种行级锁"><a href="#InnoDB存储引擎有哪两种行级锁" class="headerlink" title="InnoDB存储引擎有哪两种行级锁"></a>InnoDB存储引擎有哪两种行级锁</h4><details>
+<summary>展开查看</summary>
+
+<p>共享锁（多个事务可以同时对同一行数据加共享锁）和排他锁</p>
+</details>
+
+<h4 id="mysql查询sql语句的查询时间"><a href="#mysql查询sql语句的查询时间" class="headerlink" title="mysql查询sql语句的查询时间"></a>mysql查询sql语句的查询时间</h4><details>
+<summary>展开查看</summary>
+
+<p><code>SHOW PROFILES</code> 命令可以用来查看最近执行的 SQL 语句的执行时间</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> profiling <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> your_table <span class="keyword">WHERE</span> your_conditions;</span><br><span class="line"><span class="keyword">SHOW</span> PROFILES;</span><br></pre></td></tr></table></figure>
+</details>
+
+<h4 id="distinct关键字"><a href="#distinct关键字" class="headerlink" title="distinct关键字"></a>distinct关键字</h4><details>
+<summary>展开查看</summary>
+
+<p>从查询结果中去除重复的行</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> department <span class="keyword">FROM</span> employees;</span><br></pre></td></tr></table></figure>
+</details>
+
+<h4 id="左连接和右连接"><a href="#左连接和右连接" class="headerlink" title="左连接和右连接"></a>左连接和右连接</h4><details>
+<summary>展开查看</summary>
+
+<p>左连接是基于左边的表来连接右边的表，左连接返回左表中所有行，以及右表中与左表中匹配的行，如果右表中没有与左表匹配的行，则返回NULL值。</p>
+<p>右连接相反。</p>
+</details>
+
+<h4 id="哪些sql语句会产生临时表"><a href="#哪些sql语句会产生临时表" class="headerlink" title="哪些sql语句会产生临时表"></a>哪些sql语句会产生临时表</h4><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>排序  order by和group by</li>
+<li>连接 </li>
+<li>子查询</li>
+</ul>
 </details>
 
 <h3 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h3><h4 id="Redis-如何实现分布式锁？"><a href="#Redis-如何实现分布式锁？" class="headerlink" title="Redis 如何实现分布式锁？"></a>Redis 如何实现分布式锁？</h4><details>
@@ -926,6 +1002,15 @@ RDB
 <p>解决方法：消费消息服务做幂等校验，比如Redis的set，MySQL的主键等天然的幂等功能。</p>
 </details>
 
+<h4 id="kafka高性能的原因"><a href="#kafka高性能的原因" class="headerlink" title="kafka高性能的原因"></a>kafka高性能的原因</h4><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>磁盘顺序读写</li>
+<li>页缓存：磁盘中的数据缓存到内存，对磁盘的访问变成对内存的访问</li>
+</ul>
+</details>
+
 <h3 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h3><h4 id="网络分层模型"><a href="#网络分层模型" class="headerlink" title="网络分层模型"></a>网络分层模型</h4><h5 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h5><details>
 <summary>展开查看</summary>
 
@@ -963,6 +1048,8 @@ RDB
 <li>端口号：HTTP默认是80，HTTPs默认是443</li>
 <li>URL前缀</li>
 <li>安全性：HTTPS运行在SSL&#x2F;TLS协议上，SSL&#x2F;TLS运行在TCP上，所有传输的内容都经过加密。</li>
+<li>HTTPS连接建立相对复杂，在tcp三次握手后，还要进行SSL&#x2F;TLS的握手过程。</li>
+<li>HTTPS需要向CA申请数字证书，保证服务器的身份是可信的。</li>
 </ul>
 </details>
 
@@ -1068,6 +1155,42 @@ RDB
 <li>拥塞避免：发送方每收到一个ACK，cwnd增加1&#x2F;cwnd        cwnd &gt;&#x3D; ssthresh</li>
 <li>拥塞发生  ssthresh设为 cwnd &#x2F; 2   cwnd初始化值</li>
 <li>快速恢复</li>
+</ul>
+</details>
+
+<h4 id="TCP延迟确认"><a href="#TCP延迟确认" class="headerlink" title="TCP延迟确认"></a>TCP延迟确认</h4><details>
+<summary>展开查看</summary>
+
+<p>当没有响应数据要发送时，ACK 将会延迟一段时间，以等待是否有响应数据可以一起发送</p>
+</details>
+
+<h4 id="TCP超时重传"><a href="#TCP超时重传" class="headerlink" title="TCP超时重传"></a>TCP超时重传</h4><details>
+<summary>展开查看</summary>
+
+<p>超时重传，两种情况：数据包丢失；应答丢失。超时时间应略大于往返时延</p>
+</details>
+
+<h4 id="TCP滑动窗口和流量控制"><a href="#TCP滑动窗口和流量控制" class="headerlink" title="TCP滑动窗口和流量控制"></a>TCP滑动窗口和流量控制</h4><details>
+<summary>展开查看</summary>
+
+<p>一问一答的通信效率不高，为解决这个问题，tcp引入了窗口的概念，发送方可以连续发送 窗口大小 的请求 (批量思想)<br>TCP 提供一种机制可以让「发送方」根据「接收方」的实际接收能力控制发送的数据量。通过滑动窗口实现的</p>
+</details>
+
+<h4 id="TCP粘包和拆包"><a href="#TCP粘包和拆包" class="headerlink" title="TCP粘包和拆包"></a>TCP粘包和拆包</h4><details>
+<summary>展开查看</summary>
+
+<p>TCP传输的是字节流，它会根据缓冲区的实际情况进行包的划分（发送和接收），由此会导致上层业务的一个完整的包被拆分成多个包进行发送（“拆包”），或者多个小包被封装成一个大的数据包进行发送（“粘包”），这就是所谓的TCP的拆包和粘包问题。</p>
+</details>
+
+<h4 id="http常见状态码"><a href="#http常见状态码" class="headerlink" title="http常见状态码"></a>http常见状态码</h4><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>1xx  正在处理</li>
+<li>2xx  处理完成</li>
+<li>3xx  处理需要额外的操作——重定向</li>
+<li>4xx  客户端错误</li>
+<li>5xx  服务端错误</li>
 </ul>
 </details>
 
@@ -1194,6 +1317,22 @@ RDB
 <h5 id="复杂度-2"><a href="#复杂度-2" class="headerlink" title="复杂度"></a>复杂度</h5><p>建初始堆的时间复杂度O(n), 调整堆的时间复杂度O(logn), 调整n次, 因此时间复杂度O(nlogn)        堆的高度是O(logn)</p>
 <p>空间复杂度O(1)</p>
 <p>不稳定的排序算法</p>
+<h3 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h3><h4 id="查询日志"><a href="#查询日志" class="headerlink" title="查询日志"></a>查询日志</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">&quot;content&quot;</span> /path/to/log</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">&quot;/content/&quot;</span> /path/to/log</span><br></pre></td></tr></table></figure>
+
+<h5 id="grep的参数"><a href="#grep的参数" class="headerlink" title="grep的参数"></a>grep的参数</h5><p>-i   忽略大小写</p>
+<p>-v  排除某内容的行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查找包含error但是不包含timeout的内容行</span></span><br><span class="line">grep <span class="string">&#x27;error&#x27;</span> /var/log/syslog | grep -v <span class="string">&#x27;timeout&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="查找创建时间两天内的文件"><a href="#查找创建时间两天内的文件" class="headerlink" title="查找创建时间两天内的文件"></a>查找创建时间两天内的文件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -<span class="built_in">type</span> f -mtime -2</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看磁盘的使用率和占用空间"><a href="#查看磁盘的使用率和占用空间" class="headerlink" title="查看磁盘的使用率和占用空间"></a>查看磁盘的使用率和占用空间</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看磁盘的使用情况，磁盘大小和使用率</span></span><br><span class="line"><span class="built_in">df</span> -h</span><br><span class="line"><span class="comment">#查看目录或文件的使用情况，-s表示努力下占用空间的汇总</span></span><br><span class="line"><span class="built_in">du</span> -h</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看进程的端口"><a href="#查看进程的端口" class="headerlink" title="查看进程的端口"></a>查看进程的端口</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -p</span><br></pre></td></tr></table></figure>
+
+
+
 <h2 id="横向项目"><a href="#横向项目" class="headerlink" title="横向项目"></a>横向项目</h2><h3 id="yolo模型部署在华为开发板上"><a href="#yolo模型部署在华为开发板上" class="headerlink" title="yolo模型部署在华为开发板上"></a>yolo模型部署在华为开发板上</h3><ol>
 <li>首先是根据yolov5源码，通过网络上抓取到的人或者军事建筑目标的图片（手动打标签），训练出yolov5模型，这时候是pt模型文件；</li>
 <li>通过yolov5源码中的export.py将pt模型导出ONNX模型；</li>
