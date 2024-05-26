@@ -15,7 +15,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://developer.qcloudimg.com/http-save/yehe-10496291/a66e29500026a19ea096b11bf8bae1f8.png">
 <meta property="article:published_time" content="2024-04-10T08:02:09.236Z">
-<meta property="article:modified_time" content="2024-04-23T11:32:58.468Z">
+<meta property="article:modified_time" content="2024-05-26T06:03:51.510Z">
 <meta property="article:author" content="jiangduwang">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://developer.qcloudimg.com/http-save/yehe-10496291/a66e29500026a19ea096b11bf8bae1f8.png">
@@ -114,6 +114,18 @@
 <h3 id="测试用例"><a href="#测试用例" class="headerlink" title="测试用例"></a>测试用例</h3><details>
 <summary>展开查看</summary>
 描述输入实际值和预期输出行为或者结果的文档，同时也标识了测试过程结果与约束
+</details>
+### 测试用例的设计方法
+
+<details>
+<summary>展开查看</summary>
+
+<ul>
+<li>等价类划分：将输入数据划分为若干等价类，认为每个等价类中的所有数据都会引起相同的处理结果。</li>
+<li>边界值分析：测试边界值</li>
+<li>决策表测试：针对多个输入条件的复杂逻辑，构建决策表，通过表格的形式明切输入条件极其对应的输出结果</li>
+<li>随机测试：随机生成输入数据进行测试</li>
+</ul>
 </details>
 
 <h2 id="如何理解测试开发中的开发"><a href="#如何理解测试开发中的开发" class="headerlink" title="如何理解测试开发中的开发"></a>如何理解测试开发中的开发</h2><details>
@@ -276,6 +288,97 @@
 </ul>
 </li>
 </ol>
+</details>
+
+<h2 id="微信发送文件的测试用例"><a href="#微信发送文件的测试用例" class="headerlink" title="微信发送文件的测试用例"></a>微信发送文件的测试用例</h2><details>
+<summary>展开查看</summary>
+
+<ul>
+<li><p>功能测试</p>
+<ul>
+<li>正常发送文件</li>
+<li>发送支持的文件类型</li>
+</ul>
+</li>
+<li><p>边界值测试</p>
+<ul>
+<li>发送最大允许大小的文件</li>
+<li>发送超过最大允许大小的文件</li>
+</ul>
+</li>
+<li><p>异常情况测试</p>
+<ul>
+<li>发送空文件</li>
+<li>发送损坏文件</li>
+<li>网络中断后重新发送</li>
+</ul>
+</li>
+<li><p>性能测试</p>
+<ul>
+<li>同时发送多个文件</li>
+<li>选择一个接近最大允许大小的文件</li>
+</ul>
+</li>
+<li><p>用户体验测试</p>
+<ul>
+<li>发送文件时的用户提示</li>
+<li>文件发送记录</li>
+</ul>
+</li>
+<li><p>安全性测试</p>
+<ul>
+<li>发送包含敏感信息的文件</li>
+<li>病毒文件检测</li>
+</ul>
+</li>
+<li><p>跨平台测试</p>
+</li>
+</ul>
+</details>
+
+<h2 id="微信发送红包的测试用例"><a href="#微信发送红包的测试用例" class="headerlink" title="微信发送红包的测试用例"></a>微信发送红包的测试用例</h2><details>
+<summary>展开查看</summary>
+
+<ul>
+<li><p>功能测试</p>
+<ul>
+<li>正常发送红包</li>
+<li>发送拼手气红包</li>
+<li>发送定向红包</li>
+</ul>
+</li>
+<li><p>边界值测试</p>
+<ul>
+<li>发送最低和最高金额的红包</li>
+<li>发送超过最高金额的红包</li>
+</ul>
+</li>
+<li><p>异常情况测试</p>
+<ul>
+<li>余额不足时发送红包</li>
+<li>网络中断后重新发送</li>
+<li>取消发送红包</li>
+</ul>
+</li>
+<li><p>安全性测试</p>
+<ul>
+<li>多测领取红包</li>
+<li>红包过期</li>
+<li>未实名验证用户发送红包</li>
+<li>单方删除好友后发送红包</li>
+</ul>
+</li>
+<li><p>用户体验测试</p>
+</li>
+<li><p>跨平台测试</p>
+</li>
+<li><p>性能测试</p>
+<ul>
+<li>高频发送红包</li>
+<li>大规模红包领取（拼手气红包）</li>
+</ul>
+</li>
+</ul>
 </details>
 
 <h2 id="自动化测试"><a href="#自动化测试" class="headerlink" title="自动化测试"></a>自动化测试</h2><details>
