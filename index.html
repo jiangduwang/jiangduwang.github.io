@@ -1264,166 +1264,6 @@
 
 
   
-    <article id="post-sql" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/06/03/sql/" class="article-date">
-  <time class="dt-published" datetime="2024-06-03T05:49:25.172Z" itemprop="datePublished">2024-06-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/06/03/sql/">sql语句</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="字段为null的情况"><a href="#字段为null的情况" class="headerlink" title="字段为null的情况"></a>字段为null的情况</h2><p>字段为null的情况，不可以用&#x3D;来判断，两种方式处理：1、用 is 来判断null；2、用IFNULL将null替换为一个有效的值再判断</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> name <span class="keyword">FROM</span> Customer <span class="keyword">WHERE</span> referee_id <span class="keyword">is</span> <span class="keyword">null</span> <span class="keyword">OR</span> referee_id <span class="operator">!=</span> <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> name <span class="keyword">FROM</span> Customer <span class="keyword">WHERE</span> IFNULL(referee_id, <span class="number">0</span>) <span class="operator">!=</span> <span class="number">2</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="去重查询"><a href="#去重查询" class="headerlink" title="去重查询"></a>去重查询</h2><p>如果要查询的列不是主键的话，会出现重复的情况，要用 <strong>DISTINCT</strong>关键字来去重</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> author_id <span class="keyword">as</span> id <span class="keyword">FROM</span> Views <span class="keyword">WHERE</span> author_id <span class="operator">=</span> viewer_id</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> author_id</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="计算字符数"><a href="#计算字符数" class="headerlink" title="计算字符数"></a>计算字符数</h2><ul>
-<li>CHAR_LENGTH     计算字符数，汉字也算一个字符</li>
-<li>LENGTH                 计算字节数，UTF8汉字三个字节</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT tweet_id FROM Tweets WHERE <span class="title function_">CHAR_LENGTH</span><span class="params">(content)</span> &gt; <span class="number">15</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="左连接和右连接"><a href="#左连接和右连接" class="headerlink" title="左连接和右连接"></a>左连接和右连接</h2><p>左连接从左表（LEFT JOIN前面的表）中返回所有记录，即使右表中没有匹配的记录。右表中如果没有匹配，则结果中右表的部分会包含NULL。</p>
-<h3 id="使用唯一标识替换员工ID"><a href="#使用唯一标识替换员工ID" class="headerlink" title="使用唯一标识替换员工ID"></a>使用唯一标识替换员工ID</h3><blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">输入：</span><br><span class="line">Employees 表:</span><br><span class="line">+----+----------+</span><br><span class="line">| id | name     |</span><br><span class="line">+----+----------+</span><br><span class="line">| 1  | Alice    |</span><br><span class="line">| 7  | Bob      |</span><br><span class="line">| 11 | Meir     |</span><br><span class="line">| 90 | Winston  |</span><br><span class="line">| 3  | Jonathan |</span><br><span class="line">+----+----------+</span><br><span class="line">EmployeeUNI 表:</span><br><span class="line">+----+-----------+</span><br><span class="line">| id | unique_id |</span><br><span class="line">+----+-----------+</span><br><span class="line">| 3  | 1         |</span><br><span class="line">| 11 | 2         |</span><br><span class="line">| 90 | 3         |</span><br><span class="line">+----+-----------+</span><br><span class="line">输出：</span><br><span class="line">+-----------+----------+</span><br><span class="line">| unique_id | name     |</span><br><span class="line">+-----------+----------+</span><br><span class="line">| null      | Alice    |</span><br><span class="line">| null      | Bob      |</span><br><span class="line">| 2         | Meir     |</span><br><span class="line">| 3         | Winston  |</span><br><span class="line">| 1         | Jonathan |</span><br><span class="line">+-----------+----------+</span><br><span class="line">解释：</span><br><span class="line">Alice and Bob 没有唯一标识码, 因此我们使用 null 替代。</span><br><span class="line">Meir 的唯一标识码是 2 。</span><br><span class="line">Winston 的唯一标识码是 3 。</span><br><span class="line">Jonathan 唯一标识码是 1 。</span><br></pre></td></tr></table></figure>
-</blockquote>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> u.unique_id, e.name <span class="keyword">FROM</span> Employees e <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> EmployeeUNI u <span class="keyword">on</span> u.id <span class="operator">=</span> e.id</span><br></pre></td></tr></table></figure>
-
-<p>这题主表是Employees表，为了实现null替代，用左连接比较好，如果没有null的情况，下面这样写也是可以的：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> u.unique_id, e.name <span class="keyword">FROM</span> Employees e, EmployeeUNI u <span class="keyword">WHERE</span> u.id <span class="operator">=</span> e.id</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="进店却未进行过交易的顾客"><a href="#进店却未进行过交易的顾客" class="headerlink" title="进店却未进行过交易的顾客"></a>进店却未进行过交易的顾客</h3><blockquote>
-<p>有一些顾客可能光顾了购物中心但没有进行交易。请你编写一个解决方案，来查找这些顾客的 ID ，以及他们只光顾不交易的次数。</p>
-<p>返回以 <strong>任何顺序</strong> 排序的结果表。</p>
-<p>返回结果格式如下例所示。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">输入:</span><br><span class="line">Visits</span><br><span class="line">+----------+-------------+</span><br><span class="line">| visit_id | customer_id |</span><br><span class="line">+----------+-------------+</span><br><span class="line">| 1        | 23          |</span><br><span class="line">| 2        | 9           |</span><br><span class="line">| 4        | 30          |</span><br><span class="line">| 5        | 54          |</span><br><span class="line">| 6        | 96          |</span><br><span class="line">| 7        | 54          |</span><br><span class="line">| 8        | 54          |</span><br><span class="line">+----------+-------------+</span><br><span class="line">Transactions</span><br><span class="line">+----------------+----------+--------+</span><br><span class="line">| transaction_id | visit_id | amount |</span><br><span class="line">+----------------+----------+--------+</span><br><span class="line">| 2              | 5        | 310    |</span><br><span class="line">| 3              | 5        | 300    |</span><br><span class="line">| 9              | 5        | 200    |</span><br><span class="line">| 12             | 1        | 910    |</span><br><span class="line">| 13             | 2        | 970    |</span><br><span class="line">+----------------+----------+--------+</span><br><span class="line">输出:</span><br><span class="line">+-------------+----------------+</span><br><span class="line">| customer_id | count_no_trans |</span><br><span class="line">+-------------+----------------+</span><br><span class="line">| 54          | 2              |</span><br><span class="line">| 30          | 1              |</span><br><span class="line">| 96          | 1              |</span><br><span class="line">+-------------+----------------+</span><br><span class="line">解释:</span><br><span class="line">ID = 23 的顾客曾经逛过一次购物中心，并在 ID = 12 的访问期间进行了一笔交易。</span><br><span class="line">ID = 9 的顾客曾经逛过一次购物中心，并在 ID = 13 的访问期间进行了一笔交易。</span><br><span class="line">ID = 30 的顾客曾经去过购物中心，并且没有进行任何交易。</span><br><span class="line">ID = 54 的顾客三度造访了购物中心。在 2 次访问中，他们没有进行任何交易，在 1 次访问中，他们进行了 3 次交易。</span><br><span class="line">ID = 96 的顾客曾经去过购物中心，并且没有进行任何交易。</span><br><span class="line">如我们所见，ID 为 30 和 96 的顾客一次没有进行任何交易就去了购物中心。顾客 54 也两次访问了购物中心并且没有进行任何交易。</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>这一题思路要分成几步来看，第一步使用左连接，计算出customer_id对应的transaction_id，如果customer_id对应的transaction_id列为null，则说明只逛过没有交易，然后计算每个customer_id对应的null的个数，按customer_id进行分组，最终得到结果。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> customer_id, <span class="built_in">COUNT</span>(customer_id) <span class="keyword">as</span> count_no_trans <span class="keyword">FROM</span> Customers</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> Transactions <span class="keyword">ON</span> Customers.visit_id <span class="operator">=</span> Transactions.visit_id</span><br><span class="line"><span class="keyword">WHERE</span> transaction_id <span class="keyword">is</span> <span class="keyword">null</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> customer_id</span><br></pre></td></tr></table></figure>
-
-<h2 id="日期比较"><a href="#日期比较" class="headerlink" title="日期比较"></a>日期比较</h2><p>DATEDIFF(endDate, startDate) 计算两个日期相差的天数</p>
-<h3 id="上升的温度"><a href="#上升的温度" class="headerlink" title="上升的温度"></a>上升的温度</h3><blockquote>
-<p>编写解决方案，找出与之前（昨天的）日期相比温度更高的所有日期的 <code>id</code> 。</p>
-<p>返回结果 <strong>无顺序要求</strong> 。</p>
-<p>结果格式如下例子所示。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">输入：</span><br><span class="line">Weather 表：</span><br><span class="line">+----+------------+-------------+</span><br><span class="line">| id | recordDate | Temperature |</span><br><span class="line">+----+------------+-------------+</span><br><span class="line">| 1  | 2015-01-01 | 10          |</span><br><span class="line">| 2  | 2015-01-02 | 25          |</span><br><span class="line">| 3  | 2015-01-03 | 20          |</span><br><span class="line">| 4  | 2015-01-04 | 30          |</span><br><span class="line">+----+------------+-------------+</span><br><span class="line">输出：</span><br><span class="line">+----+</span><br><span class="line">| id |</span><br><span class="line">+----+</span><br><span class="line">| 2  |</span><br><span class="line">| 4  |</span><br><span class="line">+----+</span><br><span class="line">解释：</span><br><span class="line">2015-01-02 的温度比前一天高（10 -&gt; 25）</span><br><span class="line">2015-01-04 的温度比前一天高（20 -&gt; 30）</span><br></pre></td></tr></table></figure>
-</blockquote>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> a.id <span class="keyword">FROM</span> Weather a, Weather b <span class="keyword">WHERE</span> DATEDIFF(a.recordDate, b.recordDate) <span class="operator">=</span> <span class="number">1</span> <span class="keyword">AND</span> a.Temperature <span class="operator">&gt;</span> b.Temperature</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://jiangduwang.github.io/2024/06/03/sql/" data-id="clwyjx9fg0001jkul7wrb25hr" data-title="sql语句" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-kafka" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/06/03/kafka/" class="article-date">
-  <time class="dt-published" datetime="2024-06-03T05:49:25.109Z" itemprop="datePublished">2024-06-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/06/03/kafka/">kafka八股</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h2><p>Message Queue，简称MQ</p>
-<p>将需要传输的数据存放在队列中</p>
-<h3 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h3><p>用来存储消息的组件，比如Kafka、RocketMQ、RabbitMQ</p>
-<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><h4 id="异步处理"><a href="#异步处理" class="headerlink" title="异步处理"></a>异步处理</h4><p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20240316171521493.png" alt="image-20240316171521493"></p>
-<p>快速响应，避免串行导致的高延迟</p>
-<h4 id="系统解耦"><a href="#系统解耦" class="headerlink" title="系统解耦"></a>系统解耦</h4><p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20240316172043220.png" alt="image-20240316172043220"></p>
-<h4 id="流量削峰"><a href="#流量削峰" class="headerlink" title="流量削峰"></a>流量削峰</h4><p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20240316172522210.png" alt="image-20240316172522210"></p>
-<h4 id="日志处理"><a href="#日志处理" class="headerlink" title="日志处理"></a>日志处理</h4><p>主要用来处理用户的喜好和活跃情况</p>
-<h2 id="kafka"><a href="#kafka" class="headerlink" title="kafka"></a>kafka</h2><p>将消息队列放入到硬盘中，利用硬盘顺序读写性能高的特点处理消息队列，然后又能保证高吞吐量。</p>
-<p>kafka跟ros差不多，也是设置一个主题，然后生产者类似于发布者，在主题上发布消息；消费者类似于订阅者，通过主题接收消息，然后会有对应的一个处理函数（回调函数）</p>
-<h3 id="发送系统通知"><a href="#发送系统通知" class="headerlink" title="发送系统通知"></a>发送系统通知</h3><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>对于评论、点赞和关注，分别设置不同的主题，生产者线程只负责将这些行为写入到消息队列中，后续的操作都是消费者线程去完成，这样就实现了异步。</p>
-<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><p>进行上面的行为需要封装一个事件的实体类，让这个实体类内中封装消费者可能需要的数据，然后让实体类的对象作为消息（这里是将对象转为json字符串）写入到消息队列中去。</p>
-<p>消费者线程会读出消息队列中的内容，写入到数据库message表中，实现系统通知就是你进入通知页面，会对message表进行查询，然后将相关信息传回前端。</p>
-<h2 id="Elasticsearch"><a href="#Elasticsearch" class="headerlink" title="Elasticsearch"></a>Elasticsearch</h2><ul>
-<li>分布式的、restful风格的搜索引擎</li>
-<li>便于水平拓展，每秒可以处理海量数据</li>
-</ul>
-<p>在搜索之前，需要存一份副本到搜索引擎中去</p>
-<h3 id="安装和使用"><a href="#安装和使用" class="headerlink" title="安装和使用"></a>安装和使用</h3><p>原生ES不支持中文分词，需要下载一个叫iK的插件实现能够检索中文分词</p>
-<h3 id="增删改查"><a href="#增删改查" class="headerlink" title="增删改查"></a>增删改查</h3><p>类似于数据库，es可以把数据库中的记录（一般是关键的字段，如果是帖子，就是标题和内容，通过注解来区分）存储到索引中，在索引中可以对记录进行增删改查。</p>
-<h3 id="全局搜索"><a href="#全局搜索" class="headerlink" title="全局搜索"></a>全局搜索</h3><p>实现一个NativeSearchQueryBuilder类，设置查询的关键字、查询的字段；设置排序的字段；设置分页；设置高亮字段。</p>
-<p>上面的高亮字段并不是真的实现对搜索字段添加标签，它直接返回的还是包含搜索字段的内容，实现高亮字段需要重写elasticsearchTemplate中的mapResults方法。</p>
-<p>新建帖子时，将帖子对象异步写入ES中；删除帖子时，会异步删除ES中的内容。 这里的异步都是消息队列实现的。</p>
-<h2 id="kafka八股"><a href="#kafka八股" class="headerlink" title="kafka八股"></a>kafka八股</h2><h3 id="消息模型"><a href="#消息模型" class="headerlink" title="消息模型"></a>消息模型</h3><p>早期使用的是队列模型，使用队列作为消息通信载体，但是使用队列有一些问题，一条消息只能被一个消费者使用，如果我想多个消费者消费同一条消息（广播），则实现不了。</p>
-<p>现在使用的是<strong>发布-订阅模型</strong>，使用主题topic作为消息通信载体，一个生产者发布了一个主题，则所有订阅了这个主题的消费者都能接收到消息（广播），当只有一个消费者的时候，就退化成了队列模型。</p>
-<h3 id="Broker与Partition"><a href="#Broker与Partition" class="headerlink" title="Broker与Partition"></a>Broker与Partition</h3><p>这两个概念是ROS中没有的，Broker代理表示kafka服务器节点，partition是topic中的分区单元，一个broker可以划分为多个topic，一个topic可以划分为多个partition，partition就是一个消息队列中的队列。</p>
-<p><img src="https://oss.javaguide.cn/github/javaguide/high-performance/message-queue20210507200944439.png" alt="img"></p>
-<h3 id="kafka怎么保证消息消费的顺序"><a href="#kafka怎么保证消息消费的顺序" class="headerlink" title="kafka怎么保证消息消费的顺序"></a>kafka怎么保证消息消费的顺序</h3><p>因为partition是一个队列，所以消费顺序是固定的❌</p>
-<p>一个topic中可能有多个partition，消息被追加到partition中会计算偏移量，然后放入partition，如果有多个partition，并不能保证先存入的消息先被消费。</p>
-<p>有两种方法：1、一个topic中只有一个partition，2、生产者将消息放入消息队列时指定key或者partition。</p>
-<h3 id="kafka怎么保证消息不丢失"><a href="#kafka怎么保证消息不丢失" class="headerlink" title="kafka怎么保证消息不丢失"></a>kafka怎么保证消息不丢失</h3><h4 id="生产者"><a href="#生产者" class="headerlink" title="生产者"></a>生产者</h4><p>若因为网络原因，导致生产者发送失败，则会重试，默认是重试10次，间隔时间0。</p>
-<p><strong>如果重试失败，则失败后的数据怎么处理？</strong>消息会被送到死信队列中，对于死信队列的处理有两种方式：1、将死信队列设置一个专门的消息处理器，处理方法比如记录日志、发送警报和发送通知；2、重新消费这些消息。</p>
-<h4 id="消费者"><a href="#消费者" class="headerlink" title="消费者"></a>消费者</h4><p>当消费者拉取到partition的某个消息之后，消费者会自动提交offset，如果消费者刚拿到消息时突然挂掉了，则这条消息就丢失了。自动提交offset——&gt;手动提交，但是可能出现重复消费的问题。</p>
-<h4 id="kafka-1"><a href="#kafka-1" class="headerlink" title="kafka"></a>kafka</h4><p>kafka为partition引入了多副本机制，多个副本之间会有个leader，除了leader其他称作follower，发送的消息会被发送到leader上，然后follower会从leader中拉取消息同步，如果leader挂掉的时候，还有follower没有同步，则丢失了消息。</p>
-<p>可以设置acks &#x3D; all，这样所有follower都同步消息之后才会响应服务器。</p>
-<h3 id="kafka如何保证消息不重复消费"><a href="#kafka如何保证消息不重复消费" class="headerlink" title="kafka如何保证消息不重复消费"></a>kafka如何保证消息不重复消费</h3><p>根本原因：消费者端已经消费的消息没有成功提交offset</p>
-<p>解决方法：消费消息服务做幂等校验，比如Redis的set，MySQL的主键等天然的幂等功能。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://jiangduwang.github.io/2024/06/03/kafka/" data-id="clwyjx9fi0002jkul31k5dlxm" data-title="kafka八股" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
     <article id="post-测试开发" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/04/10/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/" class="article-date">
@@ -2929,57 +2769,6 @@ RDB
 
 
   
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/04/02/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2024-04-02T08:02:56.852Z" itemprop="datePublished">2024-04-02</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/04/02/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://jiangduwang.github.io/2024/04/02/hello-world/" data-id="clutj1iwo0000l8ul9bbu7xxh" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
 </section>
@@ -3023,11 +2812,11 @@ RDB
           </li>
         
           <li>
-            <a href="/2024/06/03/sql/">sql语句</a>
+            <a href="/2024/04/10/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/">测试开发八股</a>
           </li>
         
           <li>
-            <a href="/2024/06/03/kafka/">kafka八股</a>
+            <a href="/2024/04/02/%E7%AE%80%E5%8E%86%E5%85%AB%E8%82%A1%E5%86%85%E5%AE%B9/">面试八股内容</a>
           </li>
         
       </ul>
