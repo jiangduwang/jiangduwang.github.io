@@ -1794,6 +1794,12 @@
 <p>源代码.java文件，经过javac编译器生成字节码.class文件，再经过JVM中的解释器生成机器码。（先编译，再解释）</p>
 </details>
 
+<h4 id="hashtable和hashmap的区别"><a href="#hashtable和hashmap的区别" class="headerlink" title="hashtable和hashmap的区别"></a>hashtable和hashmap的区别</h4><details>
+<summary>展开查看</summary>
+
+<p>hashtable是线程安全的，所有的方法都是同步的（用synchronized修饰），相比于hashmap，hashtable的键值不可以为null。</p>
+</details>
+
 <h3 id="java的内存区域与垃圾回收机制"><a href="#java的内存区域与垃圾回收机制" class="headerlink" title="java的内存区域与垃圾回收机制"></a>java的内存区域与垃圾回收机制</h3><h4 id="Java-中垃圾回收机制中如何判断对象需要回收？常见的-GC-回收算法有哪些？"><a href="#Java-中垃圾回收机制中如何判断对象需要回收？常见的-GC-回收算法有哪些？" class="headerlink" title="Java 中垃圾回收机制中如何判断对象需要回收？常见的 GC 回收算法有哪些？"></a>Java 中垃圾回收机制中如何判断对象需要回收？常见的 GC 回收算法有哪些？</h4><details>
 <summary>展开查看</summary>
 
