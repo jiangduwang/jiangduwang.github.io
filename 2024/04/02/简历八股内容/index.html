@@ -16,7 +16,7 @@
 <meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20240325145435343.png">
 <meta property="og:image" content="https://oss.javaguide.cn/github/javaguide/cs-basics/network/osi-7-model.png">
 <meta property="article:published_time" content="2024-04-02T10:28:05.019Z">
-<meta property="article:modified_time" content="2024-05-20T02:59:09.035Z">
+<meta property="article:modified_time" content="2024-06-03T05:49:02.572Z">
 <meta property="article:author" content="jiangduwang">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="c:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20240325145435343.png">
@@ -223,6 +223,12 @@
 <p>对齐填充字节：java对象所占空间应该是8bit倍数，将对象大小补充为8bit的倍数。</p>
 </details>
 
+<h4 id="java从源代码到可执行程序"><a href="#java从源代码到可执行程序" class="headerlink" title="java从源代码到可执行程序"></a>java从源代码到可执行程序</h4><details>
+<summary>展开查看</summary>
+
+<p>源代码.java文件，经过javac编译器生成字节码.class文件，再经过JVM中的解释器生成机器码。（先编译，再解释）</p>
+</details>
+
 <h3 id="java的内存区域与垃圾回收机制"><a href="#java的内存区域与垃圾回收机制" class="headerlink" title="java的内存区域与垃圾回收机制"></a>java的内存区域与垃圾回收机制</h3><h4 id="Java-中垃圾回收机制中如何判断对象需要回收？常见的-GC-回收算法有哪些？"><a href="#Java-中垃圾回收机制中如何判断对象需要回收？常见的-GC-回收算法有哪些？" class="headerlink" title="Java 中垃圾回收机制中如何判断对象需要回收？常见的 GC 回收算法有哪些？"></a>Java 中垃圾回收机制中如何判断对象需要回收？常见的 GC 回收算法有哪些？</h4><details>
 <summary>展开查看</summary>
 
@@ -267,6 +273,15 @@
 <li>CMS主要设计目的是<strong>减少垃圾回收的停顿时间</strong>，G1是提供<strong>可预测的停顿时间</strong>，同时兼顾吞吐量和停顿时间。</li>
 <li>CMS通过并发标记和并发清除来收集垃圾对象，G1通过<strong>划分内存区域</strong>和<strong>优先级排序</strong>，再通过并发标记来实现目标。</li>
 </ul>
+</details>
+
+<h4 id="垃圾回收分为哪几个区，JVM是如何进行垃圾回收的"><a href="#垃圾回收分为哪几个区，JVM是如何进行垃圾回收的" class="headerlink" title="垃圾回收分为哪几个区，JVM是如何进行垃圾回收的"></a>垃圾回收分为哪几个区，JVM是如何进行垃圾回收的</h4><details>
+<summary>展开查看</summary>
+
+<p>年轻代：eden区，两个survivor区</p>
+<p>老年代，永生代（元空间，方法区的实现）</p>
+<p>当eden区满了之后，会触发minor GC，将eden区和一个s区存活的对象复制到另一个空的s区中，对象在多次minor GC下存活，年龄到一定阈值，晋升到老年代；</p>
+<p>老年代满了或者系统调用System.gc()，触发major gc放入永久代</p>
 </details>
 
 <h4 id="新生代设计两个survivor区的目的是什么"><a href="#新生代设计两个survivor区的目的是什么" class="headerlink" title="新生代设计两个survivor区的目的是什么"></a>新生代设计两个survivor区的目的是什么</h4><details>
@@ -372,6 +387,23 @@
 <p>JDK提供了<code>InheritableThreadLocal</code>类，可以让子线程共享父线程的数据。</p>
 </details>
 
+<h4 id="线程池的工作流程"><a href="#线程池的工作流程" class="headerlink" title="线程池的工作流程"></a>线程池的工作流程</h4><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>线程数小于核心线程数：线程池创建一个新的工作线程执行任务</li>
+<li>线程数大于等于核心线程数：任务进入到任务队列</li>
+<li>任务队列已满：当前线程数小于最大线程数，会创建工作线程处理任务队列中的任务</li>
+<li>任务队列已满且已达到最大线程数：启用拒绝策略，默认是抛出异常拒绝新来的任务，或者将任务退回给调用者线程执行，或者抛弃最早未执行的任务。</li>
+</ul>
+</details>
+
+<h4 id="对字符串上锁"><a href="#对字符串上锁" class="headerlink" title="对字符串上锁"></a>对字符串上锁</h4><p>问：现在有两个字符串常量，值都是一样的，现在我对这两个常量都上锁，锁之间会互相影响吗？</p>
+<summary>展开查看</summary>
+
+<p>答：两个字符串字面值相同，则它们引用的是相同的字符串对象（字符串常量池），进行锁操作的话会相互影响，多个线程会共享同一个锁，当一个线程在持有锁的时候，其他线程需要等待该锁释放才能获取到。</p>
+</details>
+
 <h3 id="spring"><a href="#spring" class="headerlink" title="spring"></a>spring</h3><h4 id="常见的面向对象设计的设计模式"><a href="#常见的面向对象设计的设计模式" class="headerlink" title="常见的面向对象设计的设计模式"></a>常见的面向对象设计的设计模式</h4><details>
 <summary>展开查看</summary>
 
@@ -429,11 +461,13 @@
 <summary>展开查看</summary>
 
 <ol>
-<li>用户发出请求到前端控制器</li>
+<li>用户发出HTTP请求到嵌入式服务器（tomcat）,嵌入式服务器可以监听指定的端口（8080）</li>
+<li>嵌入式服务器会将请求交给spring的核心组件DispatcherServlet（前端控制器）</li>
 <li>前端控制器收到请求调用处理器映射器</li>
 <li>处理器映射器找到具体的处理器，生成处理器对象及处理器拦截器，再一起返回给前端控制器；</li>
 <li>前端控制器调用处理器适配器，处理器适配器经过适配调用具体的处理器</li>
 <li>在方法上添加了@ResponseBody，通过HttpMessageConverter来返回结果转换为JSON并响应。</li>
+<li>先响应到嵌入式服务器，再响应到客户端</li>
 </ol>
 </details>
 
@@ -617,6 +651,22 @@ MVCC会对一份数据存储多个版本，通过undo log（这个日志会记�
 </ul>
 </details>
 
+<h4 id="mysql如何实现分布式锁，底层原理是什么"><a href="#mysql如何实现分布式锁，底层原理是什么" class="headerlink" title="mysql如何实现分布式锁，底层原理是什么"></a>mysql如何实现分布式锁，底层原理是什么</h4><details>
+<summary>展开查看</summary>
+
+<p>在mysql数据库中创建一个用于存储锁信息的表，包含三个字段：锁的名称（唯一索引）、锁的持有者（线程ID等标识）、锁的过期时间（可选）</p>
+<p>获取锁则通过“INSERT”向锁表插入一条记录，释放锁则通过“DELETE”从锁表中删除相应的记录。</p>
+<p>原理：</p>
+<ul>
+<li>事务：同一个事务，要么获取锁成功，要么获取锁失败；</li>
+<li>行级锁：INSERT和DELETE都涉及到行级锁的获取，在执行时，都会为行加上行级锁。</li>
+</ul>
+</details>
+
+
+
+
+
 <h3 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h3><h4 id="Redis-如何实现分布式锁？"><a href="#Redis-如何实现分布式锁？" class="headerlink" title="Redis 如何实现分布式锁？"></a>Redis 如何实现分布式锁？</h4><details>
 <summary>展开查看</summary>
 
@@ -716,6 +766,13 @@ RDB
 </ul>
 </details>
 
+<h4 id="redis分布式锁"><a href="#redis分布式锁" class="headerlink" title="redis分布式锁"></a>redis分布式锁</h4><p>问：采用setnx实现分布式锁，如果有两个线程同时获取锁，极端情况下两个线程都能获取到锁吗？</p>
+<details>
+<summary>展开查看</summary>
+
+<p>答：是有可能都获取到锁的，这种情况被称为“锁竞争”。</p>
+</details>
+
 <h3 id="kafka"><a href="#kafka" class="headerlink" title="kafka"></a>kafka</h3><h4 id="消息模型和组件"><a href="#消息模型和组件" class="headerlink" title="消息模型和组件"></a>消息模型和组件</h4><details>
 <summary>展开查看</summary>
 
@@ -738,7 +795,7 @@ RDB
 <ul>
 <li>生产者</li>
 </ul>
-<p>因为网络原因，生产者发送失败。      会重试，0间隔重试10次，若重试失败消息会进入死信队列，死信队列有两种处理方式：为死信队列设置一个专门的消息处理器，处理方法比如记录日志、发送警报或通知；重新消费这些消息。</p>
+<p>因为网络原因，生产者发送失败会重试，0间隔重试10次，若重试失败消息会进入死信队列（特殊的消息队列），死信队列有两种处理方式：为死信队列设置一个专门的消息处理器，处理方法比如记录日志、发送警报或通知；重新消费这些消息。</p>
 <ul>
 <li>消费者</li>
 </ul>
@@ -746,7 +803,7 @@ RDB
 <ul>
 <li>kafka服务器</li>
 </ul>
-<p>kafka为partition引入了多副本机制，多个副本之间会有个leader，除了leader其他称作follower，发送的消息会被发送到leader上，然后follower会从leader中拉取消息同步，如果leader挂掉的时候，还有follower没有同步，则丢失了消息。</p>
+<p>kafka为partition引入了多副本机制，多个副本之间会有个leader，除了leader其他称作follower，发送的消息会被发送到leader上，然后follower会从leader中拉取消息同步，如果leader挂掉的时候，还有follower没有同步，则丢失了消息（leader挂了之后，会选择一个follower作为leader，如果这个follower没有同步好消息，则丢失了消息）。</p>
 <p>可以设置acks &#x3D; all，这样所有follower都同步消息之后才会响应服务器。</p>
 </details>
 
@@ -766,6 +823,13 @@ RDB
 </ul>
 </details>
 
+<h4 id="kafka的ISR机制"><a href="#kafka的ISR机制" class="headerlink" title="kafka的ISR机制"></a>kafka的ISR机制</h4><p>In-Sync Replica Set是kafka为每个分区维护的一个副本集合，这些副本中有一个leader和若干个follower。</p>
+<p>策略：</p>
+<ul>
+<li>acks &#x3D; all 默认值为1，表示消息被leader副本接受到之后就算被成功发送，acks &#x3D; all表示所有ISR列表的副本全部收到消息时，生产者才会接收到来组服务器的响应。</li>
+<li>replication.factor &gt;&#x3D; 3 保证每个分区至少有3个副本</li>
+<li>min.insync.replicas &gt; 1 消息至少要被写入到2个副本才算被成功发送</li>
+</ul>
 <h3 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h3><h4 id="网络分层模型"><a href="#网络分层模型" class="headerlink" title="网络分层模型"></a>网络分层模型</h4><h5 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h5><details>
 <summary>展开查看</summary>
 
@@ -1175,7 +1239,7 @@ RDB
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">April 2024</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">June 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">April 2024</a></li></ul>
     </div>
   </div>
 
@@ -1188,15 +1252,23 @@ RDB
       <ul>
         
           <li>
-            <a href="/2024/04/10/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/">测试开发八股</a>
+            <a href="/2024/06/03/%E7%BD%91%E7%BB%9C/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2024/04/02/%E7%AE%80%E5%8E%86%E5%85%AB%E8%82%A1%E5%86%85%E5%AE%B9/">面试八股内容</a>
+            <a href="/2024/06/03/%E6%95%B0%E6%8D%AE%E5%BA%93/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2024/04/02/hello-world/">Hello World</a>
+            <a href="/2024/06/03/Java/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/06/03/sql/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/06/03/kafka/">(no title)</a>
           </li>
         
       </ul>

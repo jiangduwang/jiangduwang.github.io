@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>顾涛的八股</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="基础数据库基础常用词 元组：数据库表中的每行 码：能唯一标识实体的属性 候选码：某一属性或者属性组能唯一的标识一个元组，并且其子集不能再标识 主码：主键，能唯一标识一个元组 外码：一个关系中一个属性是另一个关系中的主码 主属性：候选码中出现的属性  ER图 实体：业务对象，用矩形框表示 属性：实体的属性，用椭圆形表示 联系：实体与实体之间的关系，用菱形表示   实体之间的联系可以是1对1，1对多，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="顾涛的八股">
+<meta property="og:url" content="https://jiangduwang.github.io/2024/06/03/%E6%95%B0%E6%8D%AE%E5%BA%93/index.html">
+<meta property="og:site_name" content="顾涛的八股">
+<meta property="og:description" content="基础数据库基础常用词 元组：数据库表中的每行 码：能唯一标识实体的属性 候选码：某一属性或者属性组能唯一的标识一个元组，并且其子集不能再标识 主码：主键，能唯一标识一个元组 外码：一个关系中一个属性是另一个关系中的主码 主属性：候选码中出现的属性  ER图 实体：业务对象，用矩形框表示 属性：实体的属性，用椭圆形表示 联系：实体与实体之间的关系，用菱形表示   实体之间的联系可以是1对1，1对多，">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://oss.javaguide.cn/github/javaguide/csdn/c745c87f6eda9a439e0eea52012c7f4a.png">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20240318213400435.png">
+<meta property="og:image" content="https://oss.javaguide.cn/github/javaguide/mysql/summary-of-mysql-field-types.png">
+<meta property="article:published_time" content="2024-06-03T05:49:33.277Z">
+<meta property="article:modified_time" content="2024-03-25T07:58:47.946Z">
+<meta property="article:author" content="jiangduwang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://oss.javaguide.cn/github/javaguide/csdn/c745c87f6eda9a439e0eea52012c7f4a.png">
+  
+    <link rel="alternate" href="/atom.xml" title="顾涛的八股" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">顾涛的八股</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://jiangduwang.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-数据库" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/06/03/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="article-date">
+  <time class="dt-published" datetime="2024-06-03T05:49:33.277Z" itemprop="datePublished">2024-06-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><h2 id="数据库基础"><a href="#数据库基础" class="headerlink" title="数据库基础"></a>数据库基础</h2><h3 id="常用词"><a href="#常用词" class="headerlink" title="常用词"></a>常用词</h3><ul>
+<li>元组：数据库表中的每行</li>
+<li>码：能唯一标识实体的属性</li>
+<li>候选码：某一属性或者属性组能唯一的标识一个元组，并且其子集不能再标识</li>
+<li>主码：主键，能唯一标识一个元组</li>
+<li>外码：一个关系中一个属性是另一个关系中的主码</li>
+<li>主属性：候选码中出现的属性</li>
+</ul>
+<h3 id="ER图"><a href="#ER图" class="headerlink" title="ER图"></a>ER图</h3><ul>
+<li>实体：业务对象，用矩形框表示</li>
+<li>属性：实体的属性，用椭圆形表示</li>
+<li>联系：实体与实体之间的关系，用菱形表示</li>
+</ul>
+<p><img src="https://oss.javaguide.cn/github/javaguide/csdn/c745c87f6eda9a439e0eea52012c7f4a.png" alt="学生与课程之间联系的E-R图"></p>
+<p>实体之间的联系可以是1对1，1对多，或者多对多</p>
+<h3 id="数据库范式"><a href="#数据库范式" class="headerlink" title="数据库范式"></a>数据库范式</h3><h4 id="1NF"><a href="#1NF" class="headerlink" title="1NF"></a>1NF</h4><p>表中的属性不能再被分割，关系型数据库的最基本要求</p>
+<h4 id="2NF"><a href="#2NF" class="headerlink" title="2NF"></a>2NF</h4><p>确保数据库表中的每一个属性都和主键有关，<strong>而不是只和联合主键中某一部分相关</strong>。</p>
+<h4 id="3NF"><a href="#3NF" class="headerlink" title="3NF"></a>3NF</h4><p>确保数据库表中的每一个属性都和主键<strong>直接相关</strong></p>
+<h3 id="为什么不使用外键"><a href="#为什么不使用外键" class="headerlink" title="为什么不使用外键"></a>为什么不使用外键</h3><ul>
+<li>增加了复杂性：每次做删除和更新操作都必须考虑外键约束</li>
+<li>对分库分表不友好：分库分表外键无法生效</li>
+</ul>
+<h3 id="drop、delete和truncate"><a href="#drop、delete和truncate" class="headerlink" title="drop、delete和truncate"></a>drop、delete和truncate</h3><ul>
+<li><code>drop table 表名</code>     直接删除表</li>
+<li><code>truncate table 表名</code>   删除表中的数据</li>
+<li><code>delete from 表名 where 列名 = 值</code>  删除某一行的数据</li>
+</ul>
+<p>drop和truncate属于DDL数据定义语言，操作立即生效，delete输入DML数据库操作语言，删除的数据记录会放入回滚段中，等事务提交后才会生效。</p>
+<h2 id="NoSQL"><a href="#NoSQL" class="headerlink" title="NoSQL"></a>NoSQL</h2><p>非关系型数据库，针对的是键值、文档以及图形类型数据存储。</p>
+<p>常见NoSQL数据库：MongoDB和Redis</p>
+<h3 id="NoSQL和SQL的区别"><a href="#NoSQL和SQL的区别" class="headerlink" title="NoSQL和SQL的区别"></a>NoSQL和SQL的区别</h3><p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20240318213400435.png" alt="image-20240318213400435"></p>
+<h3 id="NoSQL的优势"><a href="#NoSQL的优势" class="headerlink" title="NoSQL的优势"></a>NoSQL的优势</h3><ul>
+<li>灵活性：灵活的架构</li>
+<li>可扩展性：通过分布式硬件集群横向拓展</li>
+<li>高性能：针对特定的数据模型和访问模式进行了优化，比如Redis基于内存存储，由非常高的读写速度</li>
+</ul>
+<h2 id="字符集"><a href="#字符集" class="headerlink" title="字符集"></a>字符集</h2><p>MySQL字符编码中有两套UTF-8编码实现：<code>utf8</code>和<code>utf8mb4</code></p>
+<p>UTF8就是Unicode的一种，包含了几乎所有已知的字符。</p>
+<p>MySQL中的<code>utf8</code>占1-3个字节，不能很好地表示emoji表情和繁体字，需要用到<code>utf8mb4</code></p>
+<h2 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h2><h3 id="增删改查"><a href="#增删改查" class="headerlink" title="增删改查"></a>增删改查</h3><h4 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#插入一行</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">USER</span> <span class="keyword">VALUES</span> (<span class="number">10</span>, &quot;root&quot;, &quot;root&quot;); #id, username, password</span><br><span class="line"></span><br><span class="line">#插入一部分</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">USER</span>(id, username) <span class="keyword">VALUES</span>(<span class="number">10</span>, &quot;GUTAO&quot;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">user</span> <span class="keyword">SET</span> username<span class="operator">=</span><span class="string">&#x27;rebot&#x27;</span> <span class="keyword">WHERE</span> username<span class="operator">=</span><span class="string">&#x27;root&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> <span class="keyword">user</span> <span class="keyword">WHERE</span> username<span class="operator">=</span><span class="string">&#x27;rebot&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#查询表中的所有数据</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> <span class="keyword">user</span></span><br><span class="line"></span><br><span class="line">#限制查询结果 返回<span class="number">3</span><span class="number">-5</span>行 LIMIT第一个参数偏移量，第二个参数行数</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> <span class="keyword">user</span> LIMIT <span class="number">2</span>,<span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><p><code>ORDER BY</code>对单列或者多列进行排序，<code>DESC</code>降序，<code>ASC</code>升序</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#先按价格降序，再按名字升序</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> prod_price <span class="keyword">DESC</span>, prod_name <span class="keyword">ASC</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h3><p><code>group by</code>按某个字段进行分组，涉及聚合count、max、sum、avg等操作。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#计算客户名对应的地址数量，然后按客户名分组</span><br><span class="line"><span class="keyword">SELECT</span> cust_name, <span class="built_in">COUNT</span>(cust_address) <span class="keyword">AS</span> addr_num</span><br><span class="line"><span class="keyword">FROM</span> Customers <span class="keyword">GROUP</span> <span class="keyword">BY</span> cust_name;</span><br></pre></td></tr></table></figure>
+
+<h3 id="LIKE"><a href="#LIKE" class="headerlink" title="LIKE"></a>LIKE</h3><p>在<code>where</code>子句中使用，%表示字符出现任意次数，_表示字符出现1次。</p>
+<p>这个%类似于*</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_id, prod_name, prod_price</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> prod_name <span class="keyword">LIKE</span> <span class="string">&#x27;%bean bag%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># MySQL 每页获取十个记录</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> t_order <span class="keyword">ORDER</span> <span class="keyword">BY</span> id LIMIT <span class="number">0</span>, <span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="事务处理"><a href="#事务处理" class="headerlink" title="事务处理"></a>事务处理</h3><p>MySQL每执行一条语句就把这个语句当成一个事务然后提交</p>
+<ul>
+<li>START TRANSACTION 开始事务</li>
+<li>COMMIT  提交事务</li>
+<li>ROLLBACK  回滚，撤销事务，恢复到之前的状态</li>
+</ul>
+<h1 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h1><p>关系型数据库，常用的还有：SQL Server、Oracle等</p>
+<p><strong>优点：成熟稳定、功能完善、开源免费、事务支持优秀</strong></p>
+<h2 id="MySQL字段类型"><a href="#MySQL字段类型" class="headerlink" title="MySQL字段类型"></a>MySQL字段类型</h2><p><img src="https://oss.javaguide.cn/github/javaguide/mysql/summary-of-mysql-field-types.png" alt="MySQL 常见字段类型总结"></p>
+<h3 id="整型的UNSIGNED"><a href="#整型的UNSIGNED" class="headerlink" title="整型的UNSIGNED"></a>整型的UNSIGNED</h3><p>类似于C++，表示无符号整数</p>
+<h3 id="CHAR和VARCHAR"><a href="#CHAR和VARCHAR" class="headerlink" title="CHAR和VARCHAR"></a>CHAR和VARCHAR</h3><p>前者定长，后者不定长，varchar(n)可以设置变长字符串的最大值</p>
+<h3 id="VARCHAR-10-和VARCHAR-100"><a href="#VARCHAR-10-和VARCHAR-100" class="headerlink" title="VARCHAR(10)和VARCHAR(100)"></a>VARCHAR(10)和VARCHAR(100)</h3><p>占用磁盘大小相同，但是100会消耗更多的内存来保存值</p>
+<h3 id="DECIMAL和FLOAT"><a href="#DECIMAL和FLOAT" class="headerlink" title="DECIMAL和FLOAT"></a>DECIMAL和FLOAT</h3><p>前者是定点数，存储精确的小数值，而float和double只能存近似的小数值。</p>
+<h3 id="DATETIME和TIMESTAMP"><a href="#DATETIME和TIMESTAMP" class="headerlink" title="DATETIME和TIMESTAMP"></a>DATETIME和TIMESTAMP</h3><p>前者没有时区信息，占8个字节；后者有时区信息，只占4个字节。</p>
+<h3 id="NULL和空"><a href="#NULL和空" class="headerlink" title="NULL和空"></a>NULL和空</h3><p>NULL表示不确定的值，占用空间，两个NULL之间也不一定相等；空就是空，不占用空间。</p>
+<p>判断NULL：<code>IS NULL</code> 和 <code>IS NOT NULL</code></p>
+<p>因此MySQL不建议用NULL作为默认值。</p>
+<h3 id="boolean表示"><a href="#boolean表示" class="headerlink" title="boolean表示"></a>boolean表示</h3><p>TINYINT(1)专门表示</p>
+<h2 id="MySQL存储引擎"><a href="#MySQL存储引擎" class="headerlink" title="MySQL存储引擎"></a>MySQL存储引擎</h2><p>MySQL采用<strong>InnoDB</strong>作为存储引擎，所有的存储引擎只有<strong>InnoDB</strong>是<strong>事务型存储引擎</strong>，支持事务。</p>
+<h3 id="存储引擎架构"><a href="#存储引擎架构" class="headerlink" title="存储引擎架构"></a>存储引擎架构</h3><p><strong>插件式架构</strong>，一张表可以对应一个存储引擎</p>
+<h3 id="InnoDB和MyISAM"><a href="#InnoDB和MyISAM" class="headerlink" title="InnoDB和MyISAM"></a>InnoDB和MyISAM</h3><p>MySQL5.5之前，用的是MyISAM，5.5之后是InnoDB。</p>
+<ul>
+<li>MyISAM不支持行级锁，只支持表级锁——&gt;不支持并发查询；</li>
+<li>MyISAM不支持事务</li>
+<li>MyISAM不支持数据库崩溃后的安全恢复，InnoDB数据库重启会恢复到数据库崩溃前的状态</li>
+<li>MyISAM中B+树节点的数据域中存放的是数据记录的地址，还需要根据这个地址读取数据；InnoDB data域存的就是主键的值</li>
+</ul>
+<h2 id="MySQL索引"><a href="#MySQL索引" class="headerlink" title="MySQL索引"></a>MySQL索引</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p><strong>用于快速查询和检索数据的数据结构</strong>，可以大大加快数据的检索速度。</p>
+<h3 id="底层数据结构"><a href="#底层数据结构" class="headerlink" title="底层数据结构"></a>底层数据结构</h3><h4 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h4><p>哈希表不支持顺序和范围查询</p>
+<h4 id="二叉查找树"><a href="#二叉查找树" class="headerlink" title="二叉查找树"></a>二叉查找树</h4><p>非平衡树，最坏的情况下会变成线性链表，查询效率会急剧下降</p>
+<h4 id="AVL树"><a href="#AVL树" class="headerlink" title="AVL树"></a>AVL树</h4><p>自二叉平衡查找树，采用旋转操作保持二叉查找树平衡。</p>
+<p>需要频繁地进行旋转操作来保持平衡，每个树节点仅存储一个数据，每次进行磁盘IO只能读取一个节点——&gt;会有频繁的IO操作，耗时</p>
+<h4 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h4><ol>
+<li>根节点总是黑色的</li>
+<li>叶子节点（空节点）都是黑色的</li>
+<li>节点是红色的，则子节点必须是黑色的</li>
+<li>从根节点到叶子节点的路径中黑色节点的数量都是相同的。</li>
+</ol>
+<p>红黑树并不是严格平衡二叉树，查询效率不如AVL树，但是旋转效率要远远高于AVL树，和AVL树相同的是，红黑树每个节点只能有两个子节点，在磁盘上存储效率不高。</p>
+<h4 id="B树和B-树"><a href="#B树和B-树" class="headerlink" title="B树和B+树"></a>B树和B+树</h4><ol>
+<li>B树所有节点既存放索引，也存放数据；B+树非叶子节点只存放索引，叶子节点存放索引和数据</li>
+<li>B树的叶子节点都是独立的；B+树的叶子节点有一条引用链指向与它相邻的叶子节点，所有叶子节点构成一个有序链表</li>
+<li>B树进行范围查询，首先要查找下限，然后对其中序遍历，直到找到上限；B+树直接遍历链表。</li>
+</ol>
+<p>B+树具备更少的IO次数（非叶子节点只存索引），更稳定的查询效率（只搜索叶子节点）和更适用于范围查询。</p>
+<h3 id="索引类型"><a href="#索引类型" class="headerlink" title="索引类型"></a>索引类型</h3><h4 id="聚簇索引与非聚簇索引"><a href="#聚簇索引与非聚簇索引" class="headerlink" title="聚簇索引与非聚簇索引"></a>聚簇索引与非聚簇索引</h4><ul>
+<li>索引结构和数据一起存放，即InnoDB的B+树的数据域中直接存的是数据</li>
+<li>索引结构和数据分开存放，即MyISAM的B+树的数据域中存放的是数据记录的地址——&gt;<strong>二次查询（回表）</strong></li>
+</ul>
+<h4 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h4><p><strong>索引包含所有需要查询的字段</strong>，直接从索引中获取数据，不需要访问表的实际数据行。</p>
+<p><strong>索引就是帮助你在做查询的时候往索引中的字段去靠，这样能提高查询效率</strong></p>
+<h4 id="联合索引"><a href="#联合索引" class="headerlink" title="联合索引"></a>联合索引</h4><p>使用表中的多个字段创建索引</p>
+<p>使用联合索引有个最左前缀匹配原则，会最先根据最左侧的字段过滤一批数据，直至联合索引中的字段全部匹配完成。因此要将区分度高的字段放在联合所以你的最左侧。</p>
+<h3 id="索引失效"><a href="#索引失效" class="headerlink" title="索引失效"></a>索引失效</h3><p>这里的索引失效指的是索引没有起到作用</p>
+<ul>
+<li>创建了联合索引，但查询条件没有遵守最左匹配原则。比如（a, b, c）联合字段，查了b</li>
+<li>在索引列上进行计算、函数等操作</li>
+<li>以%开头的LIKE查询</li>
+</ul>
+<h2 id="MySQL事务"><a href="#MySQL事务" class="headerlink" title="MySQL事务"></a>MySQL事务</h2><h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><p>关系型数据库事务都有ACID特性：原子性、隔离性、持久性——&gt;一致性</p>
+<h3 id="并发事务的问题"><a href="#并发事务的问题" class="headerlink" title="并发事务的问题"></a>并发事务的问题</h3><h4 id="脏读"><a href="#脏读" class="headerlink" title="脏读"></a>脏读</h4><p>一个事务对数据进行了修改，另一个事务读取了这个修改后的数据，然后前一个事务因某种原因回滚，导致第二个事务读到的数据是脏的</p>
+<h4 id="丢失修改"><a href="#丢失修改" class="headerlink" title="丢失修改"></a>丢失修改</h4><p>两个事务同时对数据进行修改，则前一个事务对数据的修改丢失了。</p>
+<h4 id="不可重复读"><a href="#不可重复读" class="headerlink" title="不可重复读"></a>不可重复读</h4><p>一个事务读取数据，在其第一次读取之后，另外一个事务修改了数据，导致第一个事务两次读到的数据不一致</p>
+<h4 id="幻读"><a href="#幻读" class="headerlink" title="幻读"></a>幻读</h4><p>一个事务读取了几行数据后，接着另一个事务插入了几行数据，导致第一个事务发现多了一些不存在的数据。            类似于不可重复读</p>
+<h3 id="并发事务的控制"><a href="#并发事务的控制" class="headerlink" title="并发事务的控制"></a>并发事务的控制</h3><p>两种方式：锁（悲观），多版本并发控制（MVCC，乐观）</p>
+<p>锁分为共享锁和排他锁，共享锁指支持多个事务同时读一个数据，排他锁即写锁，当一个事务对数据进行更新时，其他事务会阻塞。</p>
+<p>锁根据粒度不同分为行级锁和表级锁，InnoDB默认是行级锁。</p>
+<p>MVCC会对一份数据存储多个版本，实现所依赖的手段：日志undo log(用于记录某行数据的多个版本的数据)</p>
+<h3 id="事务隔离级别"><a href="#事务隔离级别" class="headerlink" title="事务隔离级别"></a>事务隔离级别</h3><ul>
+<li>读取未提交</li>
+<li>读取已提交</li>
+<li>可重复读：指事务执行期间，<strong>其他事务所做的修改对当前事务都不可见</strong>  （MySQL默认隔离级别）</li>
+<li>可串行化</li>
+</ul>
+<p>事务隔离级别都是通过锁和MVCC实现的。</p>
+<h2 id="MySQL锁"><a href="#MySQL锁" class="headerlink" title="MySQL锁"></a>MySQL锁</h2><h3 id="行级锁"><a href="#行级锁" class="headerlink" title="行级锁"></a>行级锁</h3><p>行级锁是针对索引字段加的锁，表级锁是针对非索引字段加的锁。</p>
+<p>若执行UPDATE、DELETE语句时，若WHERE后没有命中索引或者索引失效，InnoDB会对表加锁。</p>
+<ul>
+<li>记录锁：对单行记录上锁</li>
+<li>间隙锁：锁定一段连续的数据范围，不包括记录本身，间隙表示两个相邻数据行之间的区域——为了避免插入新数据</li>
+<li>临键锁：锁定一个范围，包括记录本身  （默认行级锁）</li>
+</ul>
+<h3 id="sql优化手段"><a href="#sql优化手段" class="headerlink" title="sql优化手段"></a>sql优化手段</h3><ul>
+<li>避免使用SELECT * 语句    消耗CPU、无法使用覆盖索引的优化</li>
+<li>避免使用外键或级联操作    对分库分表不友好</li>
+<li>选用合适的字段类型           存储字节越小，占用空间越小，性能也越好</li>
+</ul>
+<h2 id="MySQL三大日志"><a href="#MySQL三大日志" class="headerlink" title="MySQL三大日志"></a>MySQL三大日志</h2><p>归档日志<code>binlog</code>  同步数据，保证数据一致性</p>
+<p>重做日志redo log  让InnoDB有了崩溃恢复能力									  <strong>持久性</strong></p>
+<p>回滚日志undo log  记录事务对于数据的修改，可以对已进行的操作进行回滚                         原子性</p>
+<h2 id="数据库优化"><a href="#数据库优化" class="headerlink" title="数据库优化"></a>数据库优化</h2><h3 id="读写分离"><a href="#读写分离" class="headerlink" title="读写分离"></a>读写分离</h3><p>一台服务器负责写，多台服务器负责读，主库和从库之间进行数据同步。</p>
+<p>实现：在请求和数据库之间设置代理，将不同的请求路由到不同库</p>
+<p>一看到<strong>数据同步</strong>、<strong>主从复制</strong>就要想到binlog</p>
+<p>如何避免主从延迟？在更新之后直接到主库读取或者延迟读取</p>
+<h3 id="分库分表"><a href="#分库分表" class="headerlink" title="分库分表"></a>分库分表</h3><h4 id="分库"><a href="#分库" class="headerlink" title="分库"></a>分库</h4><ul>
+<li>垂直分库：把单一数据库按业务划分，分成不同的数据库，简单理解就是把全部字段分布到多个数据库中</li>
+<li>水平分库：相同的表，因为数据量过大分到多个数据库中存储</li>
+</ul>
+<h4 id="分表"><a href="#分表" class="headerlink" title="分表"></a>分表</h4><ul>
+<li>垂直分表：一张表列太多，分成多张表</li>
+<li>水平分表：和水平分库一样</li>
+</ul>
+<h4 id="分库分表带来的问题"><a href="#分库分表带来的问题" class="headerlink" title="分库分表带来的问题"></a>分库分表带来的问题</h4><ul>
+<li>事务问题</li>
+<li>跨库聚合查询问题</li>
+</ul>
+<h3 id="冷热分离"><a href="#冷热分离" class="headerlink" title="冷热分离"></a>冷热分离</h3><p>冷热表示根据数据的访问频率和业务重要性对数据进行分类。</p>
+<p>冷数据存在低成本低性能的存储介质中，热数据存在高成本高性能介质中。</p>
+<h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><p>基于C语言开发的NoSQL数据库</p>
+<h3 id="Redis为什么这么快"><a href="#Redis为什么这么快" class="headerlink" title="Redis为什么这么快"></a>Redis为什么这么快</h3><ul>
+<li>基于内存，关系型数据库一般基于硬盘</li>
+<li>内置了多种优化过后的数据结构，性能高</li>
+</ul>
+<p>相比于MySQL，Redis高性能且高并发</p>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><ul>
+<li>分布式锁     基于Redisson实现分布式锁</li>
+<li>限流            Redis+Lua脚本实现限流</li>
+<li>分布式Session       利用String或Hash保存Session数据</li>
+<li>搜索引擎         借助RediSearch</li>
+</ul>
+<h3 id="5种基本数据类型"><a href="#5种基本数据类型" class="headerlink" title="5种基本数据类型"></a>5种基本数据类型</h3><p>String         List               Set          Hash         Zset</p>
+<h4 id="字符串String"><a href="#字符串String" class="headerlink" title="字符串String"></a>字符串String</h4><p>存储字符串、数、图片、序列后的对象</p>
+<h5 id="底层实现"><a href="#底层实现" class="headerlink" title="底层实现"></a>底层实现</h5><p><strong>简单动态字符串SDS</strong></p>
+<ul>
+<li>可以避免缓冲区溢出</li>
+<li>获取字符串长度复杂度O(1)</li>
+</ul>
+<h5 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h5><ul>
+<li>SET key value        设置key的值</li>
+<li>SETNX key value    key不存在时设置key的值</li>
+<li>EXPIRE key seconds   给key设置过期时间</li>
+<li>INCR key                 自增1</li>
+<li>DECR key                自减1</li>
+</ul>
+<h5 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h5><p>访问次数       利用自增命令</p>
+<h4 id="Hash"><a href="#Hash" class="headerlink" title="Hash"></a>Hash</h4><ul>
+<li>HSET key field value</li>
+</ul>
+<p>存储含有多个字段的对象的信息</p>
+<p><strong>购物车中商品频繁修改和变动，用商品id为field，商品数量为value</strong></p>
+<h4 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h4><h5 id="常用命令-1"><a href="#常用命令-1" class="headerlink" title="常用命令"></a>常用命令</h5><ul>
+<li>SADD key member1 member2   向集合添加多个元素</li>
+<li>SINTER key1 key2                          求交集</li>
+<li>SUNION key1 key2                        求并集</li>
+<li>SDIFF key1 key2                             求差集</li>
+<li>SPOP key count                              随机移除count个元素</li>
+<li>SRANDMEMBER key count           随机获取count个元素</li>
+</ul>
+<h5 id="应用-1"><a href="#应用-1" class="headerlink" title="应用"></a>应用</h5><ol>
+<li>点赞统计         利用set集合的特性</li>
+<li>共同好友（交集）、好友推荐（差集）</li>
+<li>抽奖，随机点名   随机获取1个数</li>
+</ol>
+<h4 id="Sorted-Set-——-Zset"><a href="#Sorted-Set-——-Zset" class="headerlink" title="Sorted Set   ——  Zset"></a>Sorted Set   ——  Zset</h4><p>在SET的基础上增加了一个权重参数score，使元素能够按score排序。</p>
+<h5 id="底层实现-1"><a href="#底层实现-1" class="headerlink" title="底层实现"></a>底层实现</h5><p><strong>跳跃表</strong>       概率平衡</p>
+<p>为什么不用平衡树、红黑树？跳表不需要像平衡树通过旋转保持平衡，不需要像红黑树通过旋转、染色来保证黑平衡。这两个树区间查找也没有跳表效率高。</p>
+<h5 id="常用命令-2"><a href="#常用命令-2" class="headerlink" title="常用命令"></a>常用命令</h5><ul>
+<li>ZADD key score1 member1 score2 member2</li>
+<li>ZINTERSTORE destination numkeys key1 key2   求交集，相同member的score会相加</li>
+<li>ZUNIONSTORE destination numkeys key1 key2 求并集</li>
+<li>ZDIFFSTORE destination numkeys key1 key2      求差集</li>
+<li>ZRANGE key start end     获取score从低到高的元素</li>
+<li>ZREVRANGE key start end  获取score从高到低的元素</li>
+<li>ZREVRANK key member       获取元素的排名</li>
+</ul>
+<h5 id="应用场景-1"><a href="#应用场景-1" class="headerlink" title="应用场景"></a>应用场景</h5><p>排行榜，优先级任务队列</p>
+<h3 id="3种特殊数据类型"><a href="#3种特殊数据类型" class="headerlink" title="3种特殊数据类型"></a>3种特殊数据类型</h3><h4 id="Bitmap位图"><a href="#Bitmap位图" class="headerlink" title="Bitmap位图"></a>Bitmap位图</h4><p>存储连续的二进制数字，1bit表示一位，从左到右分别为offset0  offset1  offset2</p>
+<h5 id="常用命令-3"><a href="#常用命令-3" class="headerlink" title="常用命令"></a>常用命令</h5><ul>
+<li>SETBIT key offset value        设置指定offset位置的值</li>
+<li>BITCOUNT key start end      计算[start, end]区间内1的个数</li>
+</ul>
+<h5 id="应用场景-2"><a href="#应用场景-2" class="headerlink" title="应用场景"></a>应用场景</h5><p>用户签到情况</p>
+<h4 id="HyperLogLog基数统计"><a href="#HyperLogLog基数统计" class="headerlink" title="HyperLogLog基数统计"></a>HyperLogLog基数统计</h4><p>估计集合中不同元素的个数</p>
+<p>两种方式计数：</p>
+<ul>
+<li>稀疏矩阵：计数较少，占用空间小</li>
+<li>稠密矩阵：计数到阈值，占用12K的空间</li>
+</ul>
+<h5 id="常用命令-4"><a href="#常用命令-4" class="headerlink" title="常用命令"></a>常用命令</h5><ul>
+<li>PFADD key element1      添加元素</li>
+<li>PFCOUNT key1 key2       统计一个或多个集合的计数</li>
+<li>PFMEAGE destkey key1 key2  合并多个集合到一个集合中</li>
+</ul>
+<h5 id="应用场景-3"><a href="#应用场景-3" class="headerlink" title="应用场景"></a>应用场景</h5><p>数据量巨大的计数场景</p>
+<h4 id="Geospatial地理位置"><a href="#Geospatial地理位置" class="headerlink" title="Geospatial地理位置"></a>Geospatial地理位置</h4><p>底层为Zset实现，存储地理位置信息</p>
+<h5 id="常用命令-5"><a href="#常用命令-5" class="headerlink" title="常用命令"></a>常用命令</h5><ul>
+<li>GEODIST key member1 member2 M&#x2F;KM      计算两个经纬度之间的距离</li>
+<li>GEOADD key longitude1 latitude1 member1  添加经纬度</li>
+</ul>
+<h5 id="应用场景-4"><a href="#应用场景-4" class="headerlink" title="应用场景"></a>应用场景</h5><p>计算附近的人   通过计算两个经纬度之间的距离，判断是否是附近的人</p>
+<h3 id="Redis持久化机制"><a href="#Redis持久化机制" class="headerlink" title="Redis持久化机制"></a>Redis持久化机制</h3><p>三种持久化方式：</p>
+<ul>
+<li>快照RDB</li>
+<li>只追加文件AOF</li>
+<li>RDB和AOF混合持久化</li>
+</ul>
+<h4 id="RDB持久化"><a href="#RDB持久化" class="headerlink" title="RDB持久化"></a>RDB持久化</h4><p>创建快照获得存储在内存中的数据在某个时间点的副本</p>
+<h5 id="RDB生成快照的方式"><a href="#RDB生成快照的方式" class="headerlink" title="RDB生成快照的方式"></a>RDB生成快照的方式</h5><ul>
+<li>save：同步保存操作，会阻塞Redis主线程</li>
+<li>bgsave：fork（系统调用创建子进程），子进程执行。  默认方式</li>
+</ul>
+<h4 id="AOF持久化"><a href="#AOF持久化" class="headerlink" title="AOF持久化"></a>AOF持久化</h4><p>每执行一条更新数据的命令，Redis将命令写入到AOF缓冲区中，再写到AOF文件中，最后再根据持久化方式决定何时将缓存中的数据同步到硬盘中。</p>
+<h5 id="AOF持久化方式"><a href="#AOF持久化方式" class="headerlink" title="AOF持久化方式"></a>AOF持久化方式</h5><ul>
+<li>always：主线程write写后，后台立即会调用fsync函数同步</li>
+<li>everysec：每秒钟同步一次</li>
+<li>no：让操作系统决定多久同步一次，Linux是30s</li>
+</ul>
+<h5 id="AOF重写"><a href="#AOF重写" class="headerlink" title="AOF重写"></a>AOF重写</h5><p>当AOF文件变得很大时，Redis会在后台子进程重写一个AOF文件，这个AOF文件和原文件数据库状态一样，但体积更小。</p>
+<h4 id="RDB和AOF"><a href="#RDB和AOF" class="headerlink" title="RDB和AOF"></a>RDB和AOF</h4><p>RDB</p>
+<ul>
+<li>高性能，通过fork子进程完成持久化；RDB文件在指定的时间间隔内生成，而且是经过压缩的二进制数据，便于备份与恢复。</li>
+<li>Redis发生故障会丢失最近的一次快照；持久化是周期性的，不能保证每个操作都持久化到磁盘，不适用于实时持久化</li>
+</ul>
+<p>AOF</p>
+<ul>
+<li>AOF持久化记录了每个操作命令，可以确保Redis数据的完整性，即使发生故障也能恢复；几乎是实时记录每个写操作，适用于实时持久化</li>
+<li>AOF文件比RDB大很多，重写也会消耗资源；恢复数据需要依次执行每个写命令，速度非常慢。</li>
+</ul>
+<h3 id="Redis线程模型"><a href="#Redis线程模型" class="headerlink" title="Redis线程模型"></a>Redis线程模型</h3><h4 id="Redis单线程模型"><a href="#Redis单线程模型" class="headerlink" title="Redis单线程模型"></a>Redis单线程模型</h4><p>读写命令是单线程，但通过<strong>非阻塞IO多路复用程序</strong>来监听多个套接字，通过单线程处理多个客户端的请求，减少了线程切换和同步开销。</p>
+<p>基于Reactor模式（核心就是非阻塞IO）设计了文件事件处理器，非阻塞IO多路复用程序和多个客户端都是这个处理器的一部分。</p>
+<p><strong>为什么Redis不用多线程？</strong>单线程更容易维护；Redis的瓶颈在于内存和网络，而不是CPU</p>
+<h4 id="Redis多线程"><a href="#Redis多线程" class="headerlink" title="Redis多线程"></a>Redis多线程</h4><p>主要为了提高网络IO读写性能，多线程只运用于网络数据的读写，执行命令还是单线程。</p>
+<h4 id="Redis后台线程"><a href="#Redis后台线程" class="headerlink" title="Redis后台线程"></a>Redis后台线程</h4><ul>
+<li><p>bio_close_file：释放RDB和AOF的临时问那件资源</p>
+</li>
+<li><p>bio_fsync：将AOF缓冲区的内容写入到AOF文件</p>
+</li>
+</ul>
+<h3 id="Redis内存管理"><a href="#Redis内存管理" class="headerlink" title="Redis内存管理"></a>Redis内存管理</h3><h4 id="为数据设置过期时间"><a href="#为数据设置过期时间" class="headerlink" title="为数据设置过期时间"></a>为数据设置过期时间</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#数据在60s后过期</span></span><br><span class="line">expire key 60</span><br><span class="line"></span><br><span class="line"><span class="comment">#键值在60s后过期</span></span><br><span class="line">setex key 60 value</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看过期时间</span></span><br><span class="line">ttl key</span><br></pre></td></tr></table></figure>
+
+<p>因为Redis会将数据放在内存中，不设置过期时间，所有数据都一直保存的话，内存会爆；</p>
+<p>应用于验证码，网页的限期token</p>
+<h4 id="Redis怎么判断过期"><a href="#Redis怎么判断过期" class="headerlink" title="Redis怎么判断过期"></a>Redis怎么判断过期</h4><p>通过过期字典保存数据过期的时间，过期字典的键指向Redis中的某个键</p>
+<h4 id="过期数据的删除策略"><a href="#过期数据的删除策略" class="headerlink" title="过期数据的删除策略"></a>过期数据的删除策略</h4><ul>
+<li>惰性删除：在取key值的时候检查是否过期，对CPU比较友好</li>
+<li>定期删除：每隔一段时间执行删除过期的key，对内存比较友好</li>
+</ul>
+<h4 id="内存淘汰机制"><a href="#内存淘汰机制" class="headerlink" title="内存淘汰机制"></a>内存淘汰机制</h4><ul>
+<li>volatile-lru </li>
+<li>volatile-ttl 选择要过期的数据淘汰</li>
+<li>allkeys-lru 内存不足，</li>
+<li>random  任意选择淘汰</li>
+</ul>
+<h3 id="Redis事务"><a href="#Redis事务" class="headerlink" title="Redis事务"></a>Redis事务</h3><p>和关系型数据库不一样，它是将多个命令打包，再按顺序执行命令，不会被打断。</p>
+<p>Redis事务不满足原子性，执行过程中命令出现错误，其他命令都能正常执行。</p>
+<p>Redis事务也不满足持久性，Redis本身具有持久性，由持久化机制实现。</p>
+<h3 id="Redis性能优化"><a href="#Redis性能优化" class="headerlink" title="Redis性能优化"></a>Redis性能优化</h3><h4 id="批量操作减少网络传输"><a href="#批量操作减少网络传输" class="headerlink" title="批量操作减少网络传输"></a>批量操作减少网络传输</h4><p>Redis事务会将每个命令都发送到服务端，网络开销太大。因此要批量操作减少IO次数。</p>
+<ul>
+<li>原生批量操作    比如MSET，SADD</li>
+<li>pipeline流水线  </li>
+<li>Lua脚本  一段Lua脚本被视为一条命令操作，在执行过程中不会有其他命令同时执行，但是出错后也不可以回滚</li>
+</ul>
+<p>这三种方式都无法保证所有的key在同一个哈希槽上，因为Redis的分片机制。</p>
+<h4 id="大量key集中过期"><a href="#大量key集中过期" class="headerlink" title="大量key集中过期"></a>大量key集中过期</h4><p>采用定期删除+惰性删除的策略。</p>
+<p>定期删除有一个问题，它会阻塞Redis主线程，若有大量过期key，则响应速度会变慢。</p>
+<p>解决方法：key设置随机过期时间；采用lazy-free，采用异步方式释放过期的key，不会阻塞主线程</p>
+<h4 id="bigkey-大Key"><a href="#bigkey-大Key" class="headerlink" title="bigkey  大Key"></a>bigkey  大Key</h4><p>出现的原因：</p>
+<ul>
+<li>string类型写入太多二进制数据</li>
+<li>复合类型中存了太多条数据</li>
+</ul>
+<p>解决方案：</p>
+<ul>
+<li>对于大量字段的Hash，可以二次哈希拆分为多个Hash</li>
+<li>lazy-free</li>
+</ul>
+<h4 id="hotkey-热key"><a href="#hotkey-热key" class="headerlink" title="hotkey 热key"></a>hotkey 热key</h4><p>某个热点数据访问量暴增，有可能会超出Redis的处理能力，导致Redis崩溃</p>
+<p>发现hotkey：</p>
+<ul>
+<li>–hotkeys参数</li>
+<li>公有云Redis分析</li>
+</ul>
+<p>解决方案：</p>
+<ul>
+<li>读写分离：主节点处理写请求，从节点处理读请求</li>
+<li>Redis Cluster：热点数据分散存储在多个Redis节点上</li>
+</ul>
+<h4 id="慢查询指令"><a href="#慢查询指令" class="headerlink" title="慢查询指令"></a>慢查询指令</h4><p>Redis中的某些操作指令的时间复杂度是O(n)，如果有大量数据记录，则这些指令执行会很慢</p>
+<h3 id="Redis高可用的做法"><a href="#Redis高可用的做法" class="headerlink" title="Redis高可用的做法"></a>Redis高可用的做法</h3><p>高可用是指系统在面对各种故障情况下，保持长时间的可用性和稳定性。</p>
+<ul>
+<li>主从复制：redis集群中分为主节点和从节点，主从复制是指将一个 Redis 服务器（主节点）的数据复制到其他 Redis 服务器（从节点）上。主从复制提供了数据冗余备份、读写分离以及故障恢复等功能。</li>
+<li>哨兵机制：主要用于监控 Redis 主从服务器的运行状态，自动完成故障转移。当哨兵发现主节点失效时，它会在哨兵系统中发起选举，选出一个哨兵作为领导者来执行自动故障转移的操作。</li>
+<li>持久化：ROB和AOF方式实现持久化</li>
+</ul>
+<h3 id="Redis内存碎片"><a href="#Redis内存碎片" class="headerlink" title="Redis内存碎片"></a>Redis内存碎片</h3><ul>
+<li>Redis存储数据向操作系统申请的内存空间可能会大于数据实际所需要的内存空间</li>
+<li>频繁修改Redis中的数据（Redis通常不会轻易释放内存给操作系统）</li>
+</ul>
+<h3 id="Redis生产问题"><a href="#Redis生产问题" class="headerlink" title="Redis生产问题"></a>Redis生产问题</h3><h4 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h4><p>请求的key既不在缓存中，也不在数据库中。如果有大量这种请求，数据库压力会特别大，甚至会宕机。</p>
+<p>真实场景：黑客故意制造大量的非法key发起请求</p>
+<p>解决方法：</p>
+<p>最基本的做好参数校验</p>
+<ul>
+<li>缓存无效key：来一个无效key请求就在Redis中缓存一个key，这样只能应付key变化不明显的情况</li>
+<li>布隆过滤器：较大的bit数组，一个元素只占1bit，用0或1表示，把所有可能存在请求的值存放在布隆过滤器中，当用户发来的请求的值不在布隆过滤器中，直接返回请求参数错误回客户端</li>
+<li>根据IP进行限流</li>
+</ul>
+<h4 id="缓存击穿"><a href="#缓存击穿" class="headerlink" title="缓存击穿"></a>缓存击穿</h4><p>请求的key是hotkey，但是它在Redis中过期了，导致大量请求访问数据库</p>
+<p>真实场景：秒杀系统</p>
+<p>解决方法：</p>
+<ul>
+<li>设置热点数据永不过期</li>
+<li>针对热点数据提前预热，比如在秒杀场景中设置秒杀结束之前都不过期</li>
+</ul>
+<h4 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h4><p>Redis中大量的key同时过期或者Redis崩溃，导致大量的请求全都访问数据库。</p>
+<p>解决方案：</p>
+<ul>
+<li><p>防止Redis崩溃：</p>
+<ul>
+<li>采用Redis集群</li>
+<li>限流</li>
+</ul>
+</li>
+<li><p>热点缓存失效  参考缓存击穿</p>
+</li>
+</ul>
+<h3 id="Redis和数据库的双写一致性"><a href="#Redis和数据库的双写一致性" class="headerlink" title="Redis和数据库的双写一致性"></a>Redis和数据库的双写一致性</h3><p>先更新数据库，再删除缓存。</p>
+<p>如果更新数据库成功，但是删除缓存失败，可以增加cache更新重试机制</p>
+<h3 id="Redis常见阻塞原因"><a href="#Redis常见阻塞原因" class="headerlink" title="Redis常见阻塞原因"></a>Redis常见阻塞原因</h3><ol>
+<li>慢查询命令</li>
+<li>调用save而非bgsave创建RDB快照</li>
+<li>不合理的AOF持久化方式</li>
+<li>AOF重写阻塞</li>
+<li>bigkey</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jiangduwang.github.io/2024/06/03/%E6%95%B0%E6%8D%AE%E5%BA%93/" data-id="clwyjx9fj0003jkul23kceoyx" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/06/03/%E7%BD%91%E7%BB%9C/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/06/03/Java/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">June 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">April 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/06/03/%E7%BD%91%E7%BB%9C/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/06/03/%E6%95%B0%E6%8D%AE%E5%BA%93/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/06/03/Java/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/06/03/sql/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/06/03/kafka/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 jiangduwang<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

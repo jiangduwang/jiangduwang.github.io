@@ -15,7 +15,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://developer.qcloudimg.com/http-save/yehe-10496291/a66e29500026a19ea096b11bf8bae1f8.png">
 <meta property="article:published_time" content="2024-04-10T08:02:09.236Z">
-<meta property="article:modified_time" content="2024-05-26T06:03:51.510Z">
+<meta property="article:modified_time" content="2024-06-03T04:55:49.419Z">
 <meta property="article:author" content="jiangduwang">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://developer.qcloudimg.com/http-save/yehe-10496291/a66e29500026a19ea096b11bf8bae1f8.png">
@@ -115,9 +115,8 @@
 <summary>展开查看</summary>
 描述输入实际值和预期输出行为或者结果的文档，同时也标识了测试过程结果与约束
 </details>
-### 测试用例的设计方法
 
-<details>
+<h3 id="测试用例的设计方法"><a href="#测试用例的设计方法" class="headerlink" title="测试用例的设计方法"></a>测试用例的设计方法</h3><details>
 <summary>展开查看</summary>
 
 <ul>
@@ -381,6 +380,29 @@
 </ul>
 </details>
 
+<h3 id="电影订票功能的测试样例"><a href="#电影订票功能的测试样例" class="headerlink" title="电影订票功能的测试样例"></a>电影订票功能的测试样例</h3><ul>
+<li><p>功能测试</p>
+<ul>
+<li>检查电影本身的信息和电影院（不同的电影院）、场次（不同的场次）、座位信息（已售出和可售状态）是否显示正确</li>
+<li>验证不同支付方式是否可用</li>
+<li>验证电子票是否包含必要信息、是否能通过扫描进入影院</li>
+</ul>
+</li>
+<li><p>边界和异常情况测试</p>
+<ul>
+<li>无效的账户或者账户余额不足进行支付</li>
+<li>用户选择座位但未完成支付，座位在一定时间后能否自动释放</li>
+</ul>
+</li>
+<li><p>性能测试</p>
+<ul>
+<li>系统负载测试：高并发访问</li>
+<li>正常负载和高负载下的响应时间是否正常</li>
+</ul>
+</li>
+<li><p>兼容性测试</p>
+</li>
+</ul>
 <h2 id="自动化测试"><a href="#自动化测试" class="headerlink" title="自动化测试"></a>自动化测试</h2><details>
 <summary>展开查看</summary>
 
@@ -424,6 +446,15 @@
     
 <nav id="article-nav">
   
+    <a href="/2024/06/03/kafka/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
   
     <a href="/2024/04/02/%E7%AE%80%E5%8E%86%E5%85%AB%E8%82%A1%E5%86%85%E5%AE%B9/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
@@ -452,7 +483,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">April 2024</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">June 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">April 2024</a></li></ul>
     </div>
   </div>
 
@@ -465,15 +496,23 @@
       <ul>
         
           <li>
-            <a href="/2024/04/10/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/">测试开发八股</a>
+            <a href="/2024/06/03/%E7%BD%91%E7%BB%9C/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2024/04/02/%E7%AE%80%E5%8E%86%E5%85%AB%E8%82%A1%E5%86%85%E5%AE%B9/">面试八股内容</a>
+            <a href="/2024/06/03/%E6%95%B0%E6%8D%AE%E5%BA%93/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2024/04/02/hello-world/">Hello World</a>
+            <a href="/2024/06/03/Java/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/06/03/sql/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/06/03/kafka/">(no title)</a>
           </li>
         
       </ul>

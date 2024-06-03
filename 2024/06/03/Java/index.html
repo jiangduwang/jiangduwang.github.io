@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>顾涛的八股</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Java基础 3.4  基础概念与常识特点 面向对象（封装、继承、多态） 编译与解释并存——javac编译.java，JVM解释.class 平台无关性（Java虚拟机）  JVM运行Java字节码(.class文件)的虚拟机，针对不同的系统有不同的JVM实现，目的是生成相同的字节码——平台无关性 最常用——HotSpot VM JDK和JREJDK(java development kit)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="顾涛的八股">
+<meta property="og:url" content="https://jiangduwang.github.io/2024/06/03/Java/index.html">
+<meta property="og:site_name" content="顾涛的八股">
+<meta property="og:description" content="Java基础 3.4  基础概念与常识特点 面向对象（封装、继承、多态） 编译与解释并存——javac编译.java，JVM解释.class 平台无关性（Java虚拟机）  JVM运行Java字节码(.class文件)的虚拟机，针对不同的系统有不同的JVM实现，目的是生成相同的字节码——平台无关性 最常用——HotSpot VM JDK和JREJDK(java development kit)">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://oss.javaguide.cn/github/javaguide/cs-basics/network/tcp-ip-4-model.png">
+<meta property="og:image" content="https://oss.javaguide.cn/github/javaguide/java/jvm/java-runtime-data-areas-jdk1.8.png">
+<meta property="og:image" content="https://oss.javaguide.cn/github/javaguide/java/jvm/class-loading-procedure.png">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20240325145435343.png">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20240325153922367.png">
+<meta property="article:published_time" content="2024-06-03T05:49:25.228Z">
+<meta property="article:modified_time" content="2024-03-30T07:05:21.640Z">
+<meta property="article:author" content="jiangduwang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://oss.javaguide.cn/github/javaguide/cs-basics/network/tcp-ip-4-model.png">
+  
+    <link rel="alternate" href="/atom.xml" title="顾涛的八股" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">顾涛的八股</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://jiangduwang.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Java" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/06/03/Java/" class="article-date">
+  <time class="dt-published" datetime="2024-06-03T05:49:25.228Z" itemprop="datePublished">2024-06-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><blockquote>
+<p>3.4</p>
+</blockquote>
+<h3 id="基础概念与常识"><a href="#基础概念与常识" class="headerlink" title="基础概念与常识"></a>基础概念与常识</h3><h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><ul>
+<li>面向对象（封装、继承、多态）</li>
+<li>编译与解释并存——javac编译.java，JVM解释.class</li>
+<li>平台无关性（Java虚拟机）</li>
+</ul>
+<h4 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h4><p>运行Java字节码(.class文件)的虚拟机，针对不同的系统有不同的JVM实现，目的是生成相同的字节码——平台无关性</p>
+<p>最常用——HotSpot VM</p>
+<h4 id="JDK和JRE"><a href="#JDK和JRE" class="headerlink" title="JDK和JRE"></a>JDK和JRE</h4><p>JDK(java development kit)    Java SDK   包含javac、jre等</p>
+<p>JRE(java runtime environment)  运行已编译java程序所需的所有资源，包含JVM和Java类库</p>
+<h4 id="Java程序从源代码到可执行程序"><a href="#Java程序从源代码到可执行程序" class="headerlink" title="Java程序从源代码到可执行程序"></a>Java程序从源代码到可执行程序</h4><p>源代码.java文件，经过javac编译器生成字节码.class文件，再经过JVM中的解释器生成机器码。</p>
+<p>纯解释器效率太慢，引入了JIT编译器，对于经常会调用或者比较消耗系统资源的方法或者代码块交给JIT<strong>运行时编译</strong>，第一次编译后，会保存对应的机器码，下次直接使用。</p>
+<p>编译——C C++ go</p>
+<p>解释——python js PHP</p>
+<h4 id="AOT"><a href="#AOT" class="headerlink" title="AOT"></a>AOT</h4><p>Java9引入的编译模式，和JIT不同的是，它是静态编译，在程序被执行前就将其编译成机器码。</p>
+<p>适用于云原生场景，微服务架构</p>
+<p>AOT优势在于启动时间、内存占用和打包体积，缺点在于不支持java的动态特性，如反射、动态代理。</p>
+<h4 id="C-和Java"><a href="#C-和Java" class="headerlink" title="C++和Java"></a>C++和Java</h4><ul>
+<li>Java不提供指针直接访问内存，程序内存更加安全，不容易出现内存泄漏</li>
+<li>Java类只能单继承，C++支持多继承， Java接口支持多继承</li>
+<li>Java有自动内存管理垃圾回收机制，不需要像C++手动释放内存</li>
+</ul>
+<h3 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h3><h4 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h4><p>1字节（byte） &#x3D;  8bit  -128-127  补码表示</p>
+<p>short2字节，int4字节，long8字节，char2字节，float4字节，double8字节，boolean1位</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> <span class="variable">num</span> <span class="operator">=</span> <span class="number">20L</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="包装类型"><a href="#包装类型" class="headerlink" title="包装类型"></a>包装类型</h4><p>包装类型属于对象类型，集合类中的泛型只能使用包装类型</p>
+<ul>
+<li><strong>存储方式</strong>：基本类型的局部变量和对象引用存放在Java虚拟机的栈中，未被static修饰的成员变量和对象实例存放在Java虚拟机的堆中</li>
+<li><strong>默认值</strong>：包装类型默认值为null</li>
+<li><strong>比较方式</strong>：基本类型的比较方式：&#x3D;&#x3D;        包装类型的比较方式：equals            对于包装类型， &#x3D;&#x3D; 比较的是对象的内存地址</li>
+</ul>
+<h4 id="包装类型的缓存机制"><a href="#包装类型的缓存机制" class="headerlink" title="包装类型的缓存机制"></a>包装类型的缓存机制</h4><p>四个表示整型的包装类型均创建了[-128, 127]的缓存数据区域，Character为[0, 127]           浮点型包装类型无缓存机制</p>
+<p>直接通过自动装箱创建的包装类型，如果在缓存数据区域，则会直接从缓存中取。</p>
+<h4 id="自动装箱和拆箱"><a href="#自动装箱和拆箱" class="headerlink" title="自动装箱和拆箱"></a>自动装箱和拆箱</h4><p>下面这两行是等同的，第一行代码实现了自动装箱</p>
+<p>自动装箱的本质就是调用valueOf函数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Integer</span> <span class="variable">i1</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line"><span class="type">Integer</span> <span class="variable">i2</span> <span class="operator">=</span> Integer.valueOf(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="解决浮点数运算的精度丢失问题"><a href="#解决浮点数运算的精度丢失问题" class="headerlink" title="解决浮点数运算的精度丢失问题"></a>解决浮点数运算的精度丢失问题</h4><p><strong>BigDecimal</strong>实现对浮点数的运算</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">BigDecimal</span> <span class="variable">a1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BigDecimal</span>(<span class="string">&quot;0.8732&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">BigDecimal</span> <span class="variable">a</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BigDecimal</span>(<span class="string">&quot;1.0&quot;</span>);</span><br><span class="line"><span class="type">BigDecimal</span> <span class="variable">b</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BigDecimal</span>(<span class="string">&quot;0.9&quot;</span>);</span><br><span class="line">System.out.println(a.add(b));<span class="comment">// 1.9 加</span></span><br><span class="line">System.out.println(a.subtract(b));<span class="comment">// 0.1 减</span></span><br><span class="line">System.out.println(a.multiply(b));<span class="comment">// 0.90 乘</span></span><br><span class="line">System.out.println(a.divide(b));<span class="comment">// 无法除尽，抛出 ArithmeticException 异常</span></span><br><span class="line">System.out.println(a.divide(b, <span class="number">2</span>, RoundingMode.HALF_UP));<span class="comment">// 1.11  第二个参数保留几位 第三个参数保留规则</span></span><br><span class="line">System.out.println(a.compareTo(b));  <span class="comment">//比较大小</span></span><br><span class="line">System.out.println(a.equals(b));   <span class="comment">//等值比较</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>成员变量会自动赋默认值，局部变量则不会</p>
+<p>静态变量属于类，为所有的对象实例共享，只会被分配一次内存，一般用final关键字修饰</p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><h4 id="静态方法为什么不能调用非静态成员"><a href="#静态方法为什么不能调用非静态成员" class="headerlink" title="静态方法为什么不能调用非静态成员"></a>静态方法为什么不能调用非静态成员</h4><p>静态方法在类加载时就会分配内存，而非静态成员必须在对象实例化后才能存在。</p>
+<h4 id="重载"><a href="#重载" class="headerlink" title="重载"></a>重载</h4><p>方法名相同，返回类型、参数类型、参数个数、参数顺序都可以不同。</p>
+<p>最典型的例子——类的构造函数，可以有多个</p>
+<h4 id="重写"><a href="#重写" class="headerlink" title="重写"></a>重写</h4><p>子类对父类允许访问的方法进行重写，方法名、参数列表必须相同</p>
+<p>当子类强转为父类时，调用的还是父类的方法</p>
+<h4 id="可变长参数"><a href="#可变长参数" class="headerlink" title="可变长参数"></a>可变长参数</h4><p>可变长参数前可以有其他参数，后面不行</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">method</span><span class="params">(String... args)</span>;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">method1</span><span class="params">(String args1, String... args)</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="面向对象基础"><a href="#面向对象基础" class="headerlink" title="面向对象基础"></a>面向对象基础</h3><h4 id="三大特征"><a href="#三大特征" class="headerlink" title="三大特征"></a>三大特征</h4><ul>
+<li>封装——修饰符private限制访问</li>
+<li>继承</li>
+<li>多态——重载与重写</li>
+</ul>
+<h4 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h4><p>一个类可以实现多个接口，实现接口必须要实现接口中的所有方法，接口中的成员变量只能是<strong>public static final</strong>类型的，不能被修改且有初始值</p>
+<h4 id="深拷贝、浅拷贝与引用拷贝"><a href="#深拷贝、浅拷贝与引用拷贝" class="headerlink" title="深拷贝、浅拷贝与引用拷贝"></a>深拷贝、浅拷贝与引用拷贝</h4><ul>
+<li>引用拷贝：创建一个新的引用指向原对象所在的内存，本质上还是同一个对象</li>
+<li>浅拷贝：会在堆上创建一个新的对象，如果类中有引用型的成员变量，这个成员变量会引用拷贝</li>
+<li>深拷贝：创建一个和原对象一模一样的对象，但是存储所在的内存空间不同</li>
+</ul>
+<h3 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h3><h4 id="equals"><a href="#equals" class="headerlink" title="equals"></a>equals</h4><p>对于基本数据类型，&#x3D;&#x3D;是比较他们的值是否相同，而引用类型则为比较他们的内存地址是否相同</p>
+<p>Object的equals也是比较两个对象的内存地址，String中的equals重写过了，因此是直接比较两个字符串中的值</p>
+<h4 id="hashCode"><a href="#hashCode" class="headerlink" title="hashCode"></a>hashCode</h4><p>获取对象在哈希表中的索引位置，主要还是用于判断两个对象是否相等——&gt;提高判断是否不存在的效率</p>
+<p>两个对象的hashCode不相等——&gt;肯定不相等</p>
+<p>两个对象的hashCode相等——&gt;可能不相等，由于哈希冲突</p>
+<p><strong>重写equals方法时必须要重写hashCode方法，避免hashCode不相等而equals相等的情况</strong></p>
+<h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><h4 id="String是不可变的"><a href="#String是不可变的" class="headerlink" title="String是不可变的"></a>String是不可变的</h4><p>用<strong>private final</strong>修饰的字符数组，且没有提供修改字符数组的接口；String类有final关键字修饰，不可被继承。</p>
+<h4 id="StringBuilder和StringBuffer"><a href="#StringBuilder和StringBuffer" class="headerlink" title="StringBuilder和StringBuffer"></a>StringBuilder和StringBuffer</h4><p>StringBuffer对方法加了同步锁，线程安全；StringBuilder线程不安全</p>
+<p><strong>所谓线程安不安全，主要是是否有synchronized关键字修饰</strong></p>
+<h4 id="append和"><a href="#append和" class="headerlink" title="append和+"></a>append和+</h4><p>字符串的拼接有两种方式，将字符串实例化为StringBuilder对象，然后调用append方法拼接字符串，这种方式是在自身进行操作，不会生成新的对象；</p>
+<p>在Java9之前，+直接拼接String字符串实际上也是调用append方法，但是会生成多个StringBuilder对象，在Java9之后，这个问题已经解决了。</p>
+<h4 id="常量池"><a href="#常量池" class="headerlink" title="常量池"></a>常量池</h4><p>类似于包装类型的缓存区域，String也有一个缓存区域，避免字符串对象的重复创建。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;abc&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>若常量池中没有abc这个字符串，就会生成两个对象，一个在常量池中，一个在堆上。</p>
+<h4 id="String-intern"><a href="#String-intern" class="headerlink" title="String#intern"></a>String#intern</h4><p>字符串对象调用intern方法，直接获得这个字符串在常量池中的引用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在堆中创建字符串对象”Java“</span></span><br><span class="line"><span class="comment">// 将字符串对象”Java“的引用保存在字符串常量池中</span></span><br><span class="line"><span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="string">&quot;Java&quot;</span>;</span><br><span class="line"><span class="comment">// 直接返回字符串常量池中字符串对象”Java“对应的引用</span></span><br><span class="line"><span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> s1.intern();</span><br><span class="line"><span class="comment">// 会在堆中在单独创建一个字符串对象</span></span><br><span class="line"><span class="type">String</span> <span class="variable">s3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;Java&quot;</span>);</span><br><span class="line"><span class="comment">// 直接返回字符串常量池中字符串对象”Java“对应的引用</span></span><br><span class="line"><span class="type">String</span> <span class="variable">s4</span> <span class="operator">=</span> s3.intern();</span><br><span class="line"><span class="comment">// s1 和 s2 指向的是堆中的同一个对象</span></span><br><span class="line">System.out.println(s1 == s2); <span class="comment">// true</span></span><br><span class="line"><span class="comment">// s3 和 s4 指向的是堆中不同的对象</span></span><br><span class="line">System.out.println(s3 == s4); <span class="comment">// false</span></span><br><span class="line"><span class="comment">// s1 和 s4 指向的是堆中的同一个对象</span></span><br><span class="line">System.out.println(s1 == s4); <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="的进一步深化"><a href="#的进一步深化" class="headerlink" title="+的进一步深化"></a>+的进一步深化</h4><p>常量折叠：javac会把常量表达式的值求出来嵌入变量中。（当变量以final关键字修饰，也算常量）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">str1</span> <span class="operator">=</span> <span class="string">&quot;str&quot;</span>;</span><br><span class="line"><span class="type">String</span> <span class="variable">str2</span> <span class="operator">=</span> <span class="string">&quot;ing&quot;</span>;</span><br><span class="line"><span class="comment">//常量折叠 相当于String str3 = &quot;string&quot;;</span></span><br><span class="line"><span class="type">String</span> <span class="variable">str3</span> <span class="operator">=</span> <span class="string">&quot;str&quot;</span> + <span class="string">&quot;ing&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">String</span> <span class="variable">str4</span> <span class="operator">=</span> str1 + str2;</span><br><span class="line"><span class="type">String</span> <span class="variable">str5</span> <span class="operator">=</span> <span class="string">&quot;string&quot;</span>;</span><br><span class="line">System.out.println(str3 == str4);<span class="comment">//false</span></span><br><span class="line">System.out.println(str3 == str5);<span class="comment">//true</span></span><br><span class="line">System.out.println(str4 == str5);<span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>3.5</p>
+</blockquote>
+<h3 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h3><p>Java中所有的异常均继承于Throwable类，分为Exception和Error两种</p>
+<h4 id="Throwable的常用方法"><a href="#Throwable的常用方法" class="headerlink" title="Throwable的常用方法"></a>Throwable的常用方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String <span class="title function_">getMessage</span><span class="params">()</span>  <span class="comment">//异常简要描述</span></span><br><span class="line">String <span class="title function_">toString</span><span class="params">()</span>    <span class="comment">//异常详细信息</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">printStackTrace</span><span class="params">()</span> <span class="comment">//打印异常信息</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="try-catch-finally"><a href="#try-catch-finally" class="headerlink" title="try-catch-finally"></a>try-catch-finally</h4><p>finally中的内容几乎一定会执行，若try或catch中有return，则finally也会先执行再return。</p>
+<p>try和finally中同时有return时，finally的return会覆盖try</p>
+<h3 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h3><p>泛型类、泛型接口、泛型方法</p>
+<h3 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h3><p>在运行时可以分析类以及执行类中的方法，通过反射可以获取类的所有属性和方法。</p>
+<p>反射让代码更加灵活，广泛应用于各种Java框架，包括动态代理，但是性能会差点。</p>
+<h3 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h3><h4 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这两种定义都是可以的</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Override &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Override</span> <span class="keyword">extends</span> <span class="title class_">Annotation</span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="解析方法"><a href="#解析方法" class="headerlink" title="解析方法"></a>解析方法</h4><ul>
+<li><p>编译期直接扫描，比如@Override</p>
+</li>
+<li><p>运行时通过<strong>反射</strong>处理，比如@Value和@Component</p>
+</li>
+</ul>
+<h3 id="SPI"><a href="#SPI" class="headerlink" title="SPI"></a>SPI</h3><p>service provider interface   跟api完全相反，接口在调用方，让实现方适配接口。</p>
+<p>Spring、数据库加载驱动都使用了SPI机制</p>
+<p>典型例子：SLF4J</p>
+<h3 id="序列化与反序列化"><a href="#序列化与反序列化" class="headerlink" title="序列化与反序列化"></a>序列化与反序列化</h3><p>序列化就是将数据结构或对象转换为二进制字节流的过程，反序列化就是序列化的逆过程。</p>
+<p>序列化的目的就是便于网络传输或者存入内存或数据库中。</p>
+<p>TCP&#x2F;IP四层模型：应用层、传输层、网络层、网络接口层</p>
+<p><img src="https://oss.javaguide.cn/github/javaguide/cs-basics/network/tcp-ip-4-model.png" alt="TCP/IP 四层模型"></p>
+<p>序列化在OSI七层模型的表示层，因此属于应用层。</p>
+<p>序列化协议：Protobuf</p>
+<h3 id="I-O"><a href="#I-O" class="headerlink" title="I&#x2F;O"></a>I&#x2F;O</h3><p>I&#x2F;O流分为字节流与字符流</p>
+<ul>
+<li>InputStream   OutputStream</li>
+<li>Reader   Writer</li>
+</ul>
+<h4 id="分为字节流与字符流的原因"><a href="#分为字节流与字符流的原因" class="headerlink" title="分为字节流与字符流的原因"></a>分为字节流与字符流的原因</h4><p>字节流转为字符流比较耗时，而且不指定编码类型的话，字节流容易乱码。</p>
+<h4 id="字节缓冲流"><a href="#字节缓冲流" class="headerlink" title="字节缓冲流"></a>字节缓冲流</h4><p>字节缓冲流会先将读取到的字节存放在缓冲区，大幅减少IO的次数，提高读写效率。</p>
+<h3 id="语法糖"><a href="#语法糖" class="headerlink" title="语法糖"></a>语法糖</h3><p>方便程序员开发设计的语法，可以更简洁的实现功能。</p>
+<p>JVM并不能识别语法糖，是通过javac编译器解糖。</p>
+<p>常见的语法糖：For each遍历、泛型、自动装拆箱、变长参数、lambda表达式、switch对String的支持</p>
+<h3 id="重要知识点"><a href="#重要知识点" class="headerlink" title="重要知识点"></a>重要知识点</h3><h4 id="Java值传递"><a href="#Java值传递" class="headerlink" title="Java值传递"></a>Java值传递</h4><p><strong>首先Java中只有值传递，并没有引用传递。</strong></p>
+<p>对于普通数据类型，若在函数中修改值，则不会修改成功，因为实参的值是通过形参传递过去，成功修改了形参的值，但是没有修改原来实参的值。</p>
+<p>对于对象数据类型，是可以修改成功的，但是和C++不一样的是，C++中的引用即别名，引用和原来实参共用了同一个内存空间，因此修改引用也可以修改原来的实参，Java中实际上将实参的地址值作为形参传递过去了，因此可以对原来的实参进行修改。</p>
+<p>C++中的引用和原实参是相同的一片内存空间，Java对象类型是形参和实参都指向了同一地址，但是两个参数还是不同的。</p>
+<p>简单点说，就是Java的值传递会创建一个新副本，有别于原来的实参。</p>
+<h4 id="Java序列化"><a href="#Java序列化" class="headerlink" title="Java序列化"></a>Java序列化</h4><h5 id="JDK自带的序列化方式"><a href="#JDK自带的序列化方式" class="headerlink" title="JDK自带的序列化方式"></a>JDK自带的序列化方式</h5><p>需要实现<strong>Serializable</strong>接口，表明这个类可以序列化和反序列化</p>
+<h4 id="Java反射机制"><a href="#Java反射机制" class="headerlink" title="Java反射机制"></a>Java反射机制</h4><h5 id="获取Class对象的四种方式"><a href="#获取Class对象的四种方式" class="headerlink" title="获取Class对象的四种方式"></a>获取Class对象的四种方式</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Class</span> <span class="variable">alunbarClass</span> <span class="operator">=</span> TargetObject.class;</span><br><span class="line"></span><br><span class="line"><span class="type">Class</span> <span class="variable">alunbarClass1</span> <span class="operator">=</span> Class.forName(<span class="string">&quot;cn.javaguide.TargetObject&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="type">TargetObject</span> <span class="variable">o</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TargetObject</span>();</span><br><span class="line"><span class="type">Class</span> <span class="variable">alunbarClass2</span> <span class="operator">=</span> o.getClass();</span><br><span class="line"></span><br><span class="line">ClassLoader.getSystemClassLoader().loadClass(<span class="string">&quot;cn.javaguide.TargetObject&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h5 id="反射的基本操作"><a href="#反射的基本操作" class="headerlink" title="反射的基本操作"></a>反射的基本操作</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.javaguide;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TargetObject</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String value;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">TargetObject</span><span class="params">()</span> &#123;</span><br><span class="line">        value = <span class="string">&quot;JavaGuide&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">publicMethod</span><span class="params">(String s)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;I love &quot;</span> + s);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">privateMethod</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;value is &quot;</span> + value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> cn.javaguide;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationTargetException;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchFieldException &#123;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 获取 TargetObject 类的 Class 对象并且创建 TargetObject 类实例</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        Class&lt;?&gt; targetClass = Class.forName(<span class="string">&quot;cn.javaguide.TargetObject&quot;</span>);</span><br><span class="line">        <span class="type">TargetObject</span> <span class="variable">targetObject</span> <span class="operator">=</span> (TargetObject) targetClass.newInstance();</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 获取 TargetObject 类中定义的所有方法</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        Method[] methods = targetClass.getDeclaredMethods();</span><br><span class="line">        <span class="keyword">for</span> (Method method : methods) &#123;</span><br><span class="line">            System.out.println(method.getName());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 获取指定方法并调用</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="type">Method</span> <span class="variable">publicMethod</span> <span class="operator">=</span> targetClass.getDeclaredMethod(<span class="string">&quot;publicMethod&quot;</span>,</span><br><span class="line">                String.class);</span><br><span class="line"></span><br><span class="line">        publicMethod.invoke(targetObject, <span class="string">&quot;JavaGuide&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 获取指定参数并对参数进行修改</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="type">Field</span> <span class="variable">field</span> <span class="operator">=</span> targetClass.getDeclaredField(<span class="string">&quot;value&quot;</span>);</span><br><span class="line">        <span class="comment">//为了对类中的参数进行修改我们取消安全检查</span></span><br><span class="line">        field.setAccessible(<span class="literal">true</span>);</span><br><span class="line">        field.set(targetObject, <span class="string">&quot;JavaGuide&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 调用 private 方法</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="type">Method</span> <span class="variable">privateMethod</span> <span class="operator">=</span> targetClass.getDeclaredMethod(<span class="string">&quot;privateMethod&quot;</span>);</span><br><span class="line">        <span class="comment">//为了调用private方法我们取消安全检查</span></span><br><span class="line">        privateMethod.setAccessible(<span class="literal">true</span>);</span><br><span class="line">        privateMethod.invoke(targetObject);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="Java代理模式"><a href="#Java代理模式" class="headerlink" title="Java代理模式"></a>Java代理模式</h4><p>使用代理对象代替真实对象的访问，在不修改原对象的前提下，添加增强操作——&gt;有点像AOP?</p>
+<h5 id="静态代理"><a href="#静态代理" class="headerlink" title="静态代理"></a>静态代理</h5><p>定义一个接口，定义一个真实类实现接口，再定义一个代理类也实现接口，在实际使用中，将真实类的目标对象注入到代理类中。</p>
+<h5 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h5><p>AOP和RPC都使用了动态代理，重点看一下JDK动态代理</p>
+<p>Proxy#newProxyInstance()生成代理对象</p>
+<p>创建一个类实现**<code>InvocationHandler</code>**接口，主要是实现invoke方法，invoke方法中需要传入代理对象、增强的方法对象以及方法的参数，在这个invoke方法中同样会调用method.invoke()通过反射执行方法。</p>
+<ul>
+<li>接口类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">SmsService</span> &#123;</span><br><span class="line">    String <span class="title function_">send</span><span class="params">(String message)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>实现接口类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SmsServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">SmsService</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">send</span><span class="params">(String message)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;send message:&quot;</span> + message);</span><br><span class="line">        <span class="keyword">return</span> message;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>动态代理类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationHandler;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationTargetException;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DebugInvocationHandler</span> <span class="keyword">implements</span> <span class="title class_">InvocationHandler</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 代理类中的真实对象</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Object target;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">DebugInvocationHandler</span><span class="params">(Object target)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.target = target;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> InvocationTargetException, IllegalAccessException &#123;</span><br><span class="line">        <span class="comment">//调用方法之前，我们可以添加自己的操作</span></span><br><span class="line">        System.out.println(<span class="string">&quot;before method &quot;</span> + method.getName());</span><br><span class="line">        <span class="type">Object</span> <span class="variable">result</span> <span class="operator">=</span> method.invoke(target, args);</span><br><span class="line">        <span class="comment">//调用方法之后，我们同样可以添加自己的操作</span></span><br><span class="line">        System.out.println(<span class="string">&quot;after method &quot;</span> + method.getName());</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>获取代理对象类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JdkProxyFactory</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Object <span class="title function_">getProxy</span><span class="params">(Object target)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Proxy.newProxyInstance(</span><br><span class="line">                target.getClass().getClassLoader(), <span class="comment">// 目标类的类加载器</span></span><br><span class="line">                target.getClass().getInterfaces(),  <span class="comment">// 代理需要实现的接口，可指定多个</span></span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">DebugInvocationHandler</span>(target)   <span class="comment">// 代理对象对应的自定义 InvocationHandler</span></span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>实际使用</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">SmsService</span> <span class="variable">smsService</span> <span class="operator">=</span> (SmsService) JdkProxyFactory.getProxy(<span class="keyword">new</span> <span class="title class_">SmsServiceImpl</span>());</span><br><span class="line">smsService.send(<span class="string">&quot;java&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>JDK动态代理只能代理实现了接口的类或者直接代理接口，CGLIB可以代理未实现任何接口的类，它是通过生成一个被代理类的子类来拦截被代理类的方法调用。</p>
+<h4 id="Java魔法类Unsafe"><a href="#Java魔法类Unsafe" class="headerlink" title="Java魔法类Unsafe"></a>Java魔法类Unsafe</h4><p>执行一些跟系统资源相关的操作，跟C++差不多，主要就是让Java拥有操作内存的能力。</p>
+<p>native关键字修饰本地方法——Java中用其他变成语言编写的方法。</p>
+<ul>
+<li>内存操作</li>
+<li>线程调度</li>
+<li>系统信息</li>
+</ul>
+<blockquote>
+<p>3.6</p>
+</blockquote>
+<h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><h3 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h3><p>Java集合分为两个接口：<strong>Collection</strong>和<strong>Map</strong>，<strong>Collection</strong>包括<strong>List</strong>、<strong>Set</strong>和<strong>Queue</strong></p>
+<ul>
+<li>LinkedList   双向链表</li>
+<li>HashSet       哈希表HashMap</li>
+<li>TreeSet        红黑树（平衡排序二叉树）</li>
+<li>ArrayDeque 可扩容动态双向数组</li>
+<li>TreeMap       红黑树</li>
+</ul>
+<h3 id="List"><a href="#List" class="headerlink" title="List"></a>List</h3><p>ArrayList跟普通数组比起来可以动态地扩容或缩容，但是线程不安全。</p>
+<p>Vector是List古老的实现类，线程安全，Stack就是继承于Vector</p>
+<h4 id="删除和插入的时间复杂度"><a href="#删除和插入的时间复杂度" class="headerlink" title="删除和插入的时间复杂度"></a>删除和插入的时间复杂度</h4><ul>
+<li><p>对于ArrayList，尾部插入与删除都是O(1)，其余都是O(N)</p>
+</li>
+<li><p>对于LinkedList，尾部和头部插入删除都是O(1)，其他都是O(N)</p>
+</li>
+</ul>
+<p>虽然是这样，但是ArrayList的性能更好。</p>
+<h4 id="RandomAcces接口"><a href="#RandomAcces接口" class="headerlink" title="RandomAcces接口"></a>RandomAcces接口</h4><p>这个接口就类似于<strong>Serializable</strong>接口，接口中并没有什么方法，起一个标识的作用，标识这个接口的类具有随机访问功能。</p>
+<p>LinkedList并没有实现这个接口，主要是LinkedList的底层实现是链表，链表内存地址不连续。</p>
+<h3 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h3><h4 id="Comparable和Comparator"><a href="#Comparable和Comparator" class="headerlink" title="Comparable和Comparator"></a>Comparable和Comparator</h4><ul>
+<li>Comparable接口对应的是compareTo方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这个类实现了Comparable接口，对Person对象中的年龄进行排序</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compareTo</span><span class="params">(Person o)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">this</span>.age &gt; o.getAge()) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">this</span>.age &lt; o.getAge()) &#123;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>Comparator接口对应的是compare方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//sort方法默认是升序，重写compare方法后改为降序</span></span><br><span class="line">Collections.sort(arrayList, <span class="keyword">new</span> <span class="title class_">Comparator</span>&lt;Integer&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compare</span><span class="params">(Integer o1, Integer o2)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> o2.compareTo(o1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h3><p>Queue扩展了Collection的接口，对于插入、删除、查询队首元素分为了两类方法。建议还是使用返回特殊值，比较安全。</p>
+<table>
+<thead>
+<tr>
+<th align="center">方法</th>
+<th align="center">抛出异常</th>
+<th align="center">返回特殊值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">插入</td>
+<td align="center">add</td>
+<td align="center">offer</td>
+</tr>
+<tr>
+<td align="center">删除</td>
+<td align="center">remove</td>
+<td align="center">poll</td>
+</tr>
+<tr>
+<td align="center">查询队首元素</td>
+<td align="center">element</td>
+<td align="center">peek</td>
+</tr>
+</tbody></table>
+<h4 id="ArrayDeque和LinkedList"><a href="#ArrayDeque和LinkedList" class="headerlink" title="ArrayDeque和LinkedList"></a>ArrayDeque和LinkedList</h4><p><strong>Deque</strong>双端队列，可以同时在队头和队尾进行操作。</p>
+<p>ArrayDeque和LinkedList都实现了Deque接口，他们的不同：</p>
+<ul>
+<li>底层实现不同，前者是可变长的数组和双指针，后者是链表</li>
+<li>前者不可以存null数据，后者可以（对称二叉树有体现）</li>
+</ul>
+<h4 id="PriorityQueue"><a href="#PriorityQueue" class="headerlink" title="PriorityQueue"></a>PriorityQueue</h4><ul>
+<li><p>底层是可变长的数组</p>
+</li>
+<li><p>优先队列是通过堆排序将优先级最高的元素放在队尾，插入与删除元素时间复杂度O(logn)。</p>
+</li>
+<li><p>非线程安全，不可以存储null</p>
+</li>
+<li><p>默认是小顶堆，数值排序的话就是降序排序，通过Comparator或lambda表达式可以改为大顶堆</p>
+</li>
+</ul>
+<h4 id="BlockingQueue接口"><a href="#BlockingQueue接口" class="headerlink" title="BlockingQueue接口"></a>BlockingQueue接口</h4><p>当队列没有元素时一直阻塞，直到有元素；当队列已满，则会等到队列有元素出队之后再放入新元素——&gt;应用于生产者-消费者模型</p>
+<p>BlockingQueue接口的实现类——ArrayBlockingQueue和LinkedBlockingQueue。</p>
+<p>ArrayBlockingQueue支持公平和非公平的锁访问机制，LinkedBlockingQueue仅支持非公平；</p>
+<p>所谓公平和非公平，就是是否按线程的请求顺序来获取锁。</p>
+<blockquote>
+<p>3.7</p>
+</blockquote>
+<h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><h4 id="HashMap和HashTable（基本被淘汰）"><a href="#HashMap和HashTable（基本被淘汰）" class="headerlink" title="HashMap和HashTable（基本被淘汰）"></a>HashMap和HashTable（基本被淘汰）</h4><ul>
+<li>前者线程不安全，后者线程安全</li>
+<li>HashMap可以存null键值对，null键只能存一次</li>
+<li>HashMap初始容量大小16，扩充容量也是2的幂次方</li>
+<li>HashMap底层在解决哈希冲突时，当链表长度大于阈值时，会转化为红黑树。</li>
+</ul>
+<h4 id="HashSet如何检查重复"><a href="#HashSet如何检查重复" class="headerlink" title="HashSet如何检查重复"></a>HashSet如何检查重复</h4><p>HashSet的底层基本都是HashMap实现的，HashSet的添加操作是直接调用了HashMap的put方法，而HashMap的put方法是比较对象的hashcode判断加入的位置，若有相同的hashcode，则会加入失败。</p>
+<h4 id="HashMap的底层实现"><a href="#HashMap的底层实现" class="headerlink" title="HashMap的底层实现"></a>HashMap的底层实现</h4><h5 id="1-8之前"><a href="#1-8之前" class="headerlink" title="1.8之前"></a>1.8之前</h5><p>数组和链表结合在一起使用——<strong>拉链法</strong>，数组每一格就是一个链表，若哈希冲突，则将元素加入到链表中。</p>
+<h5 id="1-8及之后"><a href="#1-8及之后" class="headerlink" title="1.8及之后"></a>1.8及之后</h5><p>在处理哈希冲突时，若链表长度大于阈值8，若当前数组长度小于64，则会进行数组扩容，否则会将链表转化为红黑树，为了提高搜索效率。</p>
+<h4 id="HashMap的长度为什么是2的幂次方"><a href="#HashMap的长度为什么是2的幂次方" class="headerlink" title="HashMap的长度为什么是2的幂次方"></a>HashMap的长度为什么是2的幂次方</h4><p>若通过插入对象的哈希码和数组长度进行取模运算，则效率较慢。通过位运算可以更快地计算索引。</p>
+<h4 id="HashMap为什么线程不安全"><a href="#HashMap为什么线程不安全" class="headerlink" title="HashMap为什么线程不安全"></a>HashMap为什么线程不安全</h4><p>假设两个线程同时进行put操作，然后计算出了相同的索引，第一个线程执行完哈希冲突后时间片结束，第二个线程完成了插入，第一个线程再次获得时间片，就会出现内容覆盖。</p>
+<h4 id="数据扩容头插与尾插"><a href="#数据扩容头插与尾插" class="headerlink" title="数据扩容头插与尾插"></a>数据扩容头插与尾插</h4><p>1.8之前，hashmap采用的是头插法，是考虑到新插入的数据可能作为热点数据使用，放在头部可以减少查找时间；</p>
+<p>1.8之后采用的是尾插法，为的是防止在多线程环境下出现环化。</p>
+<p>多线程下头插法出现环化的问题：假设两个线程分别都插入一个数据A和B，前一个线程在准备插入时时间片用完，第二个线程进行扩容，因为是头插法，因此数据顺序是BA，但此时第一个线程的当前指针指向A，next指针指向B，它会先移动A，然后当前指针移向B，再插入B，由于第二个线程的next的指针的下一个next指针还是指向A，第一个线程还会再插入一次A，这样ABA，出现环化。</p>
+<h4 id="ConcurrentHashMap底层实现"><a href="#ConcurrentHashMap底层实现" class="headerlink" title="ConcurrentHashMap底层实现"></a>ConcurrentHashMap底层实现</h4><h5 id="1-8之前-1"><a href="#1-8之前-1" class="headerlink" title="1.8之前"></a>1.8之前</h5><p>Segment分段锁设计。</p>
+<p>为Segment数组结构加HashEntry数组结构。</p>
+<p>Segment数组长度是固定的，为16；HashEntry用于存储键值对数据；一个Segment对应一个HashEntry。</p>
+<p>通过对Segment加锁实现对HashEntry加锁，同时其他线程修改其他HashEntry是可以的，这就说明了Segment支持同时16个线程修改不同HashEntry的内容。</p>
+<h5 id="1-8及之后-1"><a href="#1-8及之后-1" class="headerlink" title="1.8及之后"></a>1.8及之后</h5><p>基本数据结构和HashMap相同，但是对每个节点的插入和更新通过CAS操作和synchronized关键字在没有锁竞争的情况下完成，简单来说就是对Node数组中的节点的头部加锁，来保证线程安全。</p>
+<h3 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h3><h4 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h4><h5 id="扩容机制"><a href="#扩容机制" class="headerlink" title="扩容机制"></a>扩容机制</h5><p>无参构造方法创建ArrayList，实际上使用初始容量10构造了一个空数组。</p>
+<p>当插入第一个元素时，此时数组长度还是0，会调用grow方法对列表进行扩容，初始扩容为10，当插入元素超过10时，会再次扩容。</p>
+<p><strong>扩容的策略</strong>：扩容使数组的大小扩大为原来的1.5倍，为了实现高性能，是对旧容量大小进行了向右移位一位的操作，相当于对旧容量除以2，再加上旧容量，就相当于扩大为旧容量的1.5倍。（<strong>移位操作比普通运算符运算要快很多</strong>）</p>
+<h5 id="ensureCapacity-方法"><a href="#ensureCapacity-方法" class="headerlink" title="ensureCapacity()方法"></a>ensureCapacity()方法</h5><p>提供给用户的接口，可以手动扩容ArrayList，主要是为了避免ArrayList频繁扩容影响性能。</p>
+<h5 id="数组的复制"><a href="#数组的复制" class="headerlink" title="数组的复制"></a>数组的复制</h5><p>**System.arraycopy()<strong>和</strong>Arrays.copyOf()**方法</p>
+<p>前者是一个本地方法，依赖底层系统，效率较高，而且是直接在目标数组上进行操作；</p>
+<p>后者是一个工具类方法，它会创建一个新的数组，将原数组的元素复制到新数组中。</p>
+<h4 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h4><p>LinkedList的底层实现是一个双向链表，而且它还实现了Deque接口，可以在列表的首尾两端都进行操作。</p>
+<p>LinkedList的get方法会通过比较索引值与链表size的一半大小来判断是从链表头还是链表尾开始遍历。</p>
+<blockquote>
+<p>3.9</p>
+</blockquote>
+<h4 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h4><h5 id="loadFactor和threshold"><a href="#loadFactor和threshold" class="headerlink" title="loadFactor和threshold"></a>loadFactor和threshold</h5><p>负载因子和阈值，负载因子表示数组数据存放的疏密程度，越大表示存放的数据越多，一般设置为0.75；（<strong>负载因子可以手动设置</strong>）</p>
+<p>阈值等于数组容量*负载因子，当数组中存放数据的量超过阈值后，会进行数组扩容。</p>
+<h5 id="put方法"><a href="#put方法" class="headerlink" title="put方法"></a>put方法</h5><p>实际上是调用了putval方法添加元素。</p>
+<p>当定位到的数组位置没有元素，直接放入；存在元素，对比key，key相同则覆盖，不相同则判断是否是树的节点（1.8后的哈希表中是有红黑树的），是就插入红黑树，否则就插入到链表中（尾插法）。</p>
+<h4 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h4><h5 id="1-7"><a href="#1-7" class="headerlink" title="1.7"></a>1.7</h5><p>ConcurrentHashMap由多个Segment组合而成，一个Segment相当于一个HashMap。HashMap的内部可以扩容，Segment的个数不能扩容，最大支持16。每个Segment的默认大小为2，当插入第二个元素时会进行扩容。</p>
+<h5 id="1-8"><a href="#1-8" class="headerlink" title="1.8"></a>1.8</h5><p>1.8相比于1.7效率更高的地方在于减少了锁的使用，转而使用了CAS这种原子操作。</p>
+<h6 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h6><p><code>ConcurrentHashMap</code> 的初始化是通过<strong>自旋和 CAS</strong> 操作完成的。</p>
+<ul>
+<li>自旋：线程等待的方式，不会让线程进入阻塞状态，会不断重试直至满足条件</li>
+<li>CAS：compare and swap，不需要加锁，比较当前内存位置的值与预期值是否相等，相等则更新，否则就不操作。</li>
+</ul>
+<h6 id="put方法-1"><a href="#put方法-1" class="headerlink" title="put方法"></a>put方法</h6><p>首先尝试自旋+CAS加入元素，尝试了一定次数仍不能成功，则通过使用synchronized锁写入。</p>
+<h2 id="并发编程"><a href="#并发编程" class="headerlink" title="并发编程"></a>并发编程</h2><h3 id="Java中的进程与线程"><a href="#Java中的进程与线程" class="headerlink" title="Java中的进程与线程"></a>Java中的进程与线程</h3><p>进程是程序的一次执行过程，是系统运行程序的基本单位，在Java中，启动了main函数就是启动了一个JVM的进程。</p>
+<p>一个进程包含多个线程，多个线程共享进程的堆和方法区资源，每个线程有自己的程序计数器、虚拟机栈和本地方法栈，main函数所在的线程是JVM进程的主线程。</p>
+<p>在JDK1.2之前，Java实现的是用户级线程，在JDK1.2及以后，Java实现的是内核级线程。这里的用户级和内核级就类似于操作系统中的用户态和内核态。</p>
+<p>用户级无法使用多核。</p>
+<p>在Windows和Linux中，Java采用的是一对一的线程模型，即一个Java线程对应一个内核级线程。</p>
+<h3 id="详解Java线程"><a href="#详解Java线程" class="headerlink" title="详解Java线程"></a>详解Java线程</h3><p>各个线程私有：</p>
+<ul>
+<li>程序计数器：用于记录当前线程执行的位置——&gt;为了线程切换后能恢复到正确的执行位置</li>
+<li>虚拟机栈：存储局部变量、常量池引用等信息</li>
+<li>本地方法栈：正如其名，存储虚拟机使用到的本地方法。</li>
+</ul>
+<p>后两个私有主要是为了保证局部变量不被其他线程访问</p>
+<h3 id="并发和并行"><a href="#并发和并行" class="headerlink" title="并发和并行"></a>并发和并行</h3><p>并发是程序在同一时间段执行</p>
+<p>并行是程序在同一时刻执行</p>
+<h3 id="同步和异步"><a href="#同步和异步" class="headerlink" title="同步和异步"></a>同步和异步</h3><p>同步是发出一个调用之后，在未回应之前会一直等待；</p>
+<p>异步是发出一个调用之后，调用会立即返回。</p>
+<h3 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h3><h4 id="多线程的好处"><a href="#多线程的好处" class="headerlink" title="多线程的好处"></a>多线程的好处</h4><ul>
+<li>线程是轻量级的进程，能够共享进程中的所有堆和方法区资源，线程间的切换和调度的成本远远小于进程</li>
+<li>提高计算机的并发能力和性能</li>
+</ul>
+<h4 id="多线程的问题"><a href="#多线程的问题" class="headerlink" title="多线程的问题"></a>多线程的问题</h4><p>内存泄漏、死锁、线程不安全——&gt;对于同一份文件，多线程同时访问可能会导致数据出现错误。</p>
+<h4 id="单核CPU执行多线程的问题"><a href="#单核CPU执行多线程的问题" class="headerlink" title="单核CPU执行多线程的问题"></a>单核CPU执行多线程的问题</h4><p>单核CPU在同一时刻只能有一个线程工作，若是CPU工作密集型，多线程会影响性能；若是I&#x2F;O密集型，多线程并发执行可以利用CPU等待IO完成的空闲时间，进行其他的计算。</p>
+<h3 id="创建Java线程"><a href="#创建Java线程" class="headerlink" title="创建Java线程"></a>创建Java线程</h3><p>继承Thread类，通过new Thread().start()创建线程。不管是哪种方法，都会调用Thread类中的start方法来创建新线程。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">ImplementsRunnable</span> <span class="variable">runnable</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ImplementsRunnable</span>();</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">Thread</span>(runnable).start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="线程的状态"><a href="#线程的状态" class="headerlink" title="线程的状态"></a>线程的状态</h3><ul>
+<li>NEW新建  线程创建之后</li>
+<li>RUNNABLE运行 调用start方法后等待运行</li>
+<li>WAIT等待  调用wait方法，等待某些条件的满足</li>
+<li>BLOCKED阻塞 synchroized方法，等待锁释放</li>
+<li>超时等待  wait(time) 当超时之后会自动返回到运行状态</li>
+<li>TERMINATED终止</li>
+</ul>
+<h4 id="线程的上下文切换"><a href="#线程的上下文切换" class="headerlink" title="线程的上下文切换"></a>线程的上下文切换</h4><p>将线程从CPU占用中退出：</p>
+<ul>
+<li>自己调用了sleep或者wait方法退出——&gt;等待</li>
+<li>CPU时间片用完——&gt;REDAY</li>
+<li>调用了阻塞类型的系统中断，线程被阻塞——&gt;阻塞</li>
+</ul>
+<h3 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h3><p>这个单词本意就是不稳定的</p>
+<ul>
+<li><p>保证了变量的可见性，表示这个变量是共享且不稳定的，每次使用它都到主存中进行读取。这个可见性表示其他线程能看到这个线程中变量的修改。</p>
+</li>
+<li><p>防止JVM的指令重排序（JVM具有指令重排的特性）</p>
+</li>
+<li><p>不能保证变量的原子性。</p>
+</li>
+</ul>
+<p>既保证可见性，又保证原子性——&gt;synchronized关键字</p>
+<h3 id="悲观锁"><a href="#悲观锁" class="headerlink" title="悲观锁"></a>悲观锁</h3><p>每次获取资源的时候都会上锁，当处理完资源再释放锁。</p>
+<p>共享资源仅给一个线程使用，其他线程都会阻塞。比如synchronized关键字。</p>
+<p>高并发场景下，悲观锁会造成大量阻塞，可能出现死锁问题。</p>
+<p>悲观锁适合写占比较多的情况。</p>
+<h3 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h3><p>乐观锁不限制线程对于资源的获取，在提交修改时会验证资源是否被修改了，若修改了，则线程本次修改失败。</p>
+<p>常用方法：版本号机制、CAS算法——&gt;ConcurrentHashMap用CAS乐观锁替代了原来的synchronized悲观锁。</p>
+<p>乐观锁适合读占比较多的情况，如果写比较多，则频繁的写失败也会影响性能。</p>
+<h4 id="版本号机制"><a href="#版本号机制" class="headerlink" title="版本号机制"></a>版本号机制</h4><p>资源对应一个version变量，对资源进行修改，会使version变量加一，在处理前后对比version，一致则修改成功。</p>
+<h4 id="CAS"><a href="#CAS" class="headerlink" title="CAS"></a>CAS</h4><p>V表示要更新的变量值，E表示预期值，N表示拟写入的新值，当V&#x3D;&#x3D;E时用N来更新V。</p>
+<h4 id="乐观锁的问题"><a href="#乐观锁的问题" class="headerlink" title="乐观锁的问题"></a>乐观锁的问题</h4><ul>
+<li>ABA问题 意思就是V确实等于E，并不能说明V没有修改过，他可能中间经历了某些修改使最终值还等于原来的值。</li>
+</ul>
+<p>解决ABA问题——CAS+版本号机制或时间戳</p>
+<ul>
+<li>循环时间长开销大       CAS通过自旋不断重试</li>
+<li>只能保证一个共享变量的原子操作     CAS只对一个共享变量有效</li>
+</ul>
+<h3 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a>synchronized</h3><p>修饰实例方法——锁当前对象实例</p>
+<p>修饰静态方法——锁当前类</p>
+<p>构造方法不可以用synchronized关键字修饰，构造方法本身就是线程安全的。</p>
+<h4 id="底层原理"><a href="#底层原理" class="headerlink" title="底层原理"></a>底层原理</h4><ul>
+<li>同步代码块：1个monitorenter指令指向同步代码块的开始位置，两个monitorexit指令指向同步代码块的结束位置。为了处理异常情况。</li>
+<li>方法：ACC_SYNCHRONIZED标识</li>
+</ul>
+<p>本质上都是对对象监视器monitor的获取。</p>
+<h3 id="ReentrantLock"><a href="#ReentrantLock" class="headerlink" title="ReentrantLock"></a>ReentrantLock</h3><p>有一个内部类Sync，Sync继承了AQS，添加锁和释放锁都是在Sync中实现的</p>
+<p>ReentrantLock默认使用非公平锁，也可以通过构造函数显式的指定使用公平锁。</p>
+<h4 id="synchronized和ReentrantLock的区别"><a href="#synchronized和ReentrantLock的区别" class="headerlink" title="synchronized和ReentrantLock的区别"></a>synchronized和ReentrantLock的区别</h4><ul>
+<li>R更灵活，增加了轮询、超时、中断等功能。</li>
+<li>synchronized是非公平锁，R可以指定公平锁或非公平锁。</li>
+<li>synchronized依赖于JVM实现，R基于JDK层面实现。</li>
+</ul>
+<h3 id="可重入锁的实现原理"><a href="#可重入锁的实现原理" class="headerlink" title="可重入锁的实现原理"></a>可重入锁的实现原理</h3><p>为每个锁维护一个拥有者线程标识和计数器，在加锁和解锁操作时对计数器进行递增和递减，并通过并发控制确保线程对锁状态的访问是安全的。</p>
+<p>如ReentrantLock，在内部维护了一个锁状态变量和一个等待队列，等待队列会阻塞等待获取锁的线程。在获取锁的时候，会判断当前锁状态变量是否为0，如果为0，则获取到锁，且锁状态变量+1，这时其他锁线程无法获取到锁，当获取锁的同一个线程再次获取锁时，则锁状态变量会再加一。当锁状态变量变为0才会真正释放锁。</p>
+<h3 id="Semaphore"><a href="#Semaphore" class="headerlink" title="Semaphore"></a>Semaphore</h3><p>信号量，好像是在操作系统的生产-消费者模型中学到的。</p>
+<p>Semaphore控制同时访问特定资源的线程数量。</p>
+<p>分为两种模式：非公平模式和公平模式，对应了是否满足FIFO</p>
+<h3 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h3><p>普通的变量可以被所有的线程访问并修改，ThreadLocal使变量专属于某个线程。</p>
+<p>对于ThreadLocal变量，访问这个变量的每一个线程都会保存这个变量的本地副本。</p>
+<h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>ThreadLocal本质上就是使用一个ThreadLocalMap（客制化的HashMap）存储每个线程的变量副本。</p>
+<p>调用ThreadLocal类的set和get方法，实际上调用的是ThreadLocalMap类的set和get方法。</p>
+<p>ThreadLocalMap的key为ThreadLocal类，value为变量副本。</p>
+<h4 id="内存泄露"><a href="#内存泄露" class="headerlink" title="内存泄露"></a>内存泄露</h4><p>ThreadLocalMap的key是一个弱引用，value是强引用。当外部没有对ThreadLocal对象没有直接引用时，GC会回收ThreadLocal对象，然而value强引用不会清理，这就造成了内存泄露。通过remove方法可以清理key为null的所有value。</p>
+<h3 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h3><p>类似于数据库连接池，为了更好地管理线程，减少创建线程和销毁线程造成的损耗、提高线程响应的速度。</p>
+<h4 id="创建线程池"><a href="#创建线程池" class="headerlink" title="创建线程池"></a>创建线程池</h4><p>多种类型的ThreadPoolExecutor</p>
+<ul>
+<li>FixedThreadPool  固定线程数量的线程池</li>
+<li>SingleThreadPool 单线程线程池</li>
+</ul>
+<p>使用的是无界的LinkedBlockQueue任务阻塞队列，有最大长度，为Integer.MAX_VALUE</p>
+<ul>
+<li>CachedThreadPool  根据实际情况调整线程的数量</li>
+</ul>
+<p>使用的是同步队列SynchronousQueue，有最大长度，为Integer.MAX_VALUE</p>
+<ul>
+<li>ScheduledThreadPool  定期执行任务的线程池</li>
+</ul>
+<p>使用的是无界的延迟阻塞队列DelayedWorkQueue，有最大长度，为Integer.MAX_VALUE</p>
+<p>这几种方法都可能导致OOM，即程序运行过程中内存耗尽而无法继续执行的情况。</p>
+<h4 id="线程池的参数"><a href="#线程池的参数" class="headerlink" title="线程池的参数"></a>线程池的参数</h4><ul>
+<li>corePoolSize:任务队列未达到最大长度时，最大可以同时运行的线程数量  <strong>核心线程数</strong></li>
+<li>maximumPoolSize:任务队列中达到最大长度时，核心线程数变为最大线程数</li>
+<li>workQueue:新任务判断当前同时运行的线程数量是否达到核心线程数，若达到了，进入任务队列</li>
+<li>keepAliveTime:线程数大于核心线程数时，任务队列中没有任务，不会立即销毁线程，等待keepAliveTime的时间</li>
+</ul>
+<h4 id="饱和策略"><a href="#饱和策略" class="headerlink" title="饱和策略"></a>饱和策略</h4><p>当任务队列已满，并且线程池中已经运行了最大线程数，默认是抛出异常拒绝新来的任务，也可以使用调用该任务的线程来处理，或者丢弃最早的未处理的任务请求。</p>
+<h4 id="线程池处理任务的流程"><a href="#线程池处理任务的流程" class="headerlink" title="线程池处理任务的流程"></a>线程池处理任务的流程</h4><p>先看核心线程数，达到了就进入队列，要是队列也满了，进入线程池调用非核心线程，若线程池也满了，则按饱和策略对任务处理。</p>
+<h4 id="线程池的大小"><a href="#线程池的大小" class="headerlink" title="线程池的大小"></a>线程池的大小</h4><p>线程池开的太大的话，会导致大量线程同时争取CPU资源，会有大量的上下文切换，从而增加线程的执行时间。</p>
+<p>合适的线程池的大小：</p>
+<ul>
+<li>CPU密集型任务    N + 1</li>
+<li>I&#x2F;O密集型   2 * N</li>
+</ul>
+<p>N为CPU核心数</p>
+<h4 id="动态修改线程池的参数"><a href="#动态修改线程池的参数" class="headerlink" title="动态修改线程池的参数"></a>动态修改线程池的参数</h4><p>主要就是线程池的前三个参数，为了修改队列的长度，美团实现了一个非final修饰的LinkedBlockQueue的队列。</p>
+<h4 id="现成的线程池框架"><a href="#现成的线程池框架" class="headerlink" title="现成的线程池框架"></a>现成的线程池框架</h4><p>Hippo4j     这个是12306的作者实现的</p>
+<h4 id="根据任务优先级执行"><a href="#根据任务优先级执行" class="headerlink" title="根据任务优先级执行"></a>根据任务优先级执行</h4><p>任务队列使用PriorityBlockingQueue，是线程安全的PriorityQueue。</p>
+<p>PriorityBlockingQueue也是无界的，可能会造成OOM问题；由于是优先队列，因此低优先级的任务会导致饥饿问题，一直得不到执行；由于要不停的对队列中的任务进行优先级排序并且要保证线程安全，会降低性能。</p>
+<h4 id="关闭线程池"><a href="#关闭线程池" class="headerlink" title="关闭线程池"></a>关闭线程池</h4><ul>
+<li>shutdown：线程池状态变为SHUTDOWN，线程池不再接受新任务，但是会执行完队列中的任务</li>
+<li>shutdownNow：线程池状态变为STOP，线程池会停止所有正在执行的任务，并且取消所有已提交但未执行的任务</li>
+</ul>
+<h4 id="为不同业务设计不同的线程池"><a href="#为不同业务设计不同的线程池" class="headerlink" title="为不同业务设计不同的线程池"></a>为不同业务设计不同的线程池</h4><p>一个是对不同的业务，核心线程数、最大线程数和阻塞队列的大小都要与之匹配；二是如果两个业务之间有耦合关系，若其中一个业务占用了线程池中的所有线程，会导致死锁。</p>
+<h2 id="JMM-Java内存模型"><a href="#JMM-Java内存模型" class="headerlink" title="JMM    Java内存模型"></a>JMM    Java内存模型</h2><h3 id="CPU缓存和内存缓存"><a href="#CPU缓存和内存缓存" class="headerlink" title="CPU缓存和内存缓存"></a>CPU缓存和内存缓存</h3><ul>
+<li>CPU缓存解决了CPU和内存速度不匹配的问题</li>
+<li>内存缓存解决了内存和外存速度不匹配的问题</li>
+</ul>
+<p>CPU在实际执行中，会将一份数据写入到CPU缓存中，当运算完成后，再写入到主存中，但是这样就有可能出现<strong>内存缓存不一致</strong>的问题，若多个线程同时对一个变量进行更新，则CPU缓存中的变量更新了而内存缓存中的变量没有更新。因此要通过<strong>内存模型</strong>解决这个问题。</p>
+<h3 id="Java-Memory-Model"><a href="#Java-Memory-Model" class="headerlink" title="Java Memory Model"></a>Java Memory Model</h3><p>为不同操作系统设计不同的JMM，类似于JVM，保证可移植性。</p>
+<h4 id="工作方式"><a href="#工作方式" class="headerlink" title="工作方式"></a>工作方式</h4><p>类似于CPU缓存和内存缓存，<strong>线程的共享变量必须存储在主内存中，每个线程都有一个私有的本地内存，线程对共享变量的修改都是在本地内存中进行，并同步到主内存中</strong>，Java设置了synchronized、volatile等关键字（JVM优化）和Lock接口（JDK实现）来实现对共享变量的安全访问。</p>
+<h4 id="JMM和Java内存区域"><a href="#JMM和Java内存区域" class="headerlink" title="JMM和Java内存区域"></a>JMM和Java内存区域</h4><p>JMM定义了Java程序中多线程并发访问共享内存的规则和保证，Java内存区域是JVM在运行时的内存空间。</p>
+<h4 id="happens-before"><a href="#happens-before" class="headerlink" title="happens-before"></a>happens-before</h4><p>如果一个操作happens-before另一个操作，那么第一个操作的执行结果对第二个操作可见。</p>
+<h4 id="并发编程的重要特性"><a href="#并发编程的重要特性" class="headerlink" title="并发编程的重要特性"></a>并发编程的重要特性</h4><ul>
+<li>原子性</li>
+<li>可见性</li>
+<li>有序性</li>
+</ul>
+<h3 id="Atomic原子类"><a href="#Atomic原子类" class="headerlink" title="Atomic原子类"></a>Atomic原子类</h3><p>原子类就是具有原子性特征的类</p>
+<p>对于基本数据类型原子类，不需要给其加锁也可以实现线程安全。</p>
+<h2 id="I-O-1"><a href="#I-O-1" class="headerlink" title="I&#x2F;O"></a>I&#x2F;O</h2><h3 id="I-O设计模式"><a href="#I-O设计模式" class="headerlink" title="I&#x2F;O设计模式"></a>I&#x2F;O设计模式</h3><h4 id="装饰器模式"><a href="#装饰器模式" class="headerlink" title="装饰器模式"></a>装饰器模式</h4><p>在不改变原有对象的情况下拓展其功能</p>
+<p>比如FilterInputStream增强InputStream的功能。</p>
+<h4 id="适配者模式"><a href="#适配者模式" class="headerlink" title="适配者模式"></a>适配者模式</h4><p>让接口不兼容而不能交互的类可以一起工作，如InputStreamReader实现字节流到字符流的转换。</p>
+<h4 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h4><p>用来创建对象</p>
+<h4 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h4><p>用于监听文件目录的变化，监听的三种事件——文件创建、文件删除、文件修改</p>
+<h3 id="I-O模型"><a href="#I-O模型" class="headerlink" title="I&#x2F;O模型"></a>I&#x2F;O模型</h3><h4 id="BIO"><a href="#BIO" class="headerlink" title="BIO"></a>BIO</h4><p>同步阻塞IO模型，应用程序发起read调用后，会一直阻塞直到内核把数据拷贝到用户空间</p>
+<h4 id="NIO"><a href="#NIO" class="headerlink" title="NIO"></a>NIO</h4><p>同步非阻塞IO模型，应该程序会一直发起read调用（轮询）</p>
+<p>多路复用模型，线程先发起select调用，询问内核数据是否准备就绪，若就绪了，再发起read调用。</p>
+<h4 id="AIO"><a href="#AIO" class="headerlink" title="AIO"></a>AIO</h4><p>异步IO模型</p>
+<h2 id="JVM-1"><a href="#JVM-1" class="headerlink" title="JVM"></a>JVM</h2><h3 id="Java内存区域"><a href="#Java内存区域" class="headerlink" title="Java内存区域"></a>Java内存区域</h3><ul>
+<li>线程共享：堆、本地内存</li>
+<li>线程私有：程序计数器、虚拟机栈、本地方法栈</li>
+</ul>
+<p><img src="https://oss.javaguide.cn/github/javaguide/java/jvm/java-runtime-data-areas-jdk1.8.png" alt="Java 运行时数据区域（JDK1.8 ）"></p>
+<h4 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h4><p>Java几乎所有的对象实例都是存入堆中。</p>
+<p>堆是GC管理的主要区域，因此也称为GC堆，为了更好地回收内存，将堆内存分为了多个生代——新生代、老生代、永久代，永久代在本地内存的元空间中。</p>
+<p>新生代区分为一个eden区和两个survivor区。</p>
+<h3 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h3><h4 id="内存分配和回收规则"><a href="#内存分配和回收规则" class="headerlink" title="内存分配和回收规则"></a>内存分配和回收规则</h4><p>大多数情况下，对象在新生代eden区中分配，若新生代eden区中的内存不够分配时，则虚拟机会发起一次Minor GC新生代垃圾收集，若对象熬过一次Minor GC，且能被survivor容纳，则移动到survivor区，每在survivor区生存过一轮Minor GC，则年龄增加一岁，当15岁时，会进入老年代中。</p>
+<p>大对象（需要大量连续内存空间的对象）直接进入老年代中，减少新生代的垃圾回收频率和成本。</p>
+<h5 id="空间分配担保"><a href="#空间分配担保" class="headerlink" title="空间分配担保"></a>空间分配担保</h5><p>在每次进行Minor GC之前，都会检查老年代最大可用的连续空间是否大于新生代所有对象总空间。</p>
+<h5 id="为什么新生代需要有两个survivor区"><a href="#为什么新生代需要有两个survivor区" class="headerlink" title="为什么新生代需要有两个survivor区"></a>为什么新生代需要有两个survivor区</h5><p>如果只有一个survivor区的话，由于survivor区中也有死亡的对象，这样survivor区就出现了内存碎片，然而survivor区还有很多对象年龄还没有到，不能清理survivor区中的对象到老年代中。</p>
+<p>有两个survivor区的话，相当于标记-复制算法，当Eden区满了之后会触发一次minor gc，将Eden区和s0区中存活的对象都写入s1区中，为了避免不断地在两个s区之间复制对象，此时将空的s0区作为原来的s1区使用。</p>
+<h4 id="死亡对象判断方法"><a href="#死亡对象判断方法" class="headerlink" title="死亡对象判断方法"></a>死亡对象判断方法</h4><ul>
+<li>引用计数法：计算每个对象的被引用次数，若为0，则需要回收。             <strong>可能遇到循环引用的问题</strong></li>
+<li>可达性分析：设置一个<strong>GC Roots</strong>对象作为起点，从这个起点往下搜索，若不可达某个对象，则这个对象需要被回收。</li>
+</ul>
+<h5 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h5><ul>
+<li>强引用</li>
+<li>软引用：内存空间足够，不会回收，不够则会回收</li>
+<li>弱引用：无论内存空间是否足够都会回收</li>
+</ul>
+<h4 id="垃圾回收算法"><a href="#垃圾回收算法" class="headerlink" title="垃圾回收算法"></a>垃圾回收算法</h4><h5 id="标记-清除"><a href="#标记-清除" class="headerlink" title="标记-清除"></a>标记-清除</h5><p>标记出所有不需要回收的对象，标记完成后同一回收掉所有没有被标记的对象。</p>
+<p>标记和清除的效率都不高，而且清除后会产生大量不连续的内存。</p>
+<h5 id="复制"><a href="#复制" class="headerlink" title="复制"></a>复制</h5><p>将内存分为大小相同的两块，每次使用其中的一块，当一块中的内存使用完后，就将还存活的内存复制到另一块中去，然后将使用的空间一次清理掉。</p>
+<h5 id="标记-整理"><a href="#标记-整理" class="headerlink" title="标记-整理"></a>标记-整理</h5><p>对于被标记的对象，让其向一端移动，然后直接清理掉端边界以外的内存。</p>
+<p><strong>为什么堆要分为新生代和老年代？</strong>  方便采用不同的垃圾回收算法来处理对象。</p>
+<p>对于新生代，每次收集都会有大量对象死去，只需要将存活的对象复制到另一块中，采用复制算法；对于老年代，没有额外的空间进行分配担保，则采用标记-清除和标记-整理算法。</p>
+<h4 id="垃圾回收器"><a href="#垃圾回收器" class="headerlink" title="垃圾回收器"></a>垃圾回收器</h4><h5 id="serial"><a href="#serial" class="headerlink" title="serial"></a>serial</h5><p>单线程垃圾收集器，工作时会阻塞所有线程</p>
+<p>新生代标记-复制，老年代标记-清除</p>
+<h5 id="ParNew"><a href="#ParNew" class="headerlink" title="ParNew"></a>ParNew</h5><p>serial的多线程版本</p>
+<h5 id="parallel-scavenge"><a href="#parallel-scavenge" class="headerlink" title="parallel scavenge"></a>parallel scavenge</h5><p>侧重于提高吞吐量，减少垃圾收集时的停顿时间</p>
+<h5 id="CMS"><a href="#CMS" class="headerlink" title="CMS"></a>CMS</h5><p>concurrent mark sweep并发标记清除</p>
+<p>侧重于用户线程的停顿时间，来提高用户体验。</p>
+<p>一款并发收集器，实现了让垃圾收集线程和用户线程同时工作。</p>
+<p>工作流程：</p>
+<ul>
+<li>初始标记：暂停所有线程，记录下与root相连的对象</li>
+<li>并发标记：同时开启GC和用户线程，通过可达性分析找到可达的对象</li>
+<li>重新标记：由于用户线程会不断更新引用域，因此并发标记做不到实时性，对用户线程更新产生变动的那部分对象的标记记录进行修正</li>
+<li>并发清除：开启用户线程，同时GC线程开始清除未标记的对象</li>
+</ul>
+<h5 id="G1"><a href="#G1" class="headerlink" title="G1"></a>G1</h5><p>JDK9~21</p>
+<ul>
+<li>并行与并发：并发阶段，G1和应用程序线程并发执行，减少停顿时间；部分收集阶段，G1使用多个线程并行收集垃圾</li>
+<li>内存整理：尽量避免产生内存碎片，通过空闲区域的合并和整理减少内存碎片化的问题。</li>
+<li>自适应的停顿时间控制：根据用户设定的停顿时间自适应调整垃圾收集策略</li>
+</ul>
+<h3 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h3><p><img src="https://oss.javaguide.cn/github/javaguide/java/jvm/class-loading-procedure.png" alt="类加载过程"></p>
+<p>加载Java的字节码（.class文件）到JVM中（在内存中生成一个代表该类的Class对象）</p>
+<p>JVM启动的时候，并不会一次性加载所有的类，而是根据需要动态加载——减少内存负荷</p>
+<h4 id="类加载器类型"><a href="#类加载器类型" class="headerlink" title="类加载器类型"></a>类加载器类型</h4><ul>
+<li>启动类加载器</li>
+<li>扩展类加载器</li>
+<li>应用程序类加载器</li>
+<li>自定义类加载器</li>
+</ul>
+<h4 id="双亲委派模型"><a href="#双亲委派模型" class="headerlink" title="双亲委派模型"></a>双亲委派模型</h4><p>加载一个类由哪个类加载器加载？——引出双亲委派模型</p>
+<p>类加载器实例在亲自查找类和资源之前，会将这个任务委托给其父类加载器。（启动类加载器的父类加载器还是其本身。）</p>
+<p><strong>类加载器之间的关系不是以继承的关系实现，而是使用组合关系（在一个类中创建其他类的对象）</strong></p>
+<p>类加载器在类加载时，会委派给父类加载器去完成，这样一层一层的往上委派，最终都会传送到顶层的启动类加载器。若往上的委派中父类加载器反馈自己无法完成加载请求，子加载器才会尝试自己加载。</p>
+<h2 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h2><h3 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h3><h4 id="spring中的单例bean是线程安全的吗？"><a href="#spring中的单例bean是线程安全的吗？" class="headerlink" title="spring中的单例bean是线程安全的吗？"></a>spring中的单例bean是线程安全的吗？</h4><p>spring中的bean默认是单例模式，可以修改为多例模式。</p>
+<p><strong>spring中的单例bean不是线程安全的，</strong>一般情况下spring的bean都是注入无状态的对象，没有线程安全问题；但是如果在bean中定义了可修改的变量，线程就不安全了，要靠多例模式或者加锁来实现线程安全。</p>
+<p>线程不安全的例子：项目中设置一个计数器服务，创建一个bean来记录。</p>
+<h4 id="AOP的应用"><a href="#AOP的应用" class="headerlink" title="AOP的应用"></a>AOP的应用</h4><p>面向切面编程，核心是代理模式，在原有的功能上进行增强。</p>
+<ul>
+<li><strong>记录操作日志</strong>   通过环绕通知记录业务的日志，减少与业务类代码的耦合</li>
+<li><strong>Spring中内置的事务处理</strong>     <strong>声明式事务管理</strong>    通过环绕通知捕捉异常实现事务的执行或者回滚</li>
+</ul>
+<h4 id="spring事务失效的场景"><a href="#spring事务失效的场景" class="headerlink" title="spring事务失效的场景"></a>spring事务失效的场景</h4><ul>
+<li><strong>异常捕获处理</strong>    虽然AOP实现的事务可以实现异常的捕获和回滚，但是如果在业务代码中通过catch捕获异常了，则异常以下的代码不会被执行，这样不满足原子性。解决方法：在catch中抛出异常</li>
+<li><strong>抛出检查异常</strong>   解决方法：在@Transactional注解中配置rollbackFor属性，设置为所有异常</li>
+<li><strong>非public方法</strong>   创建代理、添加事务通知的方法必须是public的。</li>
+</ul>
+<h4 id="bean的生命周期"><a href="#bean的生命周期" class="headerlink" title="bean的生命周期"></a>bean的生命周期</h4><p><strong>通过BeanDefinition获取bean的定义信息</strong></p>
+<p>bean的创建分为两步：bean对象的创建和bean对象方法的创建（初始化赋值）</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20240325145435343.png" alt="image-20240325145435343"></p>
+<p>构造函数就是对象的创建过程，后续都是对象方法的创建，其中依赖注入是注入对象以及成员变量的值。</p>
+<h4 id="spring如何解决循环依赖问题"><a href="#spring如何解决循环依赖问题" class="headerlink" title="spring如何解决循环依赖问题"></a>spring如何解决循环依赖问题</h4><p>Spring通过使用三级缓存来解决循环依赖问题。<strong>bean的创建分为两步：对象的实例化和对象属性的实例化</strong>  未对象属性实例化的对象称为半成品对象</p>
+<p>一级缓存存储已完全初始化的对象，二级缓存存储半成品对象，三级缓存只是对象的创建委托。</p>
+<p>spring中的循环依赖对象的创建过程：</p>
+<ol>
+<li>A创建过程中依赖B，则A进入三级缓存中，再去实例化B</li>
+<li>B创建过程中依赖A，则查找缓存中是否有A，发现三级缓存中有A，则将A放入二级缓存中，并删除三级缓存中的A。</li>
+<li>B创建完成，将B放入一级缓存中，此时A还是半成品对象，然后继续创建A，A依赖B，这时去查缓存，发现B在一级缓存中，直接取B完成创建，最后完成创建A，将A放入一级缓存中。</li>
+</ol>
+<h3 id="SpringMVC"><a href="#SpringMVC" class="headerlink" title="SpringMVC"></a>SpringMVC</h3><h4 id="执行流程——前后端分离"><a href="#执行流程——前后端分离" class="headerlink" title="执行流程——前后端分离"></a>执行流程——前后端分离</h4><ol>
+<li>用户发出请求到前端控制器</li>
+<li>前端控制器收到请求调用处理器映射器</li>
+<li>处理器映射器找到具体的处理器，生成处理器对象及处理器拦截器，再一起返回给前端控制器；</li>
+<li>前端控制器调用处理器适配器，处理器适配器经过适配调用具体的处理器</li>
+<li>在方法上添加了@ResponseBody，通过HttpMessageConverter来返回结果转换为JSON并响应。</li>
+</ol>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20240325153922367.png" alt="image-20240325153922367"></p>
+<h3 id="Springboot"><a href="#Springboot" class="headerlink" title="Springboot"></a>Springboot</h3><h4 id="springboot自动配置原理"><a href="#springboot自动配置原理" class="headerlink" title="springboot自动配置原理"></a>springboot自动配置原理</h4><ol>
+<li>springboot项目的入口类上有一个注解@SpringBootApplication，这个注解包含3个注解，分别为@SpringBootConfiguration、@EnableAutoConfiguation和@ComponentScan</li>
+<li><strong>@EnableAutoConfiguation</strong>实现自动化配置的核心注解，该注解通过@Import注解导入对应的配置选择器。所有的自动配置类都会在“META-INF&#x2F;spring.factories”文件中，位于对应的自动配置jar包中。</li>
+<li>@ConditionalOnClass注解会判断是否有对应的class文件，如果有则加载该类，将该类的bean放入spring容器中。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jiangduwang.github.io/2024/06/03/Java/" data-id="clwyjx9fb0000jkuld2b9606l" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/06/03/%E6%95%B0%E6%8D%AE%E5%BA%93/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/06/03/sql/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">June 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">April 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/06/03/%E7%BD%91%E7%BB%9C/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/06/03/%E6%95%B0%E6%8D%AE%E5%BA%93/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/06/03/Java/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/06/03/sql/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/06/03/kafka/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 jiangduwang<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
