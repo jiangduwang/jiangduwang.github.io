@@ -69,6 +69,1018 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-秋招八股" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/09/09/%E7%A7%8B%E6%8B%9B%E5%85%AB%E8%82%A1/" class="article-date">
+  <time class="dt-published" datetime="2024-09-09T02:04:19.818Z" itemprop="datePublished">2024-09-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/09/09/%E7%A7%8B%E6%8B%9B%E5%85%AB%E8%82%A1/">秋招面试八股</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="自我介绍"><a href="#自我介绍" class="headerlink" title="自我介绍"></a>自我介绍</h2><p>面试官好，我叫顾涛，目前是南京理工大学的硕士研究生。在校期间，我参与了多个研究所的实习项目，主要是巡逻无人车车内软件的开发；今年在阿里大文娱集团-阿里影业作为测试开发工程师实习了两个半月，主要是负责电影B端票务域和交易域项目测试需求和接口自动化代码工程的维护。实习期间承接了两个测试需求，主要是测试了POS端影票和卖品混合下单的交易重构接口，通过手工测试和自动化测试用例代码的补充对需求进行了全面验证和自动化巡检；其次，结合覆盖率报告，通过阿里的天启平台收集预发和线上流量，收藏用例，将票务域应用的热度覆盖率从67%提升到80%，全量覆盖率从32%提升到54%；最后完成了一个完整的接口自动化工程访问多套预发环境的专项开发，优化了不规范的测试用例代码，使其统一通过一个二方库接口实现。</p>
+<p>面试官您好，我叫顾涛，是南京理工大学的硕士研究生。在校期间，我参与了多个研究所的实习项目，主要负责巡逻无人车车载软件的开发。今年我在阿里巴巴大文娱集团-阿里影业实习了两个半月，担任测试开发工程师，负责电影B端票务域和交易域项目的测试需求及接口自动化工程的维护。</p>
+<p>在实习期间，我主要承接了两个测试需求，完成了POS端影票和卖品混合下单的交易重构接口的测试。通过手工测试和自动化测试用例的补充，确保了需求的全面验证和自动化巡检。此外，借助阿里的天启平台收集预发和线上流量，结合覆盖率报告，优化了票务域应用的测试覆盖率，将热度覆盖率从67%提升到80%，全量覆盖率从32%提升到54%。同时，我还完成了一个完整的接口自动化工程的专项开发，支持多套预发环境的接口访问，并通过二方库接口优化了测试用例代码的规范化。</p>
+<h3 id="java基础"><a href="#java基础" class="headerlink" title="java基础"></a>java基础</h3><h4 id="HashMap-与-ConcurrentHashMap-的实现原理是怎样的？ConcurrentHashMap-是如何保证线程安全的？这两个HashMap1-7和1-8的区别是什么？"><a href="#HashMap-与-ConcurrentHashMap-的实现原理是怎样的？ConcurrentHashMap-是如何保证线程安全的？这两个HashMap1-7和1-8的区别是什么？" class="headerlink" title="HashMap 与 ConcurrentHashMap 的实现原理是怎样的？ConcurrentHashMap 是如何保证线程安全的？这两个HashMap1.7和1.8的区别是什么？"></a>HashMap 与 ConcurrentHashMap 的实现原理是怎样的？ConcurrentHashMap 是如何保证线程安全的？这两个HashMap1.7和1.8的区别是什么？</h4><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>hashmap1.8之前数组和链表结合在一起使用（拉链法），哈希冲突将元素加入到链表中，1.7采用的是头插法。1.8及以后，默认长度为16，当负载因子大于0.75时会扩充数组（每次扩容一倍，移位操作，效率比较高），链表长度大于8，如果数组长度不大于64会扩充数组，否则会转化为红黑树，1.8采用的是尾插法。<strong>每次扩充都会rehash</strong>。</li>
+<li>concurrenthashmap在1.7由多个segment组成，一个segment相当于一个hashmap，每一个segment用一个锁，segment最大长度16；1.8之后减少了悲观锁的使用，会先尝试自旋+CAS方式加入元素，尝试多次不成功才通过synchronized锁。底层也是由数组+链表变为数组+红黑树。</li>
+</ul>
+</details>
+
+<h4 id="为什么1-8的哈希表加入元素改用尾插法"><a href="#为什么1-8的哈希表加入元素改用尾插法" class="headerlink" title="为什么1.8的哈希表加入元素改用尾插法"></a>为什么1.8的哈希表加入元素改用尾插法</h4><details>
+<summary>展开查看</summary>
+
+<p>1.8之前，hashmap采用的是头插法，是考虑到新插入的数据可能作为热点数据使用，放在头部可以减少查找时间；</p>
+<p>1.8之后采用的是尾插法，为的是防止在多线程环境下出现<strong>环化</strong>。</p>
+<p>多线程下头插法出现环化的问题：假设两个线程分别都插入一个数据A和B，前一个线程在准备插入时时间片用完，第二个线程进行扩容，因为是头插法，因此数据顺序是BA，但此时第一个线程的cur指针指向A，next指针指向B，它会先移动A，然后cur指针移向B，再插入B，由于第二个线程的next的指针的下一个next指针还是指向A，第一个线程还会再插入一次A，这样ABA，出现环化。</p>
+</details>
+
+<h4 id="简述-ArrayList-与-LinkedList-的底层实现以及常见操作的时间复杂度"><a href="#简述-ArrayList-与-LinkedList-的底层实现以及常见操作的时间复杂度" class="headerlink" title="简述 ArrayList 与 LinkedList 的底层实现以及常见操作的时间复杂度"></a>简述 ArrayList 与 LinkedList 的底层实现以及常见操作的时间复杂度</h4><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>arraylist底层实现就是一个初始容量10构造的空数组，尾部插入和删除时间复杂度O(1)，其余操作都是O(n)</li>
+<li>linkedlist底层实现是一个双向链表，首尾插入和删除时间复杂度O(1)，其余操作都是O(n)</li>
+</ul>
+</details>
+
+<h4 id="hashcode和equals方法的联系"><a href="#hashcode和equals方法的联系" class="headerlink" title="hashcode和equals方法的联系"></a>hashcode和equals方法的联系</h4><details>
+<summary>展开查看</summary>
+
+<p>当两个对象的哈希码相同且equals为true时，表明两个对象相等。</p>
+<p>重写equals方法必须要重写hashcode方法，避免hashcode不相等而equals相等的情况。</p>
+</details>
+
+<h4 id="和equals有什么区别"><a href="#和equals有什么区别" class="headerlink" title="&#x3D;&#x3D;和equals有什么区别"></a>&#x3D;&#x3D;和equals有什么区别</h4><details>
+<summary>展开查看</summary>
+
+<p>&#x3D;&#x3D;对比非引用变量直接比值，引用变量比较地址值</p>
+<p>原object的equals对比两个对象的地址值，经过重写后基本都对比字面值，比如String</p>
+</details>
+
+<h4 id="浅拷贝、深拷贝、引用拷贝"><a href="#浅拷贝、深拷贝、引用拷贝" class="headerlink" title="浅拷贝、深拷贝、引用拷贝"></a>浅拷贝、深拷贝、引用拷贝</h4><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>浅拷贝会在堆上创建一个新的对象（区别于引用拷贝的一点），不过，如果原对象内部的属性是引用类型的话，浅拷贝会直接复制内部对象的引用地址，也就是说拷贝对象和原对象共用同一个内部对象。</li>
+<li>深拷贝完全复制整个对象，包括这个对象包含的内部对象</li>
+<li>引用拷贝是两个不同的引用指向同一个对象</li>
+</ul>
+</details>
+
+<h4 id="什么是重写和重载"><a href="#什么是重写和重载" class="headerlink" title="什么是重写和重载"></a>什么是重写和重载</h4><details>
+<summary>展开查看</summary>
+
+<p>重载是指方法名相同，返回值、参数列表都可以不相同，比如构造函数；</p>
+<p>重写是子类对父类已有的方法进行覆盖，参数列表必须相同。</p>
+</details>
+
+<h4 id="java中final的作用"><a href="#java中final的作用" class="headerlink" title="java中final的作用"></a>java中final的作用</h4><details>
+<summary>展开查看</summary>
+
+<p>对于变量，表明该变量的值不能被修改；对于方法，表示子类不能重写final修饰的父类的方法；对于类，则该类不能被继承。</p>
+</details>
+
+<h4 id="hashset实现原理"><a href="#hashset实现原理" class="headerlink" title="hashset实现原理"></a>hashset实现原理</h4><details>
+<summary>展开查看</summary>
+
+<p>底层是hashmap，调用add实际上就是调用hashmap的put方法</p>
+</details>
+
+<h4 id="BIO-NIO-AIO"><a href="#BIO-NIO-AIO" class="headerlink" title="BIO  NIO AIO"></a>BIO  NIO AIO</h4><details>
+<summary>展开查看</summary>
+
+<p>BIO<strong>阻塞同步IO模型</strong></p>
+<p>NIO分为两种，一种会一直<strong>轮询</strong>直到调用，一种是<strong>多路复用</strong>，先发起select调用，询问是否准备就绪了，准备就绪了就会调用</p>
+<p>AIO <strong>异步IO模型</strong></p>
+</details>
+
+<h4 id="java出现OOM（Out-of-Memory）的情况"><a href="#java出现OOM（Out-of-Memory）的情况" class="headerlink" title="java出现OOM（Out of Memory）的情况"></a>java出现OOM（Out of Memory）的情况</h4><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>创建了太多对象</li>
+<li>创建了太大的对象，比如数组开的太大</li>
+<li>创建了大量的字符串常量</li>
+</ul>
+</details>
+
+<h4 id="java设计模式"><a href="#java设计模式" class="headerlink" title="java设计模式"></a>java设计模式</h4><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>单例模式</li>
+<li>工厂模式</li>
+<li>适配器模式</li>
+<li>代理模式</li>
+</ul>
+</details>
+
+<h4 id="接口和抽象类的区别"><a href="#接口和抽象类的区别" class="headerlink" title="接口和抽象类的区别"></a>接口和抽象类的区别</h4><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>接口更侧重于定义规范和契约,而抽象类更侧重于代码复用和实现共享功能。</li>
+<li>接口类中不能包含具体的方法实现，抽象类中可以包含具体的方法实现；</li>
+<li>只能继承一个抽象类，可以实现多个接口</li>
+</ul>
+</details>
+
+<h4 id="java对象的组成部分"><a href="#java对象的组成部分" class="headerlink" title="java对象的组成部分"></a>java对象的组成部分</h4><details>
+<summary>展开查看</summary>
+
+<p>对象都由对象头、对象的实例数据区和对齐填充字节这三部分组成。</p>
+<p>对象头包含对象和锁的信息、指向类的指针和数组长度；</p>
+<p>对齐填充字节：java对象所占空间应该是8bit倍数，将对象大小补充为8bit的倍数。</p>
+</details>
+
+<h4 id="java从源代码到可执行程序"><a href="#java从源代码到可执行程序" class="headerlink" title="java从源代码到可执行程序"></a>java从源代码到可执行程序</h4><details>
+<summary>展开查看</summary>
+
+<p>源代码.java文件，经过javac编译器生成字节码.class文件，再经过JVM中的解释器生成机器码。（先编译，再解释）</p>
+</details>
+
+<h4 id="hashtable和hashmap的区别"><a href="#hashtable和hashmap的区别" class="headerlink" title="hashtable和hashmap的区别"></a>hashtable和hashmap的区别</h4><details>
+<summary>展开查看</summary>
+
+<p>hashtable是线程安全的，所有的方法都是同步的（用synchronized修饰），相比于hashmap，hashtable的键值不可以为null。</p>
+</details>
+
+<h3 id="java的内存区域与垃圾回收机制"><a href="#java的内存区域与垃圾回收机制" class="headerlink" title="java的内存区域与垃圾回收机制"></a>java的内存区域与垃圾回收机制</h3><h4 id="Java-中垃圾回收机制中如何判断对象需要回收？常见的-GC-回收算法有哪些？"><a href="#Java-中垃圾回收机制中如何判断对象需要回收？常见的-GC-回收算法有哪些？" class="headerlink" title="Java 中垃圾回收机制中如何判断对象需要回收？常见的 GC 回收算法有哪些？"></a>Java 中垃圾回收机制中如何判断对象需要回收？常见的 GC 回收算法有哪些？</h4><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>有两种方法：一种是<strong>引用计数法</strong>，计算每个对象的被引用次数，若为0，则需要回收，但有可能需要循环引用的情况；还有一种<strong>可达性分析</strong>，从gc根节点向下搜索，若不可达，则回收这个对象。</li>
+<li>标记-清除、复制、标记-整理，新生代一般使用复制算法（应用：两个survivor区），老生代标记-清除</li>
+</ul>
+</details>
+
+<h4 id="JVM内存分类"><a href="#JVM内存分类" class="headerlink" title="JVM内存分类"></a>JVM内存分类</h4><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>堆内存：几乎所有对象实例和<strong>字符串常量池</strong>都会放在堆上，同时堆也是gc管理的主要区域，也叫gc堆</li>
+<li>栈内存：主要存临时变量和对象引用</li>
+<li>本地内存：包含元空间（永久代 ），元空间就是方法区的实现，存放了<strong>常量池</strong>。</li>
+</ul>
+</details>
+
+<h4 id="Java-类的加载流程是怎样的？什么是双亲委派机制？"><a href="#Java-类的加载流程是怎样的？什么是双亲委派机制？" class="headerlink" title="Java 类的加载流程是怎样的？什么是双亲委派机制？"></a>Java 类的加载流程是怎样的？什么是双亲委派机制？</h4><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>加载——链接（验证——准备——解析）——初始化</li>
+<li>类加载器实例在亲自查找类和资源之前，会将这个任务委托给父类加载器。</li>
+</ul>
+<p><strong>避免类重复加载：</strong> 双亲委派模式可以避免同一个类被重复加载到 JVM 中。当父加载器已经加载了一个类时，子加载器不会再次加载该类，而是直接使用父加载器加载的类。这样可以节省内存空间，并提高类加载的效率。</p>
+<p>类加载器：</p>
+<ul>
+<li>启动类加载器：所有类加载器的父加载器，加载java的核心标准库</li>
+<li>扩展类加载器：加载java的扩展类库</li>
+<li>系统类加载器：加载classpath下的类和jar包</li>
+<li>自定义加载器</li>
+</ul>
+</details>
+
+<h4 id="简述-CMS-与-G1-机制的区别"><a href="#简述-CMS-与-G1-机制的区别" class="headerlink" title="简述 CMS 与 G1 机制的区别"></a>简述 CMS 与 G1 机制的区别</h4><details>
+<summary>展开查看</summary>
+
+<p>cms一款并发垃圾收集器，实现了让<strong>垃圾收集线程</strong>和<strong>用户线程</strong>同时工作。</p>
+<ul>
+<li>CMS主要设计目的是<strong>减少垃圾回收的停顿时间</strong>，G1是提供<strong>可预测的停顿时间</strong>，同时兼顾吞吐量和停顿时间。</li>
+<li>CMS通过并发标记和并发清除来收集垃圾对象，G1通过<strong>划分内存区域</strong>和<strong>优先级排序</strong>，再通过并发标记来实现目标。</li>
+</ul>
+</details>
+
+<h4 id="垃圾回收分为哪几个区，JVM是如何进行垃圾回收的"><a href="#垃圾回收分为哪几个区，JVM是如何进行垃圾回收的" class="headerlink" title="垃圾回收分为哪几个区，JVM是如何进行垃圾回收的"></a>垃圾回收分为哪几个区，JVM是如何进行垃圾回收的</h4><details>
+<summary>展开查看</summary>
+
+<p>年轻代：eden区，两个survivor区</p>
+<p>老年代，永生代（元空间，方法区的实现）</p>
+<p>当eden区满了之后，会触发minor GC，将eden区和一个s区存活的对象复制到另一个空的s区中，对象在多次minor GC下存活，年龄到一定阈值，晋升到老年代；</p>
+<p>老年代满了或者系统调用System.gc()，触发major gc放入永久代</p>
+</details>
+
+<h4 id="新生代设计两个survivor区的目的是什么"><a href="#新生代设计两个survivor区的目的是什么" class="headerlink" title="新生代设计两个survivor区的目的是什么"></a>新生代设计两个survivor区的目的是什么</h4><details>
+<summary>展开查看</summary>
+
+<p>如果只有一个survivor区的话，由于survivor区中也有死亡的对象，这样survivor区就出现了内存碎片，然而survivor区还有很多对象年龄还没有到，不能清理survivor区中的对象到老年代中。</p>
+<p>有两个survivor区的话，相当于标记-复制算法，当Eden区满了之后会触发一次minor gc，将Eden区和s0区中存活的对象都写入s1区中，为了避免不断地在两个s区之间复制对象，此时将空的s0区作为原来的s1区使用。</p>
+<p><strong>有效避免内存碎片化</strong></p>
+</details>
+
+<h3 id="java并发编程"><a href="#java并发编程" class="headerlink" title="java并发编程"></a>java并发编程</h3><h4 id="Synchronized-关键字底层是如何实现的？它与-Lock-相比优缺点分别是什么？"><a href="#Synchronized-关键字底层是如何实现的？它与-Lock-相比优缺点分别是什么？" class="headerlink" title="Synchronized 关键字底层是如何实现的？它与 Lock 相比优缺点分别是什么？"></a>Synchronized 关键字底层是如何实现的？它与 Lock 相比优缺点分别是什么？</h4><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>底层是通过同步代码块实现，1个monitorenter指令指向同步代码块的开始位置，两个monitorexit指向结束位置</li>
+<li>优点：使用简单；synchronized依赖于jvm，可以得到jvm层面的优化； 缺点：没有lock灵活，功能没有lock丰富。</li>
+</ul>
+</details>
+
+<h4 id="Java-的线程有哪些状态，转换关系是怎么样的？"><a href="#Java-的线程有哪些状态，转换关系是怎么样的？" class="headerlink" title="Java 的线程有哪些状态，转换关系是怎么样的？"></a>Java 的线程有哪些状态，转换关系是怎么样的？</h4><details>
+<summary>展开查看</summary>
+
+<p>新建、运行、等待、阻塞、终止。</p>
+<p>线程创建之后，调用start方法线程等待运行；调用wait方法，等待某些条件、资源的满足；<strong>悲观锁阻塞，等待锁释放</strong>；线程完成或异常终止。</p>
+</details>
+
+<h4 id="JMM-内存模型是怎样的？什么是指令序列重排序？"><a href="#JMM-内存模型是怎样的？什么是指令序列重排序？" class="headerlink" title="JMM 内存模型是怎样的？什么是指令序列重排序？"></a>JMM 内存模型是怎样的？什么是指令序列重排序？</h4><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>内存模型是Java中多线程并发访问共享内存的规则和保证，具体工作方式是线程的共享变量必须存储在主内存中，每个线程中都有一个私有的本地内存，线程对共享变量的修改都是现在私有本地内存中修改，再更新到主内存中。</li>
+<li>在不改变程序执行结果的前提下，JVM会重新调整指令的执行顺序以提升执行效率。</li>
+</ul>
+</details>
+
+<h4 id="volatile-关键字解决了什么问题，它的实现原理是什么？"><a href="#volatile-关键字解决了什么问题，它的实现原理是什么？" class="headerlink" title="volatile 关键字解决了什么问题，它的实现原理是什么？"></a>volatile 关键字解决了什么问题，它的实现原理是什么？</h4><details>
+<summary>展开查看</summary>
+
+<p>保证了变量的可见性，每次修改volatile修饰的变量都需要进入主存中读取；可以防止JVM指令重排序（通过内存屏障实现）。</p>
+</details>
+
+<h4 id="简述-CAS-原理，什么是-ABA-问题，怎么解决？-除了ABA问题，还有哪些问题？"><a href="#简述-CAS-原理，什么是-ABA-问题，怎么解决？-除了ABA问题，还有哪些问题？" class="headerlink" title="简述 CAS 原理，什么是 ABA 问题，怎么解决？ 除了ABA问题，还有哪些问题？"></a>简述 CAS 原理，什么是 ABA 问题，怎么解决？ 除了ABA问题，还有哪些问题？</h4><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>乐观锁compare and swap      当更新的值和预期值相等时，对数据进行更新</li>
+<li>aba问题是在比对更新值和预期值，中间经历了几次更新，但是最终的更新值还是等于预期值。   解决：CAS+版本号机制或时间戳</li>
+<li>循环时间长开销大  CAS通过自旋操作不断重试</li>
+<li>只能保证一个共享变量的原子操作   CAS只对一个共享变量有效。</li>
+</ul>
+</details>
+
+<h4 id="线程池是如何实现的？核心参数，工作流程，简述线程池的任务策略"><a href="#线程池是如何实现的？核心参数，工作流程，简述线程池的任务策略" class="headerlink" title="线程池是如何实现的？核心参数，工作流程，简述线程池的任务策略"></a>线程池是如何实现的？核心参数，工作流程，简述线程池的任务策略</h4><details>
+<summary>展开查看</summary>
+
+<p>核心参数：核心线程数、最大线程数、线程任务队列，临时线程存活时间</p>
+<ul>
+<li><p>通过ThreadPoolExecutor构造函数可以创建多种类型的线程池，包括固定线程线程池、单线程线程池、cache线程池等</p>
+</li>
+<li><p>任务策略即饱和策略，默认策略是抛出异常拒绝新来的任务；或者把任务退回给调用者线程，让调用者线程来执行这个任务；或者丢弃掉最早未处理的任务</p>
+</li>
+<li><p>线程数小于核心线程数：线程池创建一个新的工作线程执行任务</p>
+</li>
+<li><p>线程数大于等于核心线程数：任务进入到任务队列</p>
+</li>
+<li><p>任务队列已满：当前线程数小于最大线程数，会创建工作线程处理任务队列中的任务</p>
+</li>
+<li><p>任务队列已满且已达到最大线程数：启用拒绝策略。</p>
+</li>
+</ul>
+</details>
+
+<h4 id="ThreadLocal-实现原理是什么？父子线程的threadlocal能共享吗？"><a href="#ThreadLocal-实现原理是什么？父子线程的threadlocal能共享吗？" class="headerlink" title="ThreadLocal 实现原理是什么？父子线程的threadlocal能共享吗？"></a>ThreadLocal 实现原理是什么？父子线程的threadlocal能共享吗？</h4><details>
+<summary>展开查看</summary>
+
+<p>threadlocal会保存变量的本地副本，使其独属于这个线程。本质上是一个threadlocalmap，键为threadlocal对象（弱引用），值为副本的值（强引用），调用threadlocal的put和get方法本质上就是调用threadlocalmap的put和get方法</p>
+<p>异步场景下无法给子线程共享父线程中创建的线程副本数据；<br>JDK提供了<code>InheritableThreadLocal</code>类，可以让子线程共享父线程的数据。</p>
+</details>
+
+<h4 id="Java锁升级机制，自旋的定义"><a href="#Java锁升级机制，自旋的定义" class="headerlink" title="Java锁升级机制，自旋的定义"></a>Java锁升级机制，自旋的定义</h4><details>
+<summary>展开查看</summary>
+
+<p>锁升级是从偏向锁到轻量级锁，再到重量级锁的过程，由jvm运行时决定。</p>
+<p>偏向锁会偏向第一次被加锁的对象，轻量级锁指有另一个线程尝试获取锁，偏向锁会升级成轻量级锁，会通过自旋等待获取锁；当自旋等待获取不到锁，会升级到重量级锁，重量级锁就是排他锁。</p>
+<p>自旋：线程等待的方式，不会让线程进入阻塞状态，不断重试直至满足条件</p>
+</details>
+
+<h4 id="什么是公平锁？什么是非公平锁？"><a href="#什么是公平锁？什么是非公平锁？" class="headerlink" title="什么是公平锁？什么是非公平锁？"></a>什么是公平锁？什么是非公平锁？</h4><details>
+<summary>展开查看</summary>
+
+<p>公平锁表示获取锁的顺序按照请求的顺序来分配，FIFO</p>
+<p>非公平锁不一定按照请求的顺序。</p>
+<p>synchronized非公平锁，reentrantlock默认非公平锁，可以设置公平锁（基于JDK，通过构造函数设置）。</p>
+</details>
+
+<h4 id="可重入锁的实现原理"><a href="#可重入锁的实现原理" class="headerlink" title="可重入锁的实现原理"></a>可重入锁的实现原理</h4><details>
+<summary>展开查看</summary>
+
+<p>为每个锁维护一个<strong>拥有者线程标识</strong>和<strong>计数器</strong>，在加锁和解锁操作时对计数器进行递增和递减，并通过并发控制确保线程对锁状态的访问是安全的。</p>
+<p>如ReentrantLock，在内部维护了一个锁状态变量和一个等待队列，等待队列会阻塞等待获取锁的线程。在获取锁的时候，会判断当前锁状态变量是否为0，如果为0，则获取到锁，且锁状态变量+1，这时其他锁线程无法获取到锁，当获取锁的同一个线程再次获取锁时，则锁状态变量会再加一。当锁状态变量变为0才会真正释放锁。</p>
+</details>
+
+<h4 id="对字符串上锁"><a href="#对字符串上锁" class="headerlink" title="对字符串上锁"></a>对字符串上锁</h4><p>问：现在有两个字符串常量，值都是一样的，现在我对这两个常量都上锁，锁之间会互相影响吗？</p>
+<details>
+<summary>展开查看</summary>
+
+<p>答：两个字符串字面值相同，则它们引用的是相同的字符串对象（字符串常量池），进行锁操作的话会相互影响，多个线程会共享同一个锁，当一个线程在持有锁的时候，其他线程需要等待该锁释放才能获取到。</p>
+</details>
+
+
+<h3 id="spring"><a href="#spring" class="headerlink" title="spring"></a>spring</h3><h4 id="常见的面向对象设计的设计模式"><a href="#常见的面向对象设计的设计模式" class="headerlink" title="常见的面向对象设计的设计模式"></a>常见的面向对象设计的设计模式</h4><details>
+<summary>展开查看</summary>
+
+<p>工厂模式和单例模式，工厂模式通过封装对象的创建过程降低耦合度。单例模式适合只需要创建一次的对象，比如线程池，日志对象。</p>
+<p><strong>单例模式的实现</strong>   私有构造函数，通过volatile关键字定义单例，避免指令重排序，采用双重校验锁保证单例。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 懒汉式</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">singleton</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> singleton a;</span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">singleton</span><span class="params">()</span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> singleton <span class="title function_">getInstance</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(a==<span class="literal">null</span>)&#123;</span><br><span class="line">            a = <span class="keyword">new</span> <span class="title class_">singleton</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 饿汉式</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">singleton2</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> singleton2 a;</span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">singleton2</span><span class="params">()</span>&#123;&#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> singleton2 <span class="title function_">getInstance</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//双重锁</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton uniqueInstance;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">Singleton</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span>  <span class="keyword">static</span> Singleton <span class="title function_">getUniqueInstance</span><span class="params">()</span> &#123;</span><br><span class="line">       <span class="comment">//先判断对象是否已经实例过，没有实例化过才进入加锁代码</span></span><br><span class="line">        <span class="keyword">if</span> (uniqueInstance == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="comment">//注意这里是对类对象加锁，不是对单例对象加锁</span></span><br><span class="line">            <span class="keyword">synchronized</span> (Singleton.class) &#123;</span><br><span class="line">                <span class="keyword">if</span> (uniqueInstance == <span class="literal">null</span>) &#123;</span><br><span class="line">                    uniqueInstance = <span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> uniqueInstance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+</details>
+
+<h4 id="spring中的bean是线程安全的吗"><a href="#spring中的bean是线程安全的吗" class="headerlink" title="spring中的bean是线程安全的吗"></a>spring中的bean是线程安全的吗</h4><details>
+<summary>展开查看</summary>
+
+<p>spring中的bean默认是单例模式，可以修改为多例模式。</p>
+<p><strong>spring中的单例bean不是线程安全的，</strong>一般情况下spring的bean都是注入无状态的对象，没有线程安全问题；但是如果在bean中定义了可修改的变量，线程就不安全了，要靠多例模式或者加锁来实现线程安全。</p>
+<p>线程不安全的例子：项目中设置一个计数器服务，创建一个bean来记录。</p>
+</details>
+
+<h4 id="反射机制"><a href="#反射机制" class="headerlink" title="反射机制"></a>反射机制</h4><details>
+<summary>展开查看</summary>
+
+<p>在运行时可以分析类以及执行类中的方法，通过反射可以获取类中的所有属性和方法</p>
+</details>
+
+<h4 id="IOC和AOP"><a href="#IOC和AOP" class="headerlink" title="IOC和AOP"></a>IOC和AOP</h4><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>IOC控制反转，对象的创建和调用控制交给容器来实现，具体是依赖注入。通过<strong>工厂模式</strong>负责对象的创建和管理。</li>
+<li>AOP面向切面编程：代理模式（通过反射实现），通过代理对象实现对目标方法的增强。静态代理，定义一个真实类和一个代理类实现接口，将真实对象注入到代理类中；动态代理分为jdk动态代理和CGLIB动态代理，jdk动态代理只能代理实现了接口的类或直接代理接口，cglib可以代理未实现任何接口的类，它生成一个被代理类的子类来拦截被代理类的方法调用</li>
+</ul>
+<p><strong>AOP的应用</strong>  记录操作日志、Spring中内置的事务处理（<strong>声明式事务管理</strong>    通过环绕通知捕捉异常实现事务的执行或者回滚）</p>
+</details>
+
+<h4 id="bean的生命周期"><a href="#bean的生命周期" class="headerlink" title="bean的生命周期"></a>bean的生命周期</h4><details>
+<summary>展开查看</summary>
+
+<p>BeanDefinition（获取bean的定义信息）——&gt; 对象的创建（构造函数，创建空对象） ——&gt;对象方法的创建（依赖注入：注入属性和值）</p>
+</details>
+
+<h4 id="spring如何解决循环依赖的问题"><a href="#spring如何解决循环依赖的问题" class="headerlink" title="spring如何解决循环依赖的问题"></a>spring如何解决循环依赖的问题</h4><details>
+<summary>展开查看</summary>
+
+<p>Spring通过使用三级缓存来解决循环依赖问题。<strong>bean的创建分为两步：对象的实例化和对象属性的实例化</strong>  未对象属性实例化的对象称为半成品对象</p>
+<p>一级缓存存储已完全初始化的对象，二级缓存存储半成品对象，三级缓存只是对象的创建委托。</p>
+<p>spring中的循环依赖对象的创建过程：</p>
+<ol>
+<li>A创建过程中依赖B，则A进入三级缓存中，再去实例化B</li>
+<li>B创建过程中依赖A，则查找缓存中是否有A，发现三级缓存中有A，则将A放入二级缓存中，并删除三级缓存中的A。</li>
+<li>B创建完成，将B放入一级缓存中，此时A还是半成品对象，然后继续创建A，A依赖B，这时去查缓存，发现B在一级缓存中，直接取B完成创建，最后完成创建A，将A放入一级缓存中。</li>
+</ol>
+</details>
+
+<h4 id="springMVC的执行流程"><a href="#springMVC的执行流程" class="headerlink" title="springMVC的执行流程"></a>springMVC的执行流程</h4><details>
+<summary>展开查看</summary>
+
+<ol>
+<li>用户发出HTTP请求到嵌入式服务器（tomcat）,嵌入式服务器可以监听指定的端口（8080）</li>
+<li>嵌入式服务器会将请求交给spring的核心组件DispatcherServlet（前端控制器）</li>
+<li>前端控制器收到请求调用处理器映射器</li>
+<li>处理器映射器找到具体的处理器，生成处理器对象及处理器拦截器，再一起返回给前端控制器；</li>
+<li>前端控制器调用处理器适配器，处理器适配器经过适配调用具体的处理器</li>
+<li>在方法上添加了@ResponseBody，通过HttpMessageConverter来返回结果转换为JSON并响应。</li>
+<li>先响应到嵌入式服务器，再响应到客户端</li>
+</ol>
+</details>
+
+<h4 id="springboot自动配置原理"><a href="#springboot自动配置原理" class="headerlink" title="springboot自动配置原理"></a>springboot自动配置原理</h4><details>
+<summary>展开查看</summary>
+
+<ol>
+<li>springboot项目的入口类上有一个注解@SpringBootApplication，这个注解包含3个注解，分别为@SpringBootConfiguration、@EnableAutoConfiguation和@ComponentScan</li>
+<li><strong>@EnableAutoConfiguation</strong>实现自动化配置的核心注解，该注解通过@Import注解导入对应的配置选择器。所有的自动配置类都会在“META-INF&#x2F;spring.factories”文件中，位于对应的自动配置jar包中。</li>
+<li>@ConditionalOnClass注解会判断是否有对应的class文件，如果有则加载该类，将该类的bean放入spring容器中。</li>
+</ol>
+</details>
+
+<h4 id="bean初始化之前运行一段方法的做法"><a href="#bean初始化之前运行一段方法的做法" class="headerlink" title="bean初始化之前运行一段方法的做法"></a>bean初始化之前运行一段方法的做法</h4><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>在 bean 类中实现 InitializingBean 接口,并覆写 afterPropertiesSet() 方法</li>
+<li>在 bean 类的方法上添加 @PostConstruct 注解</li>
+</ul>
+</details>
+
+<h4 id="spring事务失效的场景"><a href="#spring事务失效的场景" class="headerlink" title="spring事务失效的场景"></a>spring事务失效的场景</h4><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>自己实现了异常捕获处理</li>
+<li>抛出检查异常（编译时异常）</li>
+<li>事务注解在非public方法上</li>
+</ul>
+</details>
+
+<h4 id="mybatis中-和-的区别"><a href="#mybatis中-和-的区别" class="headerlink" title="mybatis中$和#的区别"></a>mybatis中$和#的区别</h4><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>“#” 预编译的方式，会将参数值设置为预编译语句中的占位符。</li>
+<li>“$” 直接替换的方法，会直接将参数值按照字符串的形式替换到SQL语句中，会有潜在的sql注入风险   适用于动态拼接</li>
+</ul>
+</details>
+
+<h3 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h3><h4 id="MySQL-为什么使用-B-树来作索引，对比-B-树它的优点和缺点是什么？"><a href="#MySQL-为什么使用-B-树来作索引，对比-B-树它的优点和缺点是什么？" class="headerlink" title="MySQL 为什么使用 B+ 树来作索引，对比 B 树它的优点和缺点是什么？"></a>MySQL 为什么使用 B+ 树来作索引，对比 B 树它的优点和缺点是什么？</h4><details>
+<summary>展开查看</summary>
+
+<p>B+树相比于B树有几个显著的优点：B+树具备更少的IO次数（非叶子节点只存储索引），更稳定的查询效率（只搜索叶子节点），B+树的所有叶子节点构成一个有序链表，更适用于范围查找。  </p>
+<p>缺点就是需要维护叶子节点之间的指针</p>
+</details>
+
+<h4 id="简述乐观锁以及悲观锁的区别以及使用场景"><a href="#简述乐观锁以及悲观锁的区别以及使用场景" class="headerlink" title="简述乐观锁以及悲观锁的区别以及使用场景"></a>简述乐观锁以及悲观锁的区别以及使用场景</h4><details>
+<summary>展开查看</summary>
+
+<p>乐观锁假设不会出现并发问题，不限制线程对数据进行更新，在提交修改时会验证是否被修改了。mysql事务并发控制中使用的是MVCC，适用于读比较多的场景。</p>
+<p>悲观锁则每次在获取资源时都会上锁，直到处理完。mysql中直接就叫做锁，适用于写比较多的场景</p>
+</details>
+
+<h4 id="简述-MySQL-常见索引类型，介绍一下覆盖索引"><a href="#简述-MySQL-常见索引类型，介绍一下覆盖索引" class="headerlink" title="简述 MySQL 常见索引类型，介绍一下覆盖索引"></a>简述 MySQL 常见索引类型，介绍一下覆盖索引</h4><details>
+<summary>展开查看</summary>
+
+<p>（聚簇索引和非聚簇索引有什么区别？）</p>
+<p>聚簇索引：索引结构和数据一起存放，如InnoDB的B+树</p>
+<p>非聚簇索引：索引结构和数据分开存放，如MyISAM的B+树</p>
+<p>覆盖索引：索引包含所有需要查询的字段，这样在查询时可以直接从索引中获取数据，不需要查表</p>
+<p>联合索引：使用表中的多个字段创建索引         最左前缀匹配原则</p>
+</details>
+
+<h4 id="简述事务的四大特性"><a href="#简述事务的四大特性" class="headerlink" title="简述事务的四大特性"></a>简述事务的四大特性</h4><details>
+<summary>展开查看</summary>
+
+<p>ACID  原子性：指令要么全部成功，要么全部失败；隔离性：一个用户的事务不会被其他事务干扰；持久性：数据的改变是持久的，即使数据库发生故障也能恢复；一致性：执行事务前后，数据保持一致</p>
+</details>
+
+<h4 id="MySQL-有哪些常见的存储引擎？它们的区别是什么"><a href="#MySQL-有哪些常见的存储引擎？它们的区别是什么" class="headerlink" title="MySQL 有哪些常见的存储引擎？它们的区别是什么"></a>MySQL 有哪些常见的存储引擎？它们的区别是什么</h4><details>
+<summary>展开查看</summary>
+
+<p>（什么是数据库事务，MySQL 为什么会使用 InnoDB 作为默认选项）</p>
+<p>（MySQL中 InnoDB 和 MylSAM 的区别是什么？）</p>
+<p>InnoDB：支持行级锁，事务型的存储引擎，支持数据库崩溃后的安全恢复，索引类型是聚簇索引</p>
+<p>MyISAM：只支持表级锁，不支持事务，不支持数据库崩溃后的安全恢复，索引类型是非聚簇索引</p>
+</details>
+
+<h4 id="数据库的事务隔离级别有哪些？各有哪些优缺点？"><a href="#数据库的事务隔离级别有哪些？各有哪些优缺点？" class="headerlink" title="数据库的事务隔离级别有哪些？各有哪些优缺点？"></a>数据库的事务隔离级别有哪些？各有哪些优缺点？</h4><details>
+<summary>展开查看</summary>
+
+<p>读取未提交：可能会脏读、不可重复读、幻读</p>
+<p>读取已提交：可能会不可重复读和幻读</p>
+<p>可重复读：指事务执行期间，<strong>其他事务所做的修改对当前事务都不可见</strong>，默认的事务隔离级别，幻读还有可能发生</p>
+<p>可串行化：所有事务逐个执行</p>
+</details>
+
+<h4 id="简述脏读和幻读的发生场景，InnoDB-是如何解决幻读的？"><a href="#简述脏读和幻读的发生场景，InnoDB-是如何解决幻读的？" class="headerlink" title="简述脏读和幻读的发生场景，InnoDB 是如何解决幻读的？"></a>简述脏读和幻读的发生场景，InnoDB 是如何解决幻读的？</h4><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>脏读：一个事务对数据进行了修改，另一个事务读取了这个修改后的数据，然后前一个事务失败回滚了</li>
+<li>幻读：一个事务在读取表中数据的过程中，又新插入了几行记录。</li>
+</ul>
+<p>通过MVCC或者临键锁（记录锁+间隙锁）防止新数据插入。</p>
+</details>
+
+<h4 id="简述什么是最左匹配原则"><a href="#简述什么是最左匹配原则" class="headerlink" title="简述什么是最左匹配原则"></a>简述什么是最左匹配原则</h4><details>
+<summary>展开查看</summary>
+
+<p>联合索引中的最左前缀匹配原则，会根据最左侧的字段过滤一批数据，直至联合索引中的字段全部匹配完成。</p>
+</details>
+
+<h4 id="简述-MySQL-MVCC-的实现原理"><a href="#简述-MySQL-MVCC-的实现原理" class="headerlink" title="简述 MySQL MVCC 的实现原理"></a>简述 MySQL MVCC 的实现原理</h4><details>
+<summary>展开查看</summary>
+MVCC会对一份数据存储多个版本，通过undo log（这个日志会记录某行数据多个版本的数据）实现
+
+<p>读操作：当一个事务执行读操作，会先创建快照，使用快照读取，这样其他事务的修改不会影响到当前事务的读取。</p>
+<p>写操作：事务执行写操作时，会生成一个新的数据版本，并将修改后的数据写入数据库。</p>
+</details>
+
+<h4 id="数据库如何设计索引，如何优化查询？"><a href="#数据库如何设计索引，如何优化查询？" class="headerlink" title="数据库如何设计索引，如何优化查询？"></a>数据库如何设计索引，如何优化查询？</h4><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>联合索引：对于多个列经常一起用作查询条件的情况，创建联合索引提高查询效率。</li>
+<li>使用覆盖索引；对于联合索引，满足最左前缀匹配原则；避免使用函数或者%开头的like模糊查找使索引失效</li>
+</ul>
+</details>
+
+<h4 id="MySQL的主从同步机制"><a href="#MySQL的主从同步机制" class="headerlink" title="MySQL的主从同步机制"></a>MySQL的主从同步机制</h4><details>
+<summary>展开查看</summary>
+基于**binlog**日志的机制，实现主服务器到从服务器数据的同步。（有点像读写分离那一块的）
+
+<p><code>binlog</code>文件记录了MySQL数据库中数据的所有变化，主库将数据的变化写入到<code>binlog</code>，从库将<code>binlog</code>写入到<code>relay log</code>，再从relay log同步数据到本地。</p>
+</details>
+
+<h4 id="sql优化手段"><a href="#sql优化手段" class="headerlink" title="sql优化手段"></a>sql优化手段</h4><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>避免使用select * 语句     消耗CPU、无法得到覆盖索引的优化</li>
+<li>避免使用外键或者级联操作      对分库分表不友好</li>
+<li>选择合适的字段类型       存储字节越少，，占用空间越小，性能也越好</li>
+</ul>
+</details>
+
+<h4 id="mysql的查询过程"><a href="#mysql的查询过程" class="headerlink" title="mysql的查询过程"></a>mysql的查询过程</h4><details>
+<summary>展开查看</summary>
+
+<p>连接器-查询缓存（已移除）-分析器-优化器-执行器</p>
+<p>分析器分析sql语句的语法；优化器根据索引、表的大小、数据分布等选择合适的执行方式；执行器打开表，建立读写锁，调用存储引擎的接口执行查询；存储引擎根据查询条件定位到B+树叶子节点，从叶子节点中读取到对应的数据行。</p>
+</details>
+
+<h4 id="InnoDB存储引擎有哪两种行级锁"><a href="#InnoDB存储引擎有哪两种行级锁" class="headerlink" title="InnoDB存储引擎有哪两种行级锁"></a>InnoDB存储引擎有哪两种行级锁</h4><details>
+<summary>展开查看</summary>
+
+<p>共享锁（多个事务可以同时对同一行数据加共享锁）和排他锁</p>
+</details>
+
+<h4 id="mysql查询sql语句的查询时间"><a href="#mysql查询sql语句的查询时间" class="headerlink" title="mysql查询sql语句的查询时间"></a>mysql查询sql语句的查询时间</h4><details>
+<summary>展开查看</summary>
+
+<p><code>SHOW PROFILES</code> 命令可以用来查看最近执行的 SQL 语句的执行时间</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> profiling <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> your_table <span class="keyword">WHERE</span> your_conditions;</span><br><span class="line"><span class="keyword">SHOW</span> PROFILES;</span><br></pre></td></tr></table></figure>
+</details>
+
+<h4 id="distinct关键字"><a href="#distinct关键字" class="headerlink" title="distinct关键字"></a>distinct关键字</h4><details>
+<summary>展开查看</summary>
+
+<p>从查询结果中去除重复的行</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> department <span class="keyword">FROM</span> employees;</span><br></pre></td></tr></table></figure>
+</details>
+
+<h4 id="左连接和右连接"><a href="#左连接和右连接" class="headerlink" title="左连接和右连接"></a>左连接和右连接</h4><details>
+<summary>展开查看</summary>
+
+<p>左连接是基于左边的表来连接右边的表，左连接返回左表中所有行，以及右表中与左表中匹配的行，如果右表中没有与左表匹配的行，则返回NULL值。</p>
+<p>右连接相反。</p>
+</details>
+
+<h4 id="哪些sql语句会产生临时表"><a href="#哪些sql语句会产生临时表" class="headerlink" title="哪些sql语句会产生临时表"></a>哪些sql语句会产生临时表</h4><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>排序  order by和group by</li>
+<li>连接 </li>
+<li>子查询</li>
+</ul>
+</details>
+
+<h4 id="mysql如何实现分布式锁，底层原理是什么"><a href="#mysql如何实现分布式锁，底层原理是什么" class="headerlink" title="mysql如何实现分布式锁，底层原理是什么"></a>mysql如何实现分布式锁，底层原理是什么</h4><details>
+<summary>展开查看</summary>
+
+<p>在mysql数据库中创建一个用于存储锁信息的表，包含三个字段：锁的名称（唯一索引）、锁的持有者（线程ID等标识）、锁的过期时间（可选）</p>
+<p>获取锁则通过“INSERT”向锁表插入一条记录，释放锁则通过“DELETE”从锁表中删除相应的记录。</p>
+<p>原理：</p>
+<ul>
+<li>事务：同一个事务，要么获取锁成功，要么获取锁失败；</li>
+<li>行级锁：INSERT和DELETE都涉及到行级锁的获取，在执行时，都会为行加上行级锁。</li>
+</ul>
+</details>
+
+<h3 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h3><h4 id="Redis-如何实现分布式锁？"><a href="#Redis-如何实现分布式锁？" class="headerlink" title="Redis 如何实现分布式锁？"></a>Redis 如何实现分布式锁？</h4><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>基于SETNX实现，它的原理是如果key存在则返回0，key不存在就创建key，这样只有第一个执行SETNX的客户端才能成功，这样第一个客户端就获取到了锁，直到锁过期释放</li>
+<li>基于SET实现，SET添加了NX和EX的参数，分别起到SETNX和EXPIRE的效果</li>
+<li>Redlock算法：获取当前时间，依次向5个Redis获取锁，若在3个以上成功，且获取锁的时间小于锁的有效时间，则获得锁。</li>
+</ul>
+<p><strong>具体实现：</strong> redission中的watch dog机制，获取锁之后会将锁的线程放入到redission维护的一个map中，每10s查询一次，若还持有锁，则会延长时间。</p>
+</details>
+
+<h4 id="简述-Redis-持久化中-RDB-以及-AOF-方案的优缺点"><a href="#简述-Redis-持久化中-RDB-以及-AOF-方案的优缺点" class="headerlink" title="简述 Redis 持久化中 RDB 以及 AOF 方案的优缺点"></a>简述 Redis 持久化中 RDB 以及 AOF 方案的优缺点</h4><details>
+
+<summary>展开查看</summary>
+RDB
+
+<ul>
+<li>高性能，通过<strong>fork子进程</strong>（savebg）完成持久化；RDB文件在指定的时间间隔内生成，而且是经过压缩的二进制数据，便于备份与恢复。</li>
+<li>Redis发生故障会丢失最近的一次快照；持久化是周期性的，不能保证每个操作都持久化到磁盘，不适用于实时持久化</li>
+</ul>
+<p>AOF</p>
+<ul>
+<li>AOF持久化记录了每个操作命令，可以确保Redis数据的完整性，即使发生故障也能恢复；几乎是实时记录每个写操作，适用于<strong>实时持久化</strong></li>
+<li>AOF文件比RDB大很多，重写也会消耗资源；恢复数据需要依次执行每个写命令，速度非常慢。</li>
+</ul>
+</details>
+
+<h4 id="简述-Redis-中常见类型的底层数据结构"><a href="#简述-Redis-中常见类型的底层数据结构" class="headerlink" title="简述 Redis 中常见类型的底层数据结构"></a>简述 Redis 中常见类型的底层数据结构</h4><details>
+<summary>展开查看</summary>
+
+<p>String（SDS）、Hash、List、Set、Zset（跳表）</p>
+</details>
+
+<h4 id="为什么-Redis-在单线程下能如此快？"><a href="#为什么-Redis-在单线程下能如此快？" class="headerlink" title="为什么 Redis 在单线程下能如此快？"></a>为什么 Redis 在单线程下能如此快？</h4><details>
+<summary>展开查看</summary>
+
+<p>读写命令是单线程，但通过<strong>非阻塞IO多路复用程序</strong>来监听多个套接字，通过单线程处理多个客户端的请求，减少了线程切换和同步开销。</p>
+</details>
+
+<h4 id="简述-Redis-的线程模型以及底层架构设计"><a href="#简述-Redis-的线程模型以及底层架构设计" class="headerlink" title="简述 Redis 的线程模型以及底层架构设计"></a>简述 Redis 的线程模型以及底层架构设计</h4><details>
+<summary>展开查看</summary>
+
+<p>基于<strong>Reactor</strong>模式（核心就是非阻塞IO）设计了<strong>文件事件处理器</strong>，非阻塞IO多路复用程序和多个客户端都是这个处理器的一部分。</p>
+<p>读写命令都是单线程，多线程体现在网络数据的读写。</p>
+</details>
+
+<h4 id="简述-Redis-的过期机制和内存淘汰策略"><a href="#简述-Redis-的过期机制和内存淘汰策略" class="headerlink" title="简述 Redis 的过期机制和内存淘汰策略"></a>简述 Redis 的过期机制和内存淘汰策略</h4><details>
+<summary>展开查看</summary>
+
+<p>过期机制：定期清理和惰性清理</p>
+<p>内存淘汰策略：lru、ttl、random</p>
+</details>
+
+<h4 id="简述-Redis-的哨兵机制"><a href="#简述-Redis-的哨兵机制" class="headerlink" title="简述 Redis 的哨兵机制"></a>简述 Redis 的哨兵机制</h4><details>
+<summary>展开查看</summary>
+
+<p>它主要用于监控 Redis 主从服务器的运行状态，自动完成故障转移（failover），并通过订阅和通知机制告知客户端关于 Redis 系统状态的变化。</p>
+<p><strong>选举过程</strong>：当哨兵发现主节点失效时，它会在哨兵系统中发起选举，选出一个哨兵作为领导者来执行自动故障转移的操作。</p>
+</details>
+
+<h4 id="简述-Redis-如何处理热点-key-访问"><a href="#简述-Redis-如何处理热点-key-访问" class="headerlink" title="简述 Redis 如何处理热点 key 访问"></a>简述 Redis 如何处理热点 key 访问</h4><details>
+<summary>展开查看</summary>
+
+<p>读写分离，分为读节点和写节点</p>
+<p>Redis cluster：热点数据分散存储在多个Redis节点上</p>
+</details>
+
+<h4 id="简述-Redis-中如何防止缓存雪崩和缓存击穿和缓存穿透"><a href="#简述-Redis-中如何防止缓存雪崩和缓存击穿和缓存穿透" class="headerlink" title="简述 Redis 中如何防止缓存雪崩和缓存击穿和缓存穿透"></a>简述 Redis 中如何防止缓存雪崩和缓存击穿和缓存穿透</h4><details>
+<summary>展开查看</summary>
+
+<p>缓存穿透：缓存无效key，设置布隆过滤器（把所有可能出现的值存入布隆过滤器，01存储）</p>
+<p>缓存雪崩：Redis中多个key同时过期或者Redis崩溃，导致数据库请求量暴增  针对Redis崩溃，可以采用Redis集群或者限流；针对热点key过期，参考缓存击穿；针对大量key同时过期，给key设置随机过期时间或者lazy-free策略（采用异步方式释放过期的key）</p>
+<p>缓存击穿：Redis热点key过期，导致数据库请求量暴增    缓存提前预热，设置永不过期（不推荐）</p>
+</details>
+
+<h4 id="简述-Redis-中跳表的应用以及优缺点"><a href="#简述-Redis-中跳表的应用以及优缺点" class="headerlink" title="简述 Redis 中跳表的应用以及优缺点"></a>简述 Redis 中跳表的应用以及优缺点</h4><details>
+<summary>展开查看</summary>
+跳表是ZSet的底层实现，相比于平衡树和红黑树，它有更好的区间查找效率，不需要像平衡树和红黑树要通过旋转维持平衡，缺点是跳表会在多个层次上存储节点的索引，空间开销大。
+
+<p>跳表每个节点都包含一个数据域和若干个指针域，每个节点都指向同一水平上的下一个节点和其上一层节点；跳表是由多层链表组成的，每一层都是一个普通的链表；高度越高的节点出现的概率越小。查找、插入、删除的平均复杂度为O(logn)。</p>
+</details>
+
+<h4 id="简述-Redis-集群配置以及基础原理"><a href="#简述-Redis-集群配置以及基础原理" class="headerlink" title="简述 Redis 集群配置以及基础原理"></a>简述 Redis 集群配置以及基础原理</h4><details>
+<summary>展开查看</summary>
+
+<p>Redis集群包含多个节点，这些节点通过网络连接形成集群。每个节点都配置有自己的IP地址和端口号，以便集群中的其他节点可以与之通信。节点之间的通信使用TCP连接，并且这些连接是永久保持的。</p>
+</details>
+
+<h4 id="redis高可用的做法"><a href="#redis高可用的做法" class="headerlink" title="redis高可用的做法"></a>redis高可用的做法</h4><details>
+<summary>展开查看</summary>
+
+<p>高可用是指系统在面对各种故障情况下，保持长时间的可用性和稳定性。</p>
+<ul>
+<li>主从复制：redis集群中分为主节点和从节点，主从复制是指将一个 Redis 服务器（主节点）的数据复制到其他 Redis 服务器（从节点）上。主从复制提供了数据冗余备份、读写分离以及故障恢复等功能。</li>
+<li>哨兵机制：主要用于监控 Redis 主从服务器的运行状态，自动完成故障转移。当哨兵发现主节点失效时，它会在哨兵系统中发起选举，选出一个哨兵作为领导者来执行自动故障转移的操作。</li>
+<li>持久化：ROB和AOF方式实现持久化</li>
+</ul>
+</details>
+
+<h4 id="redis分布式锁"><a href="#redis分布式锁" class="headerlink" title="redis分布式锁"></a>redis分布式锁</h4><p>问：采用setnx实现分布式锁，如果有两个线程同时获取锁，极端情况下两个线程都能获取到锁吗？</p>
+<details>
+<summary>展开查看</summary>
+
+<p>答：是有可能都获取到锁的，这种情况被称为“锁竞争”。</p>
+</details>
+
+<h3 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h3><h4 id="网络分层模型"><a href="#网络分层模型" class="headerlink" title="网络分层模型"></a>网络分层模型</h4><h5 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h5><details>
+<summary>展开查看</summary>
+
+<p>应用层<br>表示层<br>会话层<br>传输层<br>网络层<br>数据链路层<br>物理层</p>
+</details>
+
+<h5 id="TCP-IP四层模型"><a href="#TCP-IP四层模型" class="headerlink" title="TCP&#x2F;IP四层模型"></a>TCP&#x2F;IP四层模型</h5><details>
+<summary>展开查看</summary>
+
+<ol>
+<li>应用层（应用层、表示层、会话层）</li>
+<li>传输层</li>
+<li>网络层</li>
+<li>网络接口层（数据链路层、物理层）</li>
+</ol>
+</details>
+
+<h4 id="打开一个网站，会用到哪些协议"><a href="#打开一个网站，会用到哪些协议" class="headerlink" title="打开一个网站，会用到哪些协议"></a>打开一个网站，会用到哪些协议</h4><details>
+<summary>展开查看</summary>
+
+<ol>
+<li>在浏览器中输入网页的URL</li>
+<li>浏览器通过DNS协议，获取域名对应的IP地址；</li>
+<li>浏览器根据IP和端口号，向目标服务器发起一个TCP请求</li>
+<li>浏览器在TCP连接上，向服务器发送一个HTTP请求，请求获取网页的内容</li>
+<li>服务器收到HTTP请求后，会发一个HTTP响应报文给浏览器</li>
+<li>浏览器收到HTTP响应后，解析响应体中的HTML样式，同时根据HTML中其他资源（图片、CSS、js）的URL再次发起HTTP请求，直至网页资源全部加载</li>
+</ol>
+</details>
+
+<h4 id="HTTP和HTTPS有什么区别"><a href="#HTTP和HTTPS有什么区别" class="headerlink" title="HTTP和HTTPS有什么区别"></a>HTTP和HTTPS有什么区别</h4><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>端口号：HTTP默认是80，HTTPs默认是443</li>
+<li>URL前缀</li>
+<li>安全性：HTTPS运行在SSL&#x2F;TLS协议上，SSL&#x2F;TLS运行在TCP上，所有传输的内容都经过加密。</li>
+<li>HTTPS连接建立相对复杂，在tcp三次握手后，还要进行SSL&#x2F;TLS的握手过程。</li>
+<li>HTTPS需要向CA申请数字证书，保证服务器的身份是可信的。</li>
+</ul>
+</details>
+
+<h4 id="GET和POST的区别"><a href="#GET和POST的区别" class="headerlink" title="GET和POST的区别"></a>GET和POST的区别</h4><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>GET通常用于获取或查询资源，POST用于创建或修改资源；</li>
+<li>GET是幂等的，POST是不幂等的</li>
+<li>GET请求的参数放在URL中，POST请求的参数放在请求体中</li>
+<li>GET可以被缓存，POST不行</li>
+</ul>
+</details>
+
+<h4 id="TCP和UDP的区别"><a href="#TCP和UDP的区别" class="headerlink" title="TCP和UDP的区别"></a>TCP和UDP的区别</h4><details>
+<summary>展开查看</summary>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>TCP</th>
+<th>UDP</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>是否面向连接</td>
+<td>是</td>
+<td>否</td>
+</tr>
+<tr>
+<td>是否可靠</td>
+<td>是</td>
+<td>否</td>
+</tr>
+<tr>
+<td>是否有状态</td>
+<td>是</td>
+<td>否</td>
+</tr>
+<tr>
+<td>传输效率</td>
+<td>慢</td>
+<td>快</td>
+</tr>
+<tr>
+<td>传输形式</td>
+<td>字节流</td>
+<td>数据报文段</td>
+</tr>
+<tr>
+<td>首部开销</td>
+<td>20-60 bytes</td>
+<td>8bytes</td>
+</tr>
+<tr>
+<td>是否支持多播或广播</td>
+<td>点对点</td>
+<td>一对一，一对多，多对多</td>
+</tr>
+<tr>
+<td>应用</td>
+<td>文件传输、远程登录</td>
+<td>即时通信、直播</td>
+</tr>
+</tbody></table>
+</details>
+
+<h4 id="TCP的三次握手和四次挥手"><a href="#TCP的三次握手和四次挥手" class="headerlink" title="TCP的三次握手和四次挥手"></a>TCP的三次握手和四次挥手</h4><h5 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h5><details>
+<summary>展开查看</summary>
+
+<ol>
+<li>客户端向服务端发送一个SYN(SEQ &#x3D; x)的请求报文；</li>
+<li>服务端在接收之后向客户端发送一个SYN(SEQ&#x3D;y)和一个ACK(ACK &#x3D; x+1)报文；</li>
+<li>客户端在接收之后向服务端发送一个ACK(ACK&#x3D;y+1)报文。</li>
+</ol>
+<p>第一次握手之后，服务端确定了客户端发送正常，自己接收正常；</p>
+<p>第二次握手之后，客户端确定了自己发送和接收正常，服务端接收和发送正常，服务端确定了自己接收正常，客户端发送正常；</p>
+<p>第三次握手之后，客户端确定了自己发送和接收正常，服务端接收和发送正常，服务端确定了自己发送和接收正常，客户端发送和接收正常；</p>
+<p>建立连接。</p>
+</details>
+
+<h5 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h5><details>
+<summary>展开查看</summary>
+
+<ol>
+<li>客户端向服务端发送一个FIN(SEQ&#x3D;x)的请求报文；</li>
+<li>服务端在接收之后向客户端发送一个ACK(ACK&#x3D;x+1)报文；</li>
+<li>服务端向客户端发送一个FIN(SEQ&#x3D;y)的请求报文；</li>
+<li>客户端在接收之后向服务端发送一个ACK(ACK&#x3D;y+1)报文，客户端等待若干时间，若服务端无响应，则关闭连接。</li>
+</ol>
+<p>前两次挥手是客户端表明要断开连接，后两次挥手是服务端确定要断开连接。</p>
+</details>
+
+<h4 id="TCP拥塞控制"><a href="#TCP拥塞控制" class="headerlink" title="TCP拥塞控制"></a>TCP拥塞控制</h4><details>
+<summary>展开查看</summary>
+
+<p>避免发送方的数据填满整个网络，为了调节发送数据的量，定义了一个拥塞窗口的概念。</p>
+<p>网络中没有出现拥塞，cwnd就会增大；网络中出现了拥塞，cwnd就减少。</p>
+<p>算法：</p>
+<ul>
+<li>慢启动：发送方每收到一个ACK，拥塞窗口cwnd大小加1    cwnd &lt; ssthresh（慢启动门限）</li>
+<li>拥塞避免：发送方每收到一个ACK，cwnd增加1&#x2F;cwnd        cwnd &gt;&#x3D; ssthresh</li>
+<li>拥塞发生  ssthresh设为 cwnd &#x2F; 2   cwnd初始化值</li>
+<li>快速恢复</li>
+</ul>
+</details>
+
+<h4 id="TCP延迟确认"><a href="#TCP延迟确认" class="headerlink" title="TCP延迟确认"></a>TCP延迟确认</h4><details>
+<summary>展开查看</summary>
+
+<p>当没有响应数据要发送时，ACK 将会延迟一段时间，以等待是否有响应数据可以一起发送</p>
+</details>
+
+<h4 id="TCP超时重传"><a href="#TCP超时重传" class="headerlink" title="TCP超时重传"></a>TCP超时重传</h4><details>
+<summary>展开查看</summary>
+
+<p>超时重传，两种情况：数据包丢失；应答丢失。超时时间应略大于往返时延</p>
+</details>
+
+<h4 id="TCP滑动窗口和流量控制"><a href="#TCP滑动窗口和流量控制" class="headerlink" title="TCP滑动窗口和流量控制"></a>TCP滑动窗口和流量控制</h4><details>
+<summary>展开查看</summary>
+
+<p>一问一答的通信效率不高，为解决这个问题，tcp引入了窗口的概念，发送方可以连续发送 窗口大小 的请求 (批量思想)<br>TCP 提供一种机制可以让「发送方」根据「接收方」的实际接收能力控制发送的数据量。通过滑动窗口实现的</p>
+</details>
+
+<h4 id="TCP粘包和拆包"><a href="#TCP粘包和拆包" class="headerlink" title="TCP粘包和拆包"></a>TCP粘包和拆包</h4><details>
+<summary>展开查看</summary>
+
+<p>TCP传输的是字节流，它会根据缓冲区的实际情况进行包的划分（发送和接收），由此会导致上层业务的一个完整的包被拆分成多个包进行发送（“拆包”），或者多个小包被封装成一个大的数据包进行发送（“粘包”），这就是所谓的TCP的拆包和粘包问题。</p>
+</details>
+
+<h4 id="http常见状态码"><a href="#http常见状态码" class="headerlink" title="http常见状态码"></a>http常见状态码</h4><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>1xx  正在处理</li>
+<li>2xx  处理完成</li>
+<li>3xx  处理需要额外的操作——重定向</li>
+<li>4xx  客户端错误</li>
+<li>5xx  服务端错误</li>
+</ul>
+</details>
+
+<h3 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h3><h4 id="线程间的同步方式"><a href="#线程间的同步方式" class="headerlink" title="线程间的同步方式"></a>线程间的同步方式</h4><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>互斥锁</li>
+<li>读写锁</li>
+<li>信号量</li>
+<li>屏障       同步原语，等待多个线程到达某个点再一起继续执行</li>
+<li>事件       通知的方式保持线程同步</li>
+</ul>
+</details>
+
+<h4 id="进程间的通信方式"><a href="#进程间的通信方式" class="headerlink" title="进程间的通信方式"></a>进程间的通信方式</h4><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>管道</li>
+<li>信号</li>
+<li>消息队列</li>
+<li>信号量</li>
+<li>共享内存</li>
+<li>套接字</li>
+</ul>
+</details>
+
+<h4 id="进程的调度算法"><a href="#进程的调度算法" class="headerlink" title="进程的调度算法"></a>进程的调度算法</h4><details>
+<summary>展开查看</summary>
+
+<ul>
+<li><strong>先到先服务调度算法(FCFS，First Come, First Served)</strong> : 从就绪队列中选择一个最先进入该队列的进程为之分配资源，使它立即执行并一直执行到完成或发生某事件而被阻塞放弃占用 CPU 时再重新调度。</li>
+<li><strong>短作业优先的调度算法(SJF，Shortest Job First)</strong> : 从就绪队列中选出一个估计运行时间最短的进程为之分配资源，使它立即执行并一直执行到完成或发生某事件而被阻塞放弃占用 CPU 时再重新调度。</li>
+<li><strong>时间片轮转调度算法（RR，Round-Robin）</strong> : 时间片轮转调度是一种最古老，最简单，最公平且使用最广的算法。每个进程被分配一个时间段，称作它的时间片，即该进程允许运行的时间。</li>
+<li><strong>多级反馈队列调度算法（MFQ，Multi-level Feedback Queue）</strong>：前面介绍的几种进程调度的算法都有一定的局限性。如<strong>短进程优先的调度算法，仅照顾了短进程而忽略了长进程</strong> 。多级反馈队列调度算法既能使高优先级的作业得到响应又能使短作业（进程）迅速完成。，因而它是目前<strong>被公认的一种较好的进程调度算法</strong>，UNIX 操作系统采取的便是这种调度算法。</li>
+<li><strong>优先级调度算法（Priority）</strong>：为每个流程分配优先级，首先执行具有最高优先级的进程，依此类推。具有相同优先级的进程以 FCFS 方式执行。可以根据内存要求，时间要求或任何其他资源要求来确定优先级。</li>
+</ul>
+</details>
+
+<h4 id="僵尸进程与孤儿进程"><a href="#僵尸进程与孤儿进程" class="headerlink" title="僵尸进程与孤儿进程"></a>僵尸进程与孤儿进程</h4><details>
+<summary>展开查看</summary>
+
+<p>子进程通常是通过 fork()系统调用创建的，该调用会创建一个新的进程，该进程是原有进程的一个副本。子进程和父进程的运行是相互独立的，它们各自拥有自己的 PCB，即使父进程结束了，子进程仍然可以继续运行。</p>
+<ul>
+<li><strong>僵尸进程：</strong>子进程已经终止，但是其父进程仍在运行，父进程没有调用wait()系统调用来释放子进程占用的资源。</li>
+<li><strong>孤儿进程：</strong>父进程已经终止，但是子进程仍在运行。</li>
+</ul>
+</details>
+
+<h4 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h4><details>
+<summary>展开查看</summary>
+
+<p>多个线程&#x2F;进程同时被阻塞，都在等待某个资源被释放</p>
+</details>
+
+<h5 id="死锁的四个必要条件"><a href="#死锁的四个必要条件" class="headerlink" title="死锁的四个必要条件"></a>死锁的四个必要条件</h5><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>互斥</li>
+<li>占用并等待</li>
+<li>非抢占</li>
+<li>循环等待</li>
+</ul>
+</details>
+
+<h5 id="模拟死锁的代码"><a href="#模拟死锁的代码" class="headerlink" title="模拟死锁的代码"></a>模拟死锁的代码</h5><details>
+<summary>展开查看</summary>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DeadLockDemo</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">Object</span> <span class="variable">resource1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();<span class="comment">//资源 1</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">Object</span> <span class="variable">resource2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();<span class="comment">//资源 2</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (resource1) &#123;</span><br><span class="line">                System.out.println(Thread.currentThread() + <span class="string">&quot;get resource1&quot;</span>);</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(Thread.currentThread() + <span class="string">&quot;waiting get resource2&quot;</span>);</span><br><span class="line">                <span class="keyword">synchronized</span> (resource2) &#123;</span><br><span class="line">                    System.out.println(Thread.currentThread() + <span class="string">&quot;get resource2&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="string">&quot;线程 1&quot;</span>).start();</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (resource2) &#123;</span><br><span class="line">                System.out.println(Thread.currentThread() + <span class="string">&quot;get resource2&quot;</span>);</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(Thread.currentThread() + <span class="string">&quot;waiting get resource1&quot;</span>);</span><br><span class="line">                <span class="keyword">synchronized</span> (resource1) &#123;</span><br><span class="line">                    System.out.println(Thread.currentThread() + <span class="string">&quot;get resource1&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="string">&quot;线程 2&quot;</span>).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+</details>
+
+<h5 id="解决死锁的方法"><a href="#解决死锁的方法" class="headerlink" title="解决死锁的方法"></a>解决死锁的方法</h5><h6 id="死锁的预防"><a href="#死锁的预防" class="headerlink" title="死锁的预防"></a>死锁的预防</h6><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>静态分配策略    一个进程在执行前申请到它所需要的所有资源      破坏了占用并等待条件</li>
+<li>层次分配策略    一个进程得到某一次的一个资源后，它只能再申请较高一层的资源；当一个进程<br>要释放某层的一个资源时，必须先释放所占用的较高层的资源，破坏了循环等待条件</li>
+</ul>
+</details>
+
+<h6 id="死锁的避免"><a href="#死锁的避免" class="headerlink" title="死锁的避免"></a>死锁的避免</h6><details>
+<summary>展开查看</summary>
+
+<p>当一个进程申请使用资源的时候，<strong>银行家算法</strong> 通过先 <strong>试探</strong> 分配给该进程资源，然后通过 <strong>安全性算法</strong> 判断分配后系统是否处于安全状态，若不安全则试探分配作废，让该进程继续等待，若能够进入到安全的状态，则就 <strong>真的分配资源给该进程</strong>。</p>
+</details>
+
+<h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><h4 id="动态规划和贪心有什么区别"><a href="#动态规划和贪心有什么区别" class="headerlink" title="动态规划和贪心有什么区别"></a>动态规划和贪心有什么区别</h4><details>
+<summary>展开查看</summary>
+
+<ul>
+<li>动态规划采用自下而上的方式,通过求解子问题来逐步求解整个问题;贪心是采用自上而下的方式,做出局部最优选,希望能够得到全局最优解;</li>
+<li>动态规划保证能够得到全局最优解,贪心在某些问题上只能近似最优解;</li>
+<li>动态规划适用于有重叠子问题和最优子结构性质的问题。</li>
+</ul>
+</details>
+
+<h4 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h4><h5 id="思路和代码"><a href="#思路和代码" class="headerlink" title="思路和代码"></a>思路和代码</h5><p>快速排序采用分治法的思想，将大规模的排序分解为若干个小规模的排序——每次选取一个基准元素（一般是选择当前规模的第一个元素），设置左指针指向当前区间的第一个元素位置，设置右指针指向当前区间的最后一个元素位置。每次对非空位置的指针进行操作，原始左指针指向的元素作为基准元素了，因此左指针为空，先判断右指针：当右指针指向的值小于基准值时，就将该值移动到左指针指向的空位置，再判断左指针。这样移动左右指针直至两个指针指向相同的位置，一轮快速排序结束，这时位于基准元素左边的元素均小于基准元素，位于基准元素右边的元素均大于基准元素。后面再对前面和后面两个区间进行快速排序。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这个函数是进行一轮快速排序，并返回当前基准元素所在的位置</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">quick</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> low, <span class="type">int</span> high)</span>&#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> nums[low];</span><br><span class="line">    <span class="keyword">while</span>(low &lt; high)&#123;</span><br><span class="line">        <span class="keyword">while</span>(nums[high] &gt;= temp &amp;&amp; low &lt; high)&#123;</span><br><span class="line">            high--;</span><br><span class="line">        &#125;</span><br><span class="line">        nums[low] = nums[high];</span><br><span class="line">        <span class="keyword">while</span>(nums[low] &lt;= temp &amp;&amp; low &lt; high)&#123;</span><br><span class="line">            low++;</span><br><span class="line">        &#125;</span><br><span class="line">        nums[high] = nums[low];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    nums[low] = temp;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> low;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//递归方法</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">qsort</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> low, <span class="type">int</span> high)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(low &gt;= high)&#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> <span class="variable">fenjie</span> <span class="operator">=</span> quicksort(nums, low, high);</span><br><span class="line">    quick(nums, low, fenjie - <span class="number">1</span>);</span><br><span class="line">    quick(nums, fenjie + <span class="number">1</span>, high);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="复杂度和优化"><a href="#复杂度和优化" class="headerlink" title="复杂度和优化"></a>复杂度和优化</h5><p>空间复杂度平均O(logn),最坏递归n-1次,空间复杂度O(n) </p>
+<p>时间复杂度平均O(nlogn),最坏原来为逆序,时间复杂度O(n ^ 2)</p>
+<p>快速排序不是稳定的算法,在分割时会改变元素的相对位置</p>
+<p>优化方法:1. 三数取中选择基准元素 2. 尾递归优化:每次递归完,如果左子数组元素个数小于右子数组元素的个数,则优先递归调用右子数组的排序,减少递归深度</p>
+<h4 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h4><h5 id="思路和代码-1"><a href="#思路和代码-1" class="headerlink" title="思路和代码"></a>思路和代码</h5><p>插入排序的思想是从第一个元素开始认定序列是有序的,在遍历的过程中比较当前的元素和前面有序的序列,找到当前元素应该在的位置,写入就好了.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">selectSort</span><span class="params">(<span class="type">int</span>[] nums)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; nums.length; i++)&#123;</span><br><span class="line">        <span class="comment">//保存当前元素值,在找到位置后插入</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> nums[i];</span><br><span class="line">        <span class="comment">//循环过程中不能改变i,因此用一个变量来作为循环时的判断</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> i;</span><br><span class="line">        <span class="keyword">while</span>(index - <span class="number">1</span> &gt;= <span class="number">0</span> &amp;&amp; temp &lt; nums[index - <span class="number">1</span>])&#123;</span><br><span class="line">            nums[index] = nums[index - <span class="number">1</span>];</span><br><span class="line">            index--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//找到当前元素在有序序列中的位置,插入</span></span><br><span class="line">        nums[index] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h5><p>时间复杂度为O(n ^ 2),最好情况是有序的时候,时间复杂度O(n)</p>
+<p>选择排序是稳定排序算法.</p>
+<h4 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h4><h5 id="思路和代码-2"><a href="#思路和代码-2" class="headerlink" title="思路和代码"></a>思路和代码</h5><p>归并排序的核心就是分治法,先对完整的序列分为多个子序列,然后子序列内部进行排序,然后再两两合并子序列直到合成一个完整的序列.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//合并两个子序列</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">merge</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> left, <span class="type">int</span> right, <span class="type">int</span> mid)</span>&#123;</span><br><span class="line">    <span class="type">int</span>[] temp = <span class="keyword">new</span> <span class="title class_">int</span>[right - left + <span class="number">1</span>];</span><br><span class="line">    <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> left, j = mid + <span class="number">1</span>, k = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(i &lt;= mid &amp;&amp; j &lt;= right)&#123;</span><br><span class="line">        temp[k++] = (nums[i] &gt; nums[j] ? nums[j++] : nums[i++]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(i &lt;= mid)&#123;</span><br><span class="line">        temp[k++] = nums[i++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(j &lt;= right)&#123;</span><br><span class="line">        temp[k++] = nums[j++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//这是核心代码,在原数组上进行修改,将合并的序列从left下标开始赋值</span></span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; k; i++)&#123;</span><br><span class="line">        nums[left + i] = temp[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">mergeSort</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> left, <span class="type">int</span> right)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(left &gt;= right)&#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> left + (right - left) / <span class="number">2</span>;</span><br><span class="line">    <span class="comment">//在merge函数中，前半部分到mid是闭的，因此这里要赋mid，而不是mid - 1</span></span><br><span class="line">    mergeSort(nums, left, mid);</span><br><span class="line">    mergeSort(nums, mid + <span class="number">1</span>, right);</span><br><span class="line">    merge(nums, left, right, mid);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h5><p>递归的深度为logn,每次排序的复杂度是O(n),因此时间复杂度O(nlogn).</p>
+<p>空间复杂度在合并时需要创建数组,空间复杂度O(n).</p>
+<p>归并排序是稳定的排序算法.</p>
+<h4 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h4><h5 id="思路和代码-3"><a href="#思路和代码-3" class="headerlink" title="思路和代码"></a>思路和代码</h5><p>大顶堆是根节点的值大于其左右子节点的值, 堆排序的思路就是对数组建立大顶堆, 每次弹出根节点, 然后再调整大顶堆, 直至所有元素都弹出去, 是从最大值到最小值的顺序来排序。小顶堆就相反, 每次弹出最小元素。</p>
+<p>建树的过程: 从二叉树的最后一个非叶子节点自下向上建树</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> i, <span class="type">int</span> j)</span>&#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> nums[i];</span><br><span class="line">    nums[i] = nums[j];</span><br><span class="line">    nums[j] = temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">headify</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> i, <span class="type">int</span> n)</span>&#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">largest</span> <span class="operator">=</span> i;</span><br><span class="line">    <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> i * <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> i * <span class="number">2</span> + <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span>(left &lt; n &amp;&amp; nums[left] &gt; nums[largest])&#123;</span><br><span class="line">        largest = left;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(right &lt; n &amp;&amp; nums[right] &gt; nums[largest])&#123;</span><br><span class="line">        largest = right;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(largest != i)&#123;</span><br><span class="line">        <span class="comment">//交换左或右子节点和根节点的值</span></span><br><span class="line">        swap(nums, i, largest);</span><br><span class="line">        <span class="comment">//largest下标的较大值交换到根节点了，此时相当于是向下递归子树</span></span><br><span class="line">        headify(nums, largest, n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">headSort</span><span class="params">(<span class="type">int</span>[] nums)</span>&#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> nums.length;</span><br><span class="line">    <span class="comment">//n/2-1下标的元素是二叉树最后一个非叶子节点，自下向上构建最大堆</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> n / <span class="number">2</span> - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">        headify(nums, i, n);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> n - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--)&#123;</span><br><span class="line">        <span class="comment">//堆排序的方法，将下标为0的元素（根节点）和当前最后一个下标的元素交换，然后重新建树，这样每次弹出的都是局部最大值，一直到元素全部弹出</span></span><br><span class="line">        swap(nums, <span class="number">0</span>, i);</span><br><span class="line">        headify(nums, <span class="number">0</span>, i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="复杂度-2"><a href="#复杂度-2" class="headerlink" title="复杂度"></a>复杂度</h5><p>建初始堆的时间复杂度O(n), 调整堆的时间复杂度O(logn), 调整n次, 因此时间复杂度O(nlogn)        堆的高度是O(logn)</p>
+<p>空间复杂度O(1)</p>
+<p>不稳定的排序算法</p>
+<h3 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h3><h4 id="查询日志"><a href="#查询日志" class="headerlink" title="查询日志"></a>查询日志</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">&quot;content&quot;</span> /path/to/log</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">&quot;/content/&quot;</span> /path/to/log</span><br></pre></td></tr></table></figure>
+
+<h5 id="grep的参数"><a href="#grep的参数" class="headerlink" title="grep的参数"></a>grep的参数</h5><p>-i   忽略大小写</p>
+<p>-v  排除某内容的行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查找包含error但是不包含timeout的内容行</span></span><br><span class="line">grep <span class="string">&#x27;error&#x27;</span> /var/log/syslog | grep -v <span class="string">&#x27;timeout&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="查找创建时间两天内的文件"><a href="#查找创建时间两天内的文件" class="headerlink" title="查找创建时间两天内的文件"></a>查找创建时间两天内的文件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -<span class="built_in">type</span> f -mtime -2</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看磁盘的使用率和占用空间"><a href="#查看磁盘的使用率和占用空间" class="headerlink" title="查看磁盘的使用率和占用空间"></a>查看磁盘的使用率和占用空间</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看磁盘的使用情况，磁盘大小和使用率</span></span><br><span class="line"><span class="built_in">df</span> -h</span><br><span class="line"><span class="comment">#查看目录或文件的使用情况，-s表示努力下占用空间的汇总</span></span><br><span class="line"><span class="built_in">du</span> -h</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看进程的端口"><a href="#查看进程的端口" class="headerlink" title="查看进程的端口"></a>查看进程的端口</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -p</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jiangduwang.github.io/2024/09/09/%E7%A7%8B%E6%8B%9B%E5%85%AB%E8%82%A1/" data-id="cm0ug3nyu0000esulfan53mh2" data-title="秋招面试八股" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-网络" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/06/03/%E7%BD%91%E7%BB%9C/" class="article-date">
@@ -2793,7 +3805,7 @@ RDB
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">June 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">April 2024</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">September 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">June 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">April 2024</a></li></ul>
     </div>
   </div>
 
@@ -2804,6 +3816,10 @@ RDB
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2024/09/09/%E7%A7%8B%E6%8B%9B%E5%85%AB%E8%82%A1/">秋招面试八股</a>
+          </li>
         
           <li>
             <a href="/2024/06/03/%E7%BD%91%E7%BB%9C/">网络八股</a>
@@ -2819,10 +3835,6 @@ RDB
         
           <li>
             <a href="/2024/04/10/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/">测试开发八股</a>
-          </li>
-        
-          <li>
-            <a href="/2024/04/02/%E7%AE%80%E5%8E%86%E5%85%AB%E8%82%A1%E5%86%85%E5%AE%B9/">面试八股内容</a>
           </li>
         
       </ul>
