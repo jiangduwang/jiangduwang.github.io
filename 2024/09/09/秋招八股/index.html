@@ -14,7 +14,7 @@
 <meta property="og:description" content="自我介绍面试官好，我叫顾涛，目前是南京理工大学的硕士研究生。在校期间，我参与了多个研究所的实习项目，主要是巡逻无人车车内软件的开发；今年在阿里大文娱集团-阿里影业作为测试开发工程师实习了两个半月，主要是负责电影B端票务域和交易域项目测试需求和接口自动化代码工程的维护。实习期间承接了两个测试需求，主要是测试了POS端影票和卖品混合下单的交易重构接口，通过手工测试和自动化测试用例代码的补充对需求进行了">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-09-09T02:04:19.818Z">
-<meta property="article:modified_time" content="2024-09-09T03:29:20.582Z">
+<meta property="article:modified_time" content="2024-10-05T03:58:21.167Z">
 <meta property="article:author" content="jiangduwang">
 <meta name="twitter:card" content="summary">
   
@@ -934,6 +934,13 @@ RDB
 </ul>
 </details>
 
+<h4 id="对称加密与非对称加密，https协议用到这两个加密了吗？"><a href="#对称加密与非对称加密，https协议用到这两个加密了吗？" class="headerlink" title="对称加密与非对称加密，https协议用到这两个加密了吗？"></a>对称加密与非对称加密，https协议用到这两个加密了吗？</h4><details>
+<summary>展开查看</summary>
+
+<p>对称加密是指使用相同的密钥进行加密和解密的过程。也就是说，发送方和接收方使用相同的密钥来加密和解密数据。这种加密方式的优势在于加解密速度快，适合于大量数据的传输。<br>而非对称加密则使用了两个密钥：公钥和私钥。公钥用于加密数据，而私钥用于解密数据。由于公钥和私钥是成对的，因此只有拥有私钥的人才能解密数据，从而保证了数据的安全性。</p>
+<p>HTTPS在内容传输上使用的是对称加密。这意味着在通信过程中，发送方和接收方会生成一个临时的密钥，并使用该密钥对数据进行加密和解密。由于对称加密的加解密速度快，因此可以有效地保障大量数据的传输安全。<br>然而，仅仅使用对称加密是不够的。为了确保通信双方的身份验证以及防止中间人攻击，HTTPS还需要用到非对称加密。在证书验证阶段，HTTPS使用非对称加密来验证服务器的身份。服务器会向客户端发送自己的证书，其中包括了公钥等信息。客户端会使用证书中的公钥来验证服务器的身份，并确保数据传输过程中的安全性。</p>
+</details>
+
 <h3 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h3><h4 id="线程间的同步方式"><a href="#线程间的同步方式" class="headerlink" title="线程间的同步方式"></a>线程间的同步方式</h4><details>
 <summary>展开查看</summary>
 
@@ -1068,6 +1075,10 @@ RDB
 <h4 id="查看磁盘的使用率和占用空间"><a href="#查看磁盘的使用率和占用空间" class="headerlink" title="查看磁盘的使用率和占用空间"></a>查看磁盘的使用率和占用空间</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看磁盘的使用情况，磁盘大小和使用率</span></span><br><span class="line"><span class="built_in">df</span> -h</span><br><span class="line"><span class="comment">#查看目录或文件的使用情况，-s表示努力下占用空间的汇总</span></span><br><span class="line"><span class="built_in">du</span> -h</span><br></pre></td></tr></table></figure>
 
 <h4 id="查看进程的端口"><a href="#查看进程的端口" class="headerlink" title="查看进程的端口"></a>查看进程的端口</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -p</span><br></pre></td></tr></table></figure>
+
+<h4 id="输出“error”在日志文件中出现的次数"><a href="#输出“error”在日志文件中出现的次数" class="headerlink" title="输出“error”在日志文件中出现的次数"></a>输出“error”在日志文件中出现的次数</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -o <span class="string">&quot;error&quot;</span> /path/to/log.log | <span class="built_in">wc</span> -l</span><br></pre></td></tr></table></figure>
+
+<h4 id="杀死包含java的所有进程"><a href="#杀死包含java的所有进程" class="headerlink" title="杀死包含java的所有进程"></a>杀死包含java的所有进程</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#获取包含java进程的pid，然后逐个杀死，grep无法模糊查询，或者说他本身就带着模糊查询</span></span><br><span class="line">ps aux | grep <span class="string">&#x27;java&#x27;</span> | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> | xargs <span class="built_in">kill</span></span><br><span class="line"></span><br><span class="line">pkill -f <span class="string">&#x27;java&#x27;</span></span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">

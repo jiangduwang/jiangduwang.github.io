@@ -932,6 +932,13 @@ RDB
 </ul>
 </details>
 
+<h4 id="对称加密与非对称加密，https协议用到这两个加密了吗？"><a href="#对称加密与非对称加密，https协议用到这两个加密了吗？" class="headerlink" title="对称加密与非对称加密，https协议用到这两个加密了吗？"></a>对称加密与非对称加密，https协议用到这两个加密了吗？</h4><details>
+<summary>展开查看</summary>
+
+<p>对称加密是指使用相同的密钥进行加密和解密的过程。也就是说，发送方和接收方使用相同的密钥来加密和解密数据。这种加密方式的优势在于加解密速度快，适合于大量数据的传输。<br>而非对称加密则使用了两个密钥：公钥和私钥。公钥用于加密数据，而私钥用于解密数据。由于公钥和私钥是成对的，因此只有拥有私钥的人才能解密数据，从而保证了数据的安全性。</p>
+<p>HTTPS在内容传输上使用的是对称加密。这意味着在通信过程中，发送方和接收方会生成一个临时的密钥，并使用该密钥对数据进行加密和解密。由于对称加密的加解密速度快，因此可以有效地保障大量数据的传输安全。<br>然而，仅仅使用对称加密是不够的。为了确保通信双方的身份验证以及防止中间人攻击，HTTPS还需要用到非对称加密。在证书验证阶段，HTTPS使用非对称加密来验证服务器的身份。服务器会向客户端发送自己的证书，其中包括了公钥等信息。客户端会使用证书中的公钥来验证服务器的身份，并确保数据传输过程中的安全性。</p>
+</details>
+
 <h3 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h3><h4 id="线程间的同步方式"><a href="#线程间的同步方式" class="headerlink" title="线程间的同步方式"></a>线程间的同步方式</h4><details>
 <summary>展开查看</summary>
 
@@ -1066,6 +1073,10 @@ RDB
 <h4 id="查看磁盘的使用率和占用空间"><a href="#查看磁盘的使用率和占用空间" class="headerlink" title="查看磁盘的使用率和占用空间"></a>查看磁盘的使用率和占用空间</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看磁盘的使用情况，磁盘大小和使用率</span></span><br><span class="line"><span class="built_in">df</span> -h</span><br><span class="line"><span class="comment">#查看目录或文件的使用情况，-s表示努力下占用空间的汇总</span></span><br><span class="line"><span class="built_in">du</span> -h</span><br></pre></td></tr></table></figure>
 
 <h4 id="查看进程的端口"><a href="#查看进程的端口" class="headerlink" title="查看进程的端口"></a>查看进程的端口</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -p</span><br></pre></td></tr></table></figure>
+
+<h4 id="输出“error”在日志文件中出现的次数"><a href="#输出“error”在日志文件中出现的次数" class="headerlink" title="输出“error”在日志文件中出现的次数"></a>输出“error”在日志文件中出现的次数</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -o <span class="string">&quot;error&quot;</span> /path/to/log.log | <span class="built_in">wc</span> -l</span><br></pre></td></tr></table></figure>
+
+<h4 id="杀死包含java的所有进程"><a href="#杀死包含java的所有进程" class="headerlink" title="杀死包含java的所有进程"></a>杀死包含java的所有进程</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#获取包含java进程的pid，然后逐个杀死，grep无法模糊查询，或者说他本身就带着模糊查询</span></span><br><span class="line">ps aux | grep <span class="string">&#x27;java&#x27;</span> | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> | xargs <span class="built_in">kill</span></span><br><span class="line"></span><br><span class="line">pkill -f <span class="string">&#x27;java&#x27;</span></span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
@@ -2621,6 +2632,7 @@ RDB
 <li>Web驱动程序将结果传递给测试代码，以便进行进一步的处理和验证。</li>
 </ol>
 <p><img src="https://developer.qcloudimg.com/http-save/yehe-10496291/a66e29500026a19ea096b11bf8bae1f8.png" alt="img"></p>
+<p>PS：这个ui自动化工具是其中一种实现，需要自己手动写脚本触发浏览器界面的功能。ui自动化工具还有一种是通过截图识别图标触发功能来进行测试，阿里的很多ui自动化都是基于这种思路。</p>
 </details>
 
 <h2 id="测试工具"><a href="#测试工具" class="headerlink" title="测试工具"></a>测试工具</h2><details>
@@ -2635,6 +2647,59 @@ RDB
 </details>
 
 <h2 id="项目中的实际测试经验"><a href="#项目中的实际测试经验" class="headerlink" title="项目中的实际测试经验"></a>项目中的实际测试经验</h2><p>周期性心跳包阻塞<br>从100ms阻塞到700ms<br>排查网络：网络延时，无线转有线<br>软件层数据问题，接收数据排查，校验和错误或长度错误导致未执行<br>发送端的问题，模块间冲突，删除模块依次测试，看问题是否解决<br>只剩下udp后还存在问题，底层问题，写日志，看日志是否阻塞<br>top查看cpu，是否异常占用，cpu调度<br>system-journaled每次阻塞时cpu占用高，这个是管理Linux日志的线程，查内核日志<br>有频繁写入写出，硬件接口连接问题，日志几十微妙的速度写，导致阻塞。<br>最终禁用该服务</p>
+<h2 id="基于TestNG实现一个自动化测试框架"><a href="#基于TestNG实现一个自动化测试框架" class="headerlink" title="基于TestNG实现一个自动化测试框架"></a>基于TestNG实现一个自动化测试框架</h2><p>能够实现从前置调用、请求初始化与构建、接口调用，到结果校验、检查及后续动作的完整自动化测试流程。该二方库支持通过XML、CSV、JSON文件读取接口参数和校验响应数据。此外，还实现了环境管理功能，允许通过运行参数切换不同的测试环境（如日常环境、预发环境、线上环境）。同时，提供了测试方法的重试监听器和测试报告监听器——测试报告上传到数据库中。</p>
+<h2 id="TestNG如何设置多线程并行测试"><a href="#TestNG如何设置多线程并行测试" class="headerlink" title="TestNG如何设置多线程并行测试"></a>TestNG如何设置多线程并行测试</h2><p>在testng.xml文件中进行配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">suite</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;http://testng.org/testng-1.0.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--这里设置的方法类级的并行，指将一个类中的所有方法放在一个线程下执行--&gt;</span></span><br><span class="line"><span class="comment">&lt;!--还可以设置方法级和test级的并行--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">suite</span> <span class="attr">name</span>=<span class="string">&quot;MyTestSuite&quot;</span> <span class="attr">parallel</span>=<span class="string">&quot;classes&quot;</span> <span class="attr">thread-count</span>=<span class="string">&quot;8&quot;</span> <span class="attr">verbose</span>=<span class="string">&quot;2&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">test</span> <span class="attr">name</span>=<span class="string">&quot;MyTestCase&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">classes</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">&quot;cangqiong.CangQiongTest&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">classes</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">test</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">suite</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="百度首页www-baidu-com进不去，测试原因"><a href="#百度首页www-baidu-com进不去，测试原因" class="headerlink" title="百度首页www.baidu.com进不去，测试原因"></a>百度首页<a target="_blank" rel="noopener" href="http://www.baidu.com进不去,测试原因/">www.baidu.com进不去，测试原因</a></h2><p>这个测试首先要了解输入一个url用到的协议；</p>
+<p>1、首先url会通过DNS协议解析为ip，这步主要是排查系统的域名解析：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /etc/resolv.conf</span><br></pre></td></tr></table></figure>
+
+<p>查看namespace行，一般有两个DNS服务器ip：</p>
+<p>Google DNS：<code>8.8.8.8</code> 和 <code>8.8.4.4</code></p>
+<p>Cloudflare DNS：<code>1.1.1.1</code> 和 <code>1.0.0.1</code></p>
+<p>ping这些DNS服务器的ip，如果ping不通，说明要么是网络原因（ifconfig），要么是防火墙</p>
+<p>2、DNS没问题，ping百度的url</p>
+<p>ping不通，网络或者防火墙问题</p>
+<p>ping的过程中会显示该url的ip，需要对这个ip进行抓包，看是否向这个ip发送tcp请求：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tcpdump -i any -n tcp and dst host 123.123.123.123</span><br></pre></td></tr></table></figure>
+
+<p>抓不到包说明网络或防火墙原因，请求发送失败；</p>
+<p>有包过去说明tcp请求没问题。</p>
+<p>3、tcp连接没问题，测试http请求是否发送成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl http://www.baidu.com</span><br></pre></td></tr></table></figure>
+
+<p>返回状态码5xx，说明百度有问题</p>
+<p>返回状态码4xx，一般是权限问题或者自己的网络问题</p>
+<p>返回状态码2xx，说明http请求没问题</p>
+<p>4、http连接且返回的状态码没问题，还是加载失败</p>
+<p>在浏览器的开发者工具（F12）中，切到Network，刷新网页，查看是否有css和js资源加载失败。</p>
+<h2 id="如何对一个接口进行测试"><a href="#如何对一个接口进行测试" class="headerlink" title="如何对一个接口进行测试"></a>如何对一个接口进行测试</h2><ul>
+<li><p>入参校验</p>
+</li>
+<li><p>业务校验：复杂的业务会根据已有的部分参数访问其他应用域进行查询，用查询到的结果跟入参的部分参数进行对比校验；先通过正常入参测试成功后，修改其中的几个参数再进行测试</p>
+</li>
+<li><p>业务场景：基于业务功能，主要是从用户的角度去手工测试</p>
+</li>
+<li><p>稳定性</p>
+<ul>
+<li>事务回滚：数据库的操作一般都是事务性的，执行失败会回滚数据库，这里需要看数据库字段验证</li>
+<li>幂等：一般下单或者支付业务都是幂等的，需要重复测试，看是否会重复创建订单或重复付款</li>
+</ul>
+</li>
+<li><p>switch开关：一般复杂的业务系统中会塞一大堆乱七八糟的东西，但是流量大的时候为了提高执行效率和减少非必要性的错误，会使用降级开关简化业务流程，这里就是测试降级开关；</p>
+</li>
+<li><p>消息通知：测试消息队列中的是否成功生产和消费（阿里有看消息队列生产和消费的工具）。</p>
+</li>
+<li><p>压测（性能测试）：测试高并发的接口，比如下单或者发弹幕</p>
+</li>
+<li><p>对于重构的代码接口，还需要测试对比新老接口</p>
+</li>
+<li><p>对于支付接口，资产扣减校验，避免出现资损</p>
+</li>
+</ul>
 
       
     </div>
