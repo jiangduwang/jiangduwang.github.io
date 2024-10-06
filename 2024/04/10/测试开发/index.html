@@ -15,7 +15,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://developer.qcloudimg.com/http-save/yehe-10496291/a66e29500026a19ea096b11bf8bae1f8.png">
 <meta property="article:published_time" content="2024-04-10T08:02:09.236Z">
-<meta property="article:modified_time" content="2024-10-05T08:02:53.874Z">
+<meta property="article:modified_time" content="2024-10-06T05:10:40.291Z">
 <meta property="article:author" content="jiangduwang">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://developer.qcloudimg.com/http-save/yehe-10496291/a66e29500026a19ea096b11bf8bae1f8.png">
@@ -486,6 +486,17 @@
 <li><p>对于支付接口，资产扣减校验，避免出现资损</p>
 </li>
 </ul>
+<h2 id="自动化测试的本质"><a href="#自动化测试的本质" class="headerlink" title="自动化测试的本质"></a>自动化测试的本质</h2><p>通过流水线实现持续部署和持续集成，预发卡点就是代码部署到预发环境之后会触发流水线脚本执行预先编写好的测试用例，线上巡检就是设置一个定时的流水线，每天&#x2F;周定时执行用例。</p>
+<p>流水线实现自动化测试：<a target="_blank" rel="noopener" href="https://www.yuque.com/gutao-hsytm/ii3g9g/fprobkaahtus85h4">https://www.yuque.com/gutao-hsytm/ii3g9g/fprobkaahtus85h4</a></p>
+<h2 id="阿里先进的测试工具"><a href="#阿里先进的测试工具" class="headerlink" title="阿里先进的测试工具"></a>阿里先进的测试工具</h2><h3 id="流量平台"><a href="#流量平台" class="headerlink" title="流量平台"></a>流量平台</h3><p>可以接收预发环境和线上环境的流量，这个流量怎么理解，就是在测试环境中接口被调用，就会显示在流量平台上，可以看到出入参、子调用等信息。</p>
+<p>回放流量：流量平台可以mock入参和子调用，按理说出参应该和当时调用的也保持一致，实际上很多会回放失败，这个下面思考中会提到；</p>
+<p>保存用例：对于可以暂时回放成功的用例，可以保存作为自动化测试用例。</p>
+<h3 id="订单数据对比工具"><a href="#订单数据对比工具" class="headerlink" title="订单数据对比工具"></a>订单数据对比工具</h3><p>这个工具主要是用来测试重构代码，主要是下单+支付的接口，根据订单号和测试环境查询hsf平台获取数据库中的订单数据，并进行对比。</p>
+<p>缺少一个校验字段的功能，比如锁座状态、订单状态、支付状态。</p>
+<h3 id="链路自动化工具"><a href="#链路自动化工具" class="headerlink" title="链路自动化工具"></a>链路自动化工具</h3><p>这个我实习的部门没有，不过我在open ata上看到阿里国际有这个工具，很好用，下面思考也提到了。</p>
+<h2 id="对于测试提效的一些思考"><a href="#对于测试提效的一些思考" class="headerlink" title="对于测试提效的一些思考"></a>对于测试提效的一些思考</h2><p>1、开发链路自动化工具，一个完整的业务流程包括多个接口的交替调用，手工写代码的问题：上手有难度、代码不规范、过期用例不好维护。因此将用例的编写从手工写代码变成前端手动操作。具备的功能：选择接口类型；输入访问url、入参、校验条件；选择测试环境；接入流水线；配置接口形成调用链路；测试用例文字对应接口或者链路。</p>
+<p>2、流量平台的回放问题：一个大的业务系统有多个应用域，不同应用域会部署在不同的云服务器上，不同应用域在不同时间会有不同的部署节点，这需要k8s的服务发现机制来实现，目前天启的回放只能指定固定的ip，但是回放的时候可能当前服务并不在该ip上，就会导致回放失败，流量平台可能也需要引入k8s的机制。</p>
+<p>3、用例保鲜的问题：不管是流量平台还是手工编写的用例，都会存在测试环境不稳定或者数据过期的问题；设置一个稳定的测试环境，只部署，不修改，仅供测试，该测试环境另外配置一个数据库，存储测试的数据不动，这样能保证用例不会过期。</p>
 
       
     </div>
